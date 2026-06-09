@@ -1,7 +1,7 @@
 // State Management
 let state = {
   selectedDay: null,
-  activeTab: 'overview',
+  activeTab: 'dashboard',
   completedDays: JSON.parse(localStorage.getItem('aptitude_completed_days')) || [],
   mistakes: JSON.parse(localStorage.getItem('aptitude_mistakes')) || [],
   streak: parseInt(localStorage.getItem('aptitude_streak')) || 0,
@@ -12,7 +12,8 @@ let state = {
   timerInterval: null,
   dsaProgress: JSON.parse(localStorage.getItem('dsa_progress')) || {},
   selectedMLChapter: 1,
-  completedMLChapters: JSON.parse(localStorage.getItem('ml_completed_chapters')) || []
+  completedMLChapters: JSON.parse(localStorage.getItem('ml_completed_chapters')) || [],
+  activeCategoryFilter: 'all'
 };
 
 // Initial Load
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDSATracker();
   initMLTracker();
   setupEventListeners();
+  setupPlaygroundListeners();
   updateGlobalStats();
   
   // Show welcome page
@@ -54,11 +56,16 @@ function initStreak() {
 }
 
 // Render Sidebar Navigation
-function renderSidebar() {
+function renderSidebar(categoryFilter = state.activeCategoryFilter) {
   const dayListContainer = document.getElementById('day-list-container');
+  if (!dayListContainer) return;
   dayListContainer.innerHTML = '';
   
   SYLLABUS_DATA.weeks.forEach(week => {
+    // Check if there are matching days in this week
+    const matchingDays = week.days.filter(d => categoryFilter === 'all' || d.category === categoryFilter);
+    if (matchingDays.length === 0) return;
+    
     const weekGroup = document.createElement('div');
     weekGroup.className = 'week-group';
     
@@ -67,7 +74,7 @@ function renderSidebar() {
     weekHeader.textContent = `Week ${week.weekNumber}: ${week.title}`;
     weekGroup.appendChild(weekHeader);
     
-    week.days.forEach(dayData => {
+    matchingDays.forEach(dayData => {
       const isCompleted = state.completedDays.includes(dayData.day);
       const isActive = state.selectedDay === dayData.day;
       
@@ -78,7 +85,7 @@ function renderSidebar() {
         <div class="day-details">
           <div class="day-title">${dayData.topic}</div>
           <div class="day-cat">
-            <span class="category-tag ${dayData.category.toLowerCase().replace(' ', '-').substring(0, 5)}">${dayData.category}</span>
+            <span class="category-tag ${dayData.category.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 8)}">${dayData.category}</span>
           </div>
         </div>
         <div class="day-status"></div>
@@ -93,29 +100,30 @@ function renderSidebar() {
 }
 
 // Render Dashboard Grid boxes
-function renderDashboardOverview() {
+function renderDashboardOverview(categoryFilter = state.activeCategoryFilter) {
   const dayGrid = document.getElementById('day-grid');
+  if (!dayGrid) return;
   dayGrid.innerHTML = '';
   
-  let totalDays = 0;
-  SYLLABUS_DATA.weeks.forEach(w => {
-    totalDays += w.days.length;
+  SYLLABUS_DATA.weeks.forEach(week => {
+    week.days.forEach(dayData => {
+      if (categoryFilter !== 'all' && dayData.category !== categoryFilter) return;
+      
+      const isCompleted = state.completedDays.includes(dayData.day);
+      const isActive = state.selectedDay === dayData.day;
+      
+      const dayBox = document.createElement('div');
+      dayBox.className = `day-grid-box ${isCompleted ? 'completed' : ''} ${isActive ? 'active' : ''}`;
+      dayBox.innerHTML = `
+        <div class="day-box-num">${dayData.day}</div>
+        <div class="day-box-title">${dayData.topic}</div>
+        <div class="day-box-cat">${dayData.category}</div>
+      `;
+      
+      dayBox.addEventListener('click', () => selectDay(dayData.day));
+      dayGrid.appendChild(dayBox);
+    });
   });
-  
-  for (let d = 1; d <= totalDays; d++) {
-    const isCompleted = state.completedDays.includes(d);
-    const isActive = state.selectedDay === d;
-    
-    const dayBox = document.createElement('div');
-    dayBox.className = `day-grid-box ${isCompleted ? 'completed' : ''} ${isActive ? 'active' : ''}`;
-    dayBox.innerHTML = `
-      ${d}
-      <span>Day</span>
-    `;
-    
-    dayBox.addEventListener('click', () => selectDay(d));
-    dayGrid.appendChild(dayBox);
-  }
 }
 
 // Select Day handler
@@ -195,12 +203,13 @@ function startPracticeZone() {
 }
 
 // Setup Event Listeners
+// Setup Event Listeners
 function setupEventListeners() {
   const tabs = document.querySelectorAll('.nav-tab');
   tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
       const targetTab = tab.getAttribute('data-tab');
-      if (targetTab === 'overview') {
+      if (targetTab === 'dashboard') {
         showDashboardHome();
       } else {
         switchTab(targetTab);
@@ -223,7 +232,32 @@ function setupEventListeners() {
       document.body.classList.toggle('light-theme');
       const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
       localStorage.setItem('app-theme', currentTheme);
+      
+      // Sync Monaco theme
+      if (monacoEditor) {
+        const monacoTheme = currentTheme === 'light' ? 'vs' : 'vs-dark';
+        monaco.editor.setTheme(monacoTheme);
+      }
     });
+  }
+
+  // Sidebar and Dashboard category selection synchronization
+  const sidebarSelect = document.getElementById('sidebar-category-select');
+  const dashboardSelect = document.getElementById('dashboard-category-select');
+  
+  function handleCategoryChange(val) {
+    state.activeCategoryFilter = val;
+    if (sidebarSelect) sidebarSelect.value = val;
+    if (dashboardSelect) dashboardSelect.value = val;
+    renderSidebar();
+    renderDashboardOverview();
+  }
+  
+  if (sidebarSelect) {
+    sidebarSelect.addEventListener('change', (e) => handleCategoryChange(e.target.value));
+  }
+  if (dashboardSelect) {
+    dashboardSelect.addEventListener('change', (e) => handleCategoryChange(e.target.value));
   }
 }
 
@@ -259,6 +293,10 @@ function switchTab(tabId) {
     targetPane.classList.add('active');
   }
   
+  if (tabId === 'playground') {
+    initPlayground();
+  }
+  
   if (tabId !== 'practice') {
     clearInterval(state.timerInterval);
   } else {
@@ -272,7 +310,7 @@ function showDashboardHome() {
   state.selectedDay = null;
   renderSidebar();
   renderDashboardOverview();
-  switchTab('overview');
+  switchTab('dashboard');
 }
 
 // Initialize Day Quiz
@@ -1123,4 +1161,214 @@ function showToast(msg) {
     toast.style.opacity = '0';
     toast.style.transform = 'translateY(10px)';
   }, 3000);
+}
+
+// Monaco & Pyodide Playground Implementation
+let monacoEditor = null;
+let pyodideInstance = null;
+let pyodideLoadingState = false;
+
+const PLAYGROUND_CHALLENGES = {
+  custom: {
+    desc: `<h4>Scratchpad Mode</h4><p>Feel free to import <code>numpy</code> or write vanilla Python. Use <code>print()</code> to output results to the console.</p>`,
+    starter: `import numpy as np
+
+# Write your custom code here
+x = np.array([1, 2, 3])
+print("Vector:", x)
+print("Mean:", np.mean(x))`
+  },
+  sum_array: {
+    desc: `<h4>Challenge 1: Sum of Array</h4><p>Write a function <code>sum_array(arr)</code> that takes a list of integers and returns the sum. Print the result for array <code>[10, 20, 30, 40]</code>.</p>`,
+    starter: `def sum_array(arr):
+    # Your code here
+    return sum(arr)
+
+test_arr = [10, 20, 30, 40]
+print("Sum of array:", sum_array(test_arr))`
+  },
+  matrix_mult: {
+    desc: `<h4>Challenge 2: Matrix Multiplication</h4><p>Write a function <code>multiply_matrices(a, b)</code> using <code>numpy.dot</code> or the <code>@</code> operator to multiply two 2x2 matrices.</p>`,
+    starter: `import numpy as np
+
+def multiply_matrices(a, b):
+    # Your code here
+    return np.dot(a, b)
+
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+
+print("Result of A x B:")
+print(multiply_matrices(A, B))`
+  },
+  binary_search: {
+    desc: `<h4>Challenge 3: Binary Search</h4><p>Implement binary search to find target element. Return index or -1 if not found.</p>`,
+    starter: `def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+sorted_arr = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]
+target = 23
+print(f"Target found at index: {binary_search(sorted_arr, target)}")`
+  },
+  relu: {
+    desc: `<h4>Challenge 4: ReLU Activation</h4><p>Implement the Rectified Linear Unit function <code>relu(x)</code> which returns <code>max(0, x)</code> for all elements in a NumPy array.</p>`,
+    starter: `import numpy as np
+
+def relu(x):
+    # Your code here
+    return np.maximum(0, x)
+
+inputs = np.array([-2.5, 1.0, 0.0, -0.5, 3.0])
+print("Inputs:", inputs)
+print("ReLU outputs:", relu(inputs))`
+  }
+};
+
+async function initPlayground() {
+  // 1. Initialize Monaco Editor if not already initialized
+  if (!monacoEditor && typeof require !== 'undefined') {
+    require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs' } });
+    require(['vs/editor/editor.main'], function () {
+      const isLightTheme = document.body.classList.contains('light-theme');
+      monacoEditor = monaco.editor.create(document.getElementById('monaco-container'), {
+        value: PLAYGROUND_CHALLENGES.custom.starter,
+        language: 'python',
+        theme: isLightTheme ? 'vs' : 'vs-dark',
+        automaticLayout: true,
+        fontSize: 14,
+        minimap: { enabled: false }
+      });
+    });
+  } else if (monacoEditor) {
+    // Theme sync
+    const isLightTheme = document.body.classList.contains('light-theme');
+    monaco.editor.setTheme(isLightTheme ? 'vs' : 'vs-dark');
+  }
+
+  // 2. Start loading Pyodide in background
+  if (!pyodideInstance && !pyodideLoadingState) {
+    lazyLoadPyodide();
+  }
+}
+
+async function lazyLoadPyodide() {
+  if (pyodideInstance || pyodideLoadingState) return;
+  pyodideLoadingState = true;
+
+  const statusText = document.getElementById('pyodide-status-text');
+  const statusDot = document.getElementById('pyodide-status-dot');
+  if (statusText) statusText.textContent = "Pyodide: Loading...";
+  if (statusDot) statusDot.style.background = "#eab308"; // yellow/amber
+
+  try {
+    pyodideInstance = await loadPyodide({
+      indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/"
+    });
+    // Load NumPy
+    await pyodideInstance.loadPackage("numpy");
+    
+    if (statusText) statusText.textContent = "Pyodide: NumPy Ready";
+    if (statusDot) statusDot.style.background = "#10b981"; // emerald/green
+  } catch (err) {
+    console.error("Pyodide loading failed:", err);
+    if (statusText) statusText.textContent = "Pyodide: Failed";
+    if (statusDot) statusDot.style.background = "#ef4444"; // red
+    pyodideLoadingState = false;
+  }
+}
+
+async function runPlaygroundCode() {
+  const consoleEl = document.getElementById('playground-console');
+  if (!consoleEl) return;
+
+  if (!pyodideInstance) {
+    consoleEl.textContent = "Python engine is loading. Please wait 5-10 seconds...";
+    await lazyLoadPyodide();
+    if (!pyodideInstance) {
+      consoleEl.textContent = "Failed to load Python engine. Check internet connection.";
+      return;
+    }
+  }
+
+  consoleEl.textContent = "Running...\n";
+  const code = monacoEditor ? monacoEditor.getValue() : "";
+  
+  let output = "";
+  pyodideInstance.setStdout({
+    write: (text) => {
+      output += text;
+      return text.length;
+    }
+  });
+  pyodideInstance.setStderr({
+    write: (text) => {
+      output += text;
+      return text.length;
+    }
+  });
+
+  try {
+    await pyodideInstance.runPythonAsync(code);
+    consoleEl.textContent = output || "Code executed successfully with no print output.";
+  } catch (err) {
+    consoleEl.textContent = output + "\nError:\n" + err.message;
+  }
+}
+
+function resetPlayground() {
+  const challengeSelect = document.getElementById('playground-challenge-select');
+  const selectedChallenge = challengeSelect ? challengeSelect.value : 'custom';
+  const challengeData = PLAYGROUND_CHALLENGES[selectedChallenge];
+  
+  if (monacoEditor && challengeData) {
+    monacoEditor.setValue(challengeData.starter);
+  }
+}
+
+function clearPlaygroundConsole() {
+  const consoleEl = document.getElementById('playground-console');
+  if (consoleEl) {
+    consoleEl.textContent = "";
+  }
+}
+
+function setupPlaygroundListeners() {
+  const challengeSelect = document.getElementById('playground-challenge-select');
+  const challengeDesc = document.getElementById('playground-challenge-desc');
+  const runBtn = document.getElementById('playground-run-btn');
+  const resetBtn = document.getElementById('playground-reset-btn');
+  const clearConsoleBtn = document.getElementById('playground-clear-console-btn');
+
+  if (challengeSelect) {
+    challengeSelect.addEventListener('change', (e) => {
+      const challengeKey = e.target.value;
+      const challengeData = PLAYGROUND_CHALLENGES[challengeKey];
+      if (challengeData) {
+        if (challengeDesc) challengeDesc.innerHTML = challengeData.desc;
+        if (monacoEditor) monacoEditor.setValue(challengeData.starter);
+      }
+    });
+  }
+
+  if (runBtn) {
+    runBtn.addEventListener('click', runPlaygroundCode);
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', resetPlayground);
+  }
+
+  if (clearConsoleBtn) {
+    clearConsoleBtn.addEventListener('click', clearPlaygroundConsole);
+  }
 }

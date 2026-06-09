@@ -1,5 +1,7 @@
 {
   "version": 2,
+  "name": "aptitude-master",
+  "cleanUrls": true,
   "builds": [
     { "src": "index.html", "use": "@vercel/static" }
   ],

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aptitude master: 35-Day Placement Prep Dashboard</title>
   <link rel="stylesheet" href="style.css?v=2">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
 </head>
 <body>
   <div class="bg-glow-1"></div>
@@ -28,6 +30,18 @@
         </div>
       </div>
 
+      <!-- Topic-wise Aptitude Filter -->
+      <div class="sidebar-filter" style="padding: 12px 16px 8px 16px; border-bottom: 1px solid var(--border-color);">
+        <label for="sidebar-category-select" style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block;">Topic Filter</label>
+        <select id="sidebar-category-select" class="input-field" style="margin: 0; width: 100%; font-size: 12px; padding: 6px 10px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: var(--radius-sm); font-family: var(--font-main); outline: none;">
+          <option value="all">⚡ All Topics (35 Days)</option>
+          <option value="Quantitative Aptitude">📈 Quantitative Aptitude</option>
+          <option value="Logical Reasoning">🧩 Logical Reasoning</option>
+          <option value="Verbal Ability">🗣️ Verbal Ability</option>
+          <option value="Mock Exams">📝 Mock Exams</option>
+        </select>
+      </div>
+
       <!-- Day list container -->
       <div class="day-list" id="day-list-container">
         <!-- Generated Dynamically -->
@@ -39,17 +53,21 @@
       <!-- Top Navigation Tabs -->
       <header class="topbar">
         <nav class="nav-tabs">
-          <div class="nav-tab active" data-tab="overview">
+          <div class="nav-tab active" data-tab="dashboard">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
-            Overview
+            Dashboard
           </div>
           <div class="nav-tab" data-tab="theory">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-            Theory & Tricks
+            Theory
           </div>
           <div class="nav-tab" data-tab="practice">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-            Practice Zone
+            Practice
+          </div>
+          <div class="nav-tab" data-tab="playground">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            Playground
           </div>
           <div class="nav-tab" data-tab="cheatsheets">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v12m0 0l-4-4m4 4l4-4m0 6V7m0 0l-4 4m4-4l4 4m5 8V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v14a2 2 0 002 2h4a2 2 0 002-2z"></path></svg>
@@ -57,7 +75,7 @@
           </div>
           <div class="nav-tab" data-tab="advisor">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-            AI Roadmap Advisor
+            AI Advisor
           </div>
           <div class="nav-tab" data-tab="dsa">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
@@ -85,8 +103,8 @@
       <!-- Content Views -->
       <div class="content-body">
         
-        <!-- OVERVIEW TAB -->
-        <section class="tab-pane active" id="overview">
+        <!-- DASHBOARD TAB -->
+        <section class="tab-pane active" id="dashboard">
           <div class="welcome-overlay card" style="margin-bottom: 24px;">
             <h2 class="welcome-title">Crack Your Campus Placement Rounds</h2>
             <p class="welcome-desc">
@@ -131,6 +149,16 @@
             <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 15px;">
               Click on any day below to start studying concepts, checking formulas, or attempting practice questions.
             </p>
+            <div style="margin-bottom: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <span style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Filter Grid by Topic:</span>
+              <select id="dashboard-category-select" class="input-field" style="margin: 0; width: auto; font-size: 12px; padding: 6px 12px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: var(--radius-sm); outline: none;">
+                <option value="all">⚡ Show All (35 Days)</option>
+                <option value="Quantitative Aptitude">📈 Quantitative Aptitude</option>
+                <option value="Logical Reasoning">🧩 Logical Reasoning</option>
+                <option value="Verbal Ability">🗣️ Verbal Ability</option>
+                <option value="Mock Exams">📝 Mock Exams</option>
+              </select>
+            </div>
             <div class="day-grid" id="day-grid">
               <!-- Rendered Dynamically -->
             </div>
@@ -173,6 +201,70 @@
           <div class="card" id="quiz-container">
             <div style="text-align: center; padding: 60px; color: var(--text-muted)">
               <p>Select a day and read the theory first before attempting the practice set questions.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- CODE PLAYGROUND TAB -->
+        <section class="tab-pane" id="playground">
+          <div class="layout-grid" style="display: grid; grid-template-columns: 300px 1fr; gap: 24px; align-items: start;">
+            <!-- Left Panel: Problem Selector & Instructions -->
+            <div class="card" style="display: flex; flex-direction: column; gap: 20px; min-height: 580px;">
+              <h3 class="card-title" style="color: var(--accent-cyan);">Python Playground</h3>
+              <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Write and execute Python code directly in your browser using Pyodide and NumPy. Great for practicing LeetCode challenges or ML algorithms.
+              </p>
+              
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label style="font-size: 12px; font-weight: 600; color: var(--text-primary);">Select Challenge</label>
+                <select id="playground-challenge-select" class="input-field" style="margin: 0; background-color: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 8px 10px; font-family: var(--font-main);">
+                  <option value="custom">Custom Scratchpad</option>
+                  <option value="sum_array">Challenge 1: Sum of Array (Warmup)</option>
+                  <option value="matrix_mult">Challenge 2: Matrix Multiplication (NumPy)</option>
+                  <option value="binary_search">Challenge 3: Binary Search</option>
+                  <option value="relu">Challenge 4: ReLU Activation Function</option>
+                </select>
+              </div>
+
+              <div id="playground-challenge-desc" style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                <h4 style="color: var(--text-primary); margin-top: 0; margin-bottom: 6px;">Scratchpad Mode</h4>
+                <p>Feel free to import <code>numpy</code> or write vanilla Python. Use <code>print()</code> to output results to the console.</p>
+              </div>
+
+              <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid var(--border-color);">
+                <div style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                  <span class="status-indicator" id="pyodide-status-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block;"></span>
+                  <span id="pyodide-status-text">Pyodide: Not Loaded</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Panel: Monaco Editor & Output -->
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+              <!-- Monaco Editor Card -->
+              <div class="card" style="padding: 12px; position: relative;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 0 8px;">
+                  <span style="font-family: var(--font-mono); font-size: 12.5px; color: var(--accent-purple);">main.py</span>
+                  <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-secondary" id="playground-reset-btn" style="padding: 6px 12px; font-size: 12.5px;">Reset</button>
+                    <button class="btn btn-primary" id="playground-run-btn" style="padding: 6px 16px; font-size: 12.5px; display: flex; align-items: center; gap: 6px;">
+                      <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                      Run Code
+                    </button>
+                  </div>
+                </div>
+                <!-- Monaco Container -->
+                <div id="monaco-container" style="height: 380px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: #1e1e1e;"></div>
+              </div>
+
+              <!-- Console Output Card -->
+              <div class="card" style="background: #09090b; border: 1px solid var(--border-color); padding: 16px;">
+                <h4 class="card-title" style="margin-top: 0; margin-bottom: 10px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                  <span>Console Output</span>
+                  <button id="playground-clear-console-btn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 11px; font-family: var(--font-mono); outline: none;">Clear</button>
+                </h4>
+                <pre id="playground-console" style="margin: 0; font-family: var(--font-mono); font-size: 12px; color: #a1a1aa; white-space: pre-wrap; min-height: 100px; max-height: 250px; overflow-y: auto;">Click "Run Code" to execute...</pre>
+              </div>
             </div>
           </div>
         </section>
@@ -457,6 +549,42 @@
       </div>
     </main>
   </div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <div class="mobile-nav-item active nav-tab" data-tab="dashboard">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
+      <span>Dashboard</span>
+    </div>
+    <div class="mobile-nav-item nav-tab" data-tab="theory">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+      <span>Theory</span>
+    </div>
+    <div class="mobile-nav-item nav-tab" data-tab="practice">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+      <span>Practice</span>
+    </div>
+    <div class="mobile-nav-item nav-tab" data-tab="playground">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+      <span>Playground</span>
+    </div>
+    <div class="mobile-nav-item nav-tab" data-tab="cheatsheets">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v12m0 0l-4-4m4 4l4-4m0 6V7m0 0l-4 4m4-4l4 4m5 8V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v14a2 2 0 002 2h4a2 2 0 002-2z"></path></svg>
+      <span>Cheats</span>
+    </div>
+    <div class="mobile-nav-item nav-tab" data-tab="advisor">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+      <span>Advisor</span>
+    </div>
+    <div class="mobile-nav-item nav-tab" data-tab="dsa">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+      <span>DSA</span>
+    </div>
+    <div class="mobile-nav-item nav-tab" data-tab="ml">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"></path></svg>
+      <span>ML</span>
+    </div>
+  </nav>
 
   <script src="data.js?v=2"></script>
   <script src="app.js?v=2"></script>
