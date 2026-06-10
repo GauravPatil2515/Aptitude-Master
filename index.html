@@ -4,35 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AptitudeMaster — 35-Day Placement Prep Dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
 
-  <!-- Google AdSense (publisher script injected by ads.js) -->
   <!-- SEO Meta -->
   <meta name="description" content="Free 35-day placement prep dashboard with aptitude theory, quizzes, DSA tracker, ML foundations, and Python playground.">
   <meta name="keywords" content="aptitude, placement prep, TCS, Infosys, campus placement, DSA, logical reasoning">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 
-  <!-- Monaco Editor (lazy-loaded by playground tab) -->
+  <!-- Monaco Editor -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js" defer></script>
-  <!-- Pyodide (lazy-loaded on playground open) -->
 </head>
 <body>
-  <!-- Background glows -->
   <div class="bg-glow-1"></div>
   <div class="bg-glow-2"></div>
 
-  <!-- ═══════════════════════════════════════════
-       AD SLOT — Leaderboard (728×90)
-       Sits above app layout, full-width
-  ════════════════════════════════════════════ -->
+  <!-- AD SLOT — Leaderboard (728x90) -->
   <div id="ad-slot-leaderboard" class="ad-container ad-leaderboard"></div>
 
   <div id="app-layout">
 
-    <!-- ═══════════════════════════════════════════
-         SIDEBAR
-    ════════════════════════════════════════════ -->
+    <!-- ═══ SIDEBAR ═══ -->
     <aside class="sidebar">
       <div class="sidebar-header">
         <h1 class="logo">AptitudeMaster <span>35 Days</span></h1>
@@ -51,12 +44,12 @@
 
       <!-- Monthly Calendar Tracker -->
       <div class="sidebar-calendar-wrap">
-        <div id="sidebar-calendar"><!-- Rendered by CalendarModule --></div>
+        <div id="sidebar-calendar"></div>
       </div>
 
-      <!-- Topic-wise Filter -->
+      <!-- Topic Filter -->
       <div class="sidebar-filter">
-        <label for="sidebar-category-select" class="filter-label">Topic Filter</label>
+        <label for="sidebar-category-select" class="filter-label">TOPIC FILTER</label>
         <select id="sidebar-category-select" class="input-field sidebar-select">
           <option value="all">⚡ All Topics (35 Days)</option>
           <option value="Quantitative Aptitude">📈 Quantitative Aptitude</option>
@@ -67,20 +60,16 @@
       </div>
 
       <!-- Day list -->
-      <div class="day-list" id="day-list-container">
-        <!-- Generated Dynamically -->
-      </div>
+      <div class="day-list" id="day-list-container"></div>
 
-      <!-- AD SLOT — Sidebar Rectangle (300×250) -->
+      <!-- AD SLOT — Sidebar Rectangle (300x250) -->
       <div id="ad-slot-rectangle" class="ad-container ad-rectangle"></div>
     </aside>
 
-    <!-- ═══════════════════════════════════════════
-         MAIN WORKSPACE
-    ════════════════════════════════════════════ -->
+    <!-- ═══ MAIN WORKSPACE ═══ -->
     <main class="main-content">
 
-      <!-- Top Navigation Tabs -->
+      <!-- Top Navigation -->
       <header class="topbar">
         <nav class="nav-tabs">
           <div class="nav-tab active" data-tab="dashboard">
@@ -128,25 +117,17 @@
         </div>
       </header>
 
-      <!-- ─────────────────────────────────────────
-           CONTENT VIEWS
-      ───────────────────────────────────────── -->
       <div class="content-body">
 
         <!-- ══════════ DASHBOARD TAB ══════════ -->
         <section class="tab-pane active" id="dashboard">
-
           <div class="welcome-overlay card" style="margin-bottom: 24px;">
             <h2 class="welcome-title">Crack Your Campus Placement Rounds</h2>
-            <p class="welcome-desc">
-              Welcome back! Interactive study deck with theory, shortcuts, quizzes, DSA tracker, and mistake tracking.
-            </p>
-            <button class="btn btn-primary" style="margin: 0 auto;" onclick="selectDay(1)">
-              Start Day 1 — Percentages
-            </button>
+            <p class="welcome-desc">Welcome back! Interactive study deck with theory, shortcuts, quizzes, DSA tracker, and mistake tracking.</p>
+            <button class="btn btn-primary" style="margin: 0 auto;" onclick="selectDay(1)">Start Day 1 — Percentages</button>
           </div>
 
-          <!-- ── Ring Stats Row ── -->
+          <!-- Ring Stats Row -->
           <div class="grid-3" style="margin-bottom:24px;">
             <div class="card stat-card ring-card">
               <div id="ring-course" class="ring-wrap"></div>
@@ -171,18 +152,16 @@
             </div>
           </div>
 
-          <!-- AD SLOT — Banner between sections -->
+          <!-- AD SLOT — Banner -->
           <div id="ad-slot-banner" class="ad-container ad-banner" style="margin-bottom:24px;"></div>
 
-          <!-- 35-Day Grid Tracker -->
+          <!-- 35-Day Grid -->
           <div class="card" style="margin-bottom: 24px;">
             <div class="card-title">
               <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
               35-Day Syllabus Matrix
             </div>
-            <p style="font-size:14px;color:var(--text-secondary);margin-bottom:15px;">
-              Click any day to start studying concepts, checking formulas, or attempting practice questions.
-            </p>
+            <p style="font-size:14px;color:var(--text-secondary);margin-bottom:15px;">Click any day to start studying concepts, checking formulas, or attempting practice questions.</p>
             <div style="margin-bottom:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
               <span style="font-size:13px;font-weight:600;color:var(--text-primary);">Filter by Topic:</span>
               <select id="dashboard-category-select" class="input-field" style="margin:0;width:auto;font-size:12px;padding:6px 12px;">
@@ -242,9 +221,7 @@
           <div class="layout-grid" style="display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start;">
             <div class="card" style="display:flex;flex-direction:column;gap:20px;min-height:580px;">
               <h3 class="card-title" style="color:var(--accent-cyan);">Python Playground</h3>
-              <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
-                Write and execute Python in-browser using Pyodide + NumPy. Perfect for LeetCode challenges or ML algorithms.
-              </p>
+              <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Write and execute Python in-browser using Pyodide + NumPy. Perfect for LeetCode challenges or ML algorithms.</p>
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <label style="font-size:12px;font-weight:600;color:var(--text-primary);">Select Challenge</label>
                 <select id="playground-challenge-select" class="input-field" style="margin:0;">
@@ -261,7 +238,7 @@
               </div>
               <div style="margin-top:auto;padding-top:15px;border-top:1px solid var(--border-color);">
                 <div style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:8px;">
-                  <span class="status-indicator" id="pyodide-status-dot" style="width:8px;height:8px;border-radius:50%;background:#6b7280;display:inline-block;"></span>
+                  <span id="pyodide-status-dot" style="width:8px;height:8px;border-radius:50%;background:#6b7280;display:inline-block;"></span>
                   <span id="pyodide-status-text">Pyodide: Not Loaded</span>
                 </div>
               </div>
@@ -271,17 +248,21 @@
                 <div style="background:var(--bg-tertiary);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-color);">
                   <span style="font-size:12px;font-weight:600;color:var(--text-secondary);">Editor — Python</span>
                   <div style="display:flex;gap:8px;">
-                    <button class="btn btn-primary" id="run-code-btn" style="padding:6px 16px;font-size:12px;">▶ Run</button>
-                    <button class="btn btn-secondary" id="clear-code-btn" style="padding:6px 12px;font-size:12px;">Clear</button>
+                    <!-- FIX: IDs now match setupPlaygroundListeners() in app.js -->
+                    <button class="btn btn-primary" id="playground-run-btn" style="padding:6px 16px;font-size:12px;">▶ Run</button>
+                    <button class="btn btn-secondary" id="playground-reset-btn" style="padding:6px 12px;font-size:12px;">Reset</button>
+                    <button class="btn btn-secondary" id="playground-clear-console-btn" style="padding:6px 12px;font-size:12px;">Clear Output</button>
                   </div>
                 </div>
-                <div id="monaco-editor" style="height:340px;width:100%;"></div>
+                <!-- FIX: id changed from 'monaco-editor' to 'monaco-container' to match app.js -->
+                <div id="monaco-container" style="height:340px;width:100%;"></div>
               </div>
               <div class="card" style="padding:0;overflow:hidden;">
                 <div style="background:var(--bg-tertiary);padding:8px 16px;border-bottom:1px solid var(--border-color);">
                   <span style="font-size:12px;font-weight:600;color:var(--text-secondary);">Output Console</span>
                 </div>
-                <pre id="code-output" style="padding:16px;font-family:var(--font-mono);font-size:13px;color:var(--accent-green);min-height:120px;background:var(--bg-primary);margin:0;overflow-x:auto;white-space:pre-wrap;">// Output will appear here after running code</pre>
+                <!-- FIX: id changed from 'code-output' to 'playground-console' to match app.js -->
+                <pre id="playground-console" style="padding:16px;font-family:var(--font-mono);font-size:13px;color:var(--accent-green);min-height:120px;background:var(--bg-primary);margin:0;overflow-x:auto;white-space:pre-wrap;">// Output will appear here after running code</pre>
               </div>
             </div>
           </div>
@@ -289,10 +270,26 @@
 
         <!-- ══════════ CHEAT SHEETS TAB ══════════ -->
         <section class="tab-pane" id="cheatsheets">
-          <div class="card" id="cheatsheet-content">
-            <div style="text-align:center;padding:60px;color:var(--text-muted)">
-              <p>Select a day from the sidebar to load its formula cheat sheet.</p>
+          <!-- FIX: Added proper container IDs that app.js expects -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-title">📋 Formula Cheat Sheets</div>
+            <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">Quick-reference formulas for all 35 topics. Study these before your practice session.</p>
+            <!-- FIX: app.js renderCheatSheets() targets 'cheatsheets-container' -->
+            <div id="cheatsheets-container"></div>
+          </div>
+
+          <!-- Mistake Notebook moved here -->
+          <div class="card">
+            <div class="card-title">📝 Mistake Notebook</div>
+            <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Log questions you got wrong. Review these before mock tests.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
+              <input type="text" id="m-title" class="input-field" placeholder="Mistake title..." style="margin:0;">
+              <input type="text" id="m-topic" class="input-field" placeholder="Topic (e.g. Percentages)" style="margin:0;">
+              <input type="text" id="m-desc" class="input-field" placeholder="Description / what went wrong" style="margin:0;">
             </div>
+            <button id="add-mistake-btn" class="btn btn-primary" style="margin-bottom:24px;">+ Add to Notebook</button>
+            <!-- FIX: app.js renderMistakes() targets 'mistake-container' -->
+            <div id="mistake-container"></div>
           </div>
         </section>
 
@@ -305,19 +302,29 @@
             </div>
             <div class="chat-history" id="chat-history">
               <div class="chat-message bot">
-                👋 Hi! I'm your AI Study Advisor. Ask me anything about your placement prep — weak topics, study plans, formula tricks, or what to focus on today!
+                👋 Hi! I'm your AI Study Advisor. Fill in your details below and I'll generate a personalized placement roadmap for you!
               </div>
             </div>
-            <div class="chat-inputs">
-              <select id="advisor-query-select" class="input-field" style="flex:1;margin:0;">
-                <option value="">Choose a quick question…</option>
-                <option value="plan">📅 Give me a study plan for today</option>
-                <option value="weak">🎯 What are my weakest topics?</option>
-                <option value="streak">🔥 How can I improve my streak?</option>
-                <option value="tips">💡 Give me speed math tricks</option>
-                <option value="mock">📝 Am I ready for mock tests?</option>
-              </select>
-              <button class="btn btn-primary chat-btn" onclick="handleAdvisorQuery()">Ask ✨</button>
+            <!-- FIX: Added actual form inputs that generateAIAdvice() in app.js needs -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;margin-top:16px;align-items:end;">
+              <div>
+                <label style="font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;display:block;">YOUR BRANCH</label>
+                <input type="text" id="user-branch" class="input-field" placeholder="e.g. CSE, ECE, MBA" style="margin:0;">
+              </div>
+              <div>
+                <label style="font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;display:block;">YEAR</label>
+                <select id="user-year" class="input-field" style="margin:0;">
+                  <option value="2nd">2nd Year</option>
+                  <option value="3rd">3rd Year</option>
+                  <option value="4th" selected>4th Year / Final</option>
+                  <option value="mba">MBA / PG</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;display:block;">TARGET COMPANY</label>
+                <input type="text" id="user-target" class="input-field" placeholder="e.g. TCS, Google, Infosys" style="margin:0;">
+              </div>
+              <button class="btn btn-primary" id="send-advice-btn" style="white-space:nowrap;">Get Roadmap ✨</button>
             </div>
           </div>
         </section>
@@ -329,21 +336,67 @@
               <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
               DSA Problem Tracker
             </div>
+            <!-- DSA Filter Bar -->
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;align-items:center;">
+              <input type="text" id="dsa-search" class="input-field" placeholder="Search problems..." style="margin:0;flex:1;min-width:180px;">
+              <select id="dsa-filter-topic" class="input-field" style="margin:0;width:auto;">
+                <option value="all">All Topics</option>
+                <option value="Arrays">Arrays</option>
+                <option value="Strings">Strings</option>
+                <option value="Hashing">Hashing</option>
+                <option value="Two Pointers">Two Pointers</option>
+                <option value="Sliding Window">Sliding Window</option>
+                <option value="Binary Search">Binary Search</option>
+                <option value="Linked List">Linked List</option>
+                <option value="Stack">Stack</option>
+                <option value="Trees">Trees</option>
+                <option value="Heap">Heap</option>
+                <option value="Graph BFS/DFS">Graph BFS/DFS</option>
+                <option value="DP Basics">DP Basics</option>
+              </select>
+              <select id="dsa-filter-importance" class="input-field" style="margin:0;width:auto;">
+                <option value="all">All Importance</option>
+                <option value="Must Do">Must Do</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+              </select>
+              <select id="dsa-filter-status" class="input-field" style="margin:0;width:auto;">
+                <option value="all">All Status</option>
+                <option value="todo">To Do</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+            <!-- DSA Stats -->
+            <div class="grid-3" style="margin-bottom:20px;">
+              <div class="card" style="padding:12px 16px;">
+                <div style="font-size:11px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;">Solved</div>
+                <div style="font-size:24px;font-weight:700;color:var(--accent-cyan);font-family:var(--font-mono);" id="dsa-solved-count">0/0</div>
+              </div>
+              <div class="card" style="padding:12px 16px;">
+                <div style="font-size:11px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;">Progress</div>
+                <div style="font-size:24px;font-weight:700;color:var(--accent-purple);font-family:var(--font-mono);" id="dsa-progress-percent">0%</div>
+              </div>
+              <div class="card" style="padding:12px 16px;">
+                <div style="font-size:11px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;">Focus Topic</div>
+                <div style="font-size:16px;font-weight:700;color:var(--accent-emerald);" id="dsa-active-category">Arrays</div>
+              </div>
+            </div>
             <div style="overflow-x:auto;">
-              <table class="dsa-table" id="dsa-table">
+              <table class="dsa-table" style="width:100%;border-collapse:collapse;">
                 <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Problem</th>
-                    <th>Topic</th>
-                    <th>Difficulty</th>
-                    <th>Importance</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                    <th>Link</th>
+                  <tr style="background:var(--bg-tertiary);">
+                    <th style="padding:10px 16px;text-align:left;font-size:12px;font-weight:600;color:var(--text-secondary);">Status</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:12px;font-weight:600;color:var(--text-secondary);">Problem</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:12px;font-weight:600;color:var(--text-secondary);">Topic</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:12px;font-weight:600;color:var(--text-secondary);">Importance</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:12px;font-weight:600;color:var(--text-secondary);">Link</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:12px;font-weight:600;color:var(--text-secondary);">Pattern / Hint</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:12px;font-weight:600;color:var(--text-secondary);">Notes</th>
                   </tr>
                 </thead>
-                <tbody id="dsa-tbody"></tbody>
+                <!-- FIX: ID changed from 'dsa-tbody' to 'dsa-problems-body' to match app.js -->
+                <tbody id="dsa-problems-body"></tbody>
               </table>
             </div>
           </div>
@@ -351,9 +404,47 @@
 
         <!-- ══════════ ML FOUNDATIONS TAB ══════════ -->
         <section class="tab-pane" id="ml">
-          <div id="ml-content">
-            <div style="text-align:center;padding:60px;color:var(--text-muted)">
-              <p>ML Foundations content loading…</p>
+          <div class="grid-2" style="gap:24px;align-items:start;">
+            <!-- ML Chapter List -->
+            <div class="card">
+              <div class="card-title">ML Foundations</div>
+              <div class="grid-3" style="margin-bottom:16px;">
+                <div class="card" style="padding:10px;">
+                  <div style="font-size:10px;color:var(--text-secondary);font-weight:700;text-transform:uppercase;">Completed</div>
+                  <div style="font-size:20px;font-weight:700;color:var(--accent-cyan);font-family:var(--font-mono);" id="ml-completion-stat">0/0</div>
+                </div>
+                <div class="card" style="padding:10px;">
+                  <div style="font-size:10px;color:var(--text-secondary);font-weight:700;text-transform:uppercase;">Active Layer</div>
+                  <div style="font-size:14px;font-weight:700;color:var(--accent-purple);" id="ml-active-layer">—</div>
+                </div>
+              </div>
+              <div id="ml-chapters-list" style="display:flex;flex-direction:column;gap:6px;"></div>
+            </div>
+            <!-- ML Content Panel -->
+            <div style="display:flex;flex-direction:column;gap:24px;">
+              <div class="card">
+                <div class="card-title" id="ml-theory-title">Select a chapter →</div>
+                <div id="ml-theory-content" style="color:var(--text-secondary);font-size:14px;line-height:1.7;"></div>
+              </div>
+              <div class="card">
+                <div class="card-title">Formulas &amp; Key Representations</div>
+                <div id="ml-formulas-content"></div>
+              </div>
+              <div class="card" style="padding:0;overflow:hidden;">
+                <div style="background:var(--bg-tertiary);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-color);">
+                  <span style="font-size:12px;font-weight:600;color:var(--text-secondary);">Code Sandbox</span>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <span id="ml-sandbox-status" style="font-size:11px;color:var(--text-secondary);">Idle</span>
+                    <button class="btn btn-primary" id="ml-run-btn" style="padding:5px 14px;font-size:12px;">▶ Run</button>
+                  </div>
+                </div>
+                <pre id="ml-code-block" style="padding:16px;font-family:var(--font-mono);font-size:13px;color:var(--text-primary);background:var(--bg-primary);margin:0;overflow-x:auto;white-space:pre-wrap;"></pre>
+                <pre id="ml-console-output" style="display:none;padding:16px;font-family:var(--font-mono);font-size:13px;color:var(--accent-green);background:var(--bg-primary);margin:0;border-top:1px solid var(--border-color);white-space:pre-wrap;"></pre>
+              </div>
+              <div class="card">
+                <div class="card-title">Practice Quiz</div>
+                <div id="ml-quiz-container"></div>
+              </div>
             </div>
           </div>
         </section>
@@ -362,7 +453,7 @@
     </main>
   </div><!-- /#app-layout -->
 
-  <!-- Mobile Bottom Navigation -->
+  <!-- Mobile Bottom Nav -->
   <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
     <div class="mobile-nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
@@ -386,16 +477,11 @@
     </div>
   </nav>
 
-  <!-- ─────────────────────────────────────────
-       SCRIPTS — Load order matters
-  ───────────────────────────────────────── -->
-  <!-- Data -->
+  <!-- Scripts — order matters -->
   <script src="data.js"></script>
-  <!-- Feature Modules -->
   <script src="modules/rings.js"></script>
   <script src="modules/calendar.js"></script>
   <script src="modules/ads.js"></script>
-  <!-- Core App -->
   <script src="app.js"></script>
 
 </body>
