@@ -3,23 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aptitude master: 35-Day Placement Prep Dashboard</title>
-  <link rel="stylesheet" href="style.css?v=2">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+  <title>AptitudeMaster — 35-Day Placement Prep Dashboard</title>
+
+  <!-- Google AdSense (publisher script injected by ads.js) -->
+  <!-- SEO Meta -->
+  <meta name="description" content="Free 35-day placement prep dashboard with aptitude theory, quizzes, DSA tracker, ML foundations, and Python playground.">
+  <meta name="keywords" content="aptitude, placement prep, TCS, Infosys, campus placement, DSA, logical reasoning">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css?v=3">
+
+  <!-- Monaco Editor (lazy-loaded by playground tab) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js" defer></script>
+  <!-- Pyodide (lazy-loaded on playground open) -->
 </head>
 <body>
+  <!-- Background glows -->
   <div class="bg-glow-1"></div>
   <div class="bg-glow-2"></div>
 
+  <!-- ═══════════════════════════════════════════
+       AD SLOT — Leaderboard (728×90)
+       Sits above app layout, full-width
+  ════════════════════════════════════════════ -->
+  <div id="ad-slot-leaderboard" class="ad-container ad-leaderboard"></div>
+
   <div id="app-layout">
-    <!-- Sidebar Navigation -->
+
+    <!-- ═══════════════════════════════════════════
+         SIDEBAR
+    ════════════════════════════════════════════ -->
     <aside class="sidebar">
       <div class="sidebar-header">
         <h1 class="logo">AptitudeMaster <span>35 Days</span></h1>
       </div>
-      
-      <!-- Progress Section -->
+
+      <!-- Overall Progress Bar -->
       <div class="sidebar-progress">
         <div class="progress-header">
           <span>Overall Course Progress</span>
@@ -30,10 +49,15 @@
         </div>
       </div>
 
-      <!-- Topic-wise Aptitude Filter -->
-      <div class="sidebar-filter" style="padding: 12px 16px 8px 16px; border-bottom: 1px solid var(--border-color);">
-        <label for="sidebar-category-select" style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block;">Topic Filter</label>
-        <select id="sidebar-category-select" class="input-field" style="margin: 0; width: 100%; font-size: 12px; padding: 6px 10px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: var(--radius-sm); font-family: var(--font-main); outline: none;">
+      <!-- Monthly Calendar Tracker -->
+      <div class="sidebar-calendar-wrap">
+        <div id="sidebar-calendar"><!-- Rendered by CalendarModule --></div>
+      </div>
+
+      <!-- Topic-wise Filter -->
+      <div class="sidebar-filter">
+        <label for="sidebar-category-select" class="filter-label">Topic Filter</label>
+        <select id="sidebar-category-select" class="input-field sidebar-select">
           <option value="all">⚡ All Topics (35 Days)</option>
           <option value="Quantitative Aptitude">📈 Quantitative Aptitude</option>
           <option value="Logical Reasoning">🧩 Logical Reasoning</option>
@@ -42,14 +66,20 @@
         </select>
       </div>
 
-      <!-- Day list container -->
+      <!-- Day list -->
       <div class="day-list" id="day-list-container">
         <!-- Generated Dynamically -->
       </div>
+
+      <!-- AD SLOT — Sidebar Rectangle (300×250) -->
+      <div id="ad-slot-rectangle" class="ad-container ad-rectangle"></div>
     </aside>
 
-    <!-- Main Workspace -->
+    <!-- ═══════════════════════════════════════════
+         MAIN WORKSPACE
+    ════════════════════════════════════════════ -->
     <main class="main-content">
+
       <!-- Top Navigation Tabs -->
       <header class="topbar">
         <nav class="nav-tabs">
@@ -70,7 +100,7 @@
             Playground
           </div>
           <div class="nav-tab" data-tab="cheatsheets">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v12m0 0l-4-4m4 4l4-4m0 6V7m0 0l-4 4m4-4l4 4m5 8V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v14a2 2 0 002 2h4a2 2 0 002-2z"></path></svg>
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
             Cheat Sheets
           </div>
           <div class="nav-tab" data-tab="advisor">
@@ -88,11 +118,9 @@
         </nav>
         <div class="theme-toggle-container">
           <button id="theme-toggle-btn" class="theme-btn" title="Toggle Light/Dark Mode">
-            <!-- Sun Icon (shown in dark theme) -->
             <svg class="sun-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 7a5 5 0 100 10 5 5 0 000-10z"></path>
             </svg>
-            <!-- Moon Icon (shown in light theme) -->
             <svg class="moon-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
             </svg>
@@ -100,39 +128,42 @@
         </div>
       </header>
 
-      <!-- Content Views -->
+      <!-- ─────────────────────────────────────────
+           CONTENT VIEWS
+      ───────────────────────────────────────── -->
       <div class="content-body">
-        
-        <!-- DASHBOARD TAB -->
+
+        <!-- ══════════ DASHBOARD TAB ══════════ -->
         <section class="tab-pane active" id="dashboard">
+
           <div class="welcome-overlay card" style="margin-bottom: 24px;">
             <h2 class="welcome-title">Crack Your Campus Placement Rounds</h2>
             <p class="welcome-desc">
-              Welcome back! This interactive study deck provides quick theory revisions, shortcut tricks, instant quizzes, and mistakes tracking to prepare you for top tech companies.
+              Welcome back! Interactive study deck with theory, shortcuts, quizzes, DSA tracker, and mistake tracking.
             </p>
             <button class="btn btn-primary" style="margin: 0 auto;" onclick="selectDay(1)">
-              Start Day 1 (Percentages)
+              Start Day 1 — Percentages
             </button>
           </div>
 
-          <!-- Quick Stats Row -->
-          <div class="grid-3">
-            <div class="card stat-card">
-              <div class="stat-icon cyan">📊</div>
+          <!-- ── Ring Stats Row ── -->
+          <div class="grid-3" style="margin-bottom:24px;">
+            <div class="card stat-card ring-card">
+              <div id="ring-course" class="ring-wrap"></div>
               <div>
                 <div class="stat-value" id="stat-completed">0/35</div>
                 <div class="stat-label">Days Completed</div>
               </div>
             </div>
-            <div class="card stat-card">
-              <div class="stat-icon purple">🔥</div>
+            <div class="card stat-card ring-card">
+              <div id="ring-streak" class="ring-wrap"></div>
               <div>
                 <div class="stat-value" id="stat-streak">0 Days</div>
                 <div class="stat-label">Active Streak</div>
               </div>
             </div>
-            <div class="card stat-card">
-              <div class="stat-icon amber">✏️</div>
+            <div class="card stat-card ring-card">
+              <div id="ring-dsa" class="ring-wrap"></div>
               <div>
                 <div class="stat-value" id="stat-mistakes">0</div>
                 <div class="stat-label">Mistakes Tracked</div>
@@ -140,18 +171,21 @@
             </div>
           </div>
 
+          <!-- AD SLOT — Banner between sections -->
+          <div id="ad-slot-banner" class="ad-container ad-banner" style="margin-bottom:24px;"></div>
+
           <!-- 35-Day Grid Tracker -->
           <div class="card" style="margin-bottom: 24px;">
             <div class="card-title">
               <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
               35-Day Syllabus Matrix
             </div>
-            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 15px;">
-              Click on any day below to start studying concepts, checking formulas, or attempting practice questions.
+            <p style="font-size:14px;color:var(--text-secondary);margin-bottom:15px;">
+              Click any day to start studying concepts, checking formulas, or attempting practice questions.
             </p>
-            <div style="margin-bottom: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-              <span style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Filter Grid by Topic:</span>
-              <select id="dashboard-category-select" class="input-field" style="margin: 0; width: auto; font-size: 12px; padding: 6px 12px; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: var(--radius-sm); outline: none;">
+            <div style="margin-bottom:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <span style="font-size:13px;font-weight:600;color:var(--text-primary);">Filter by Topic:</span>
+              <select id="dashboard-category-select" class="input-field" style="margin:0;width:auto;font-size:12px;padding:6px 12px;">
                 <option value="all">⚡ Show All (35 Days)</option>
                 <option value="Quantitative Aptitude">📈 Quantitative Aptitude</option>
                 <option value="Logical Reasoning">🧩 Logical Reasoning</option>
@@ -159,65 +193,61 @@
                 <option value="Mock Exams">📝 Mock Exams</option>
               </select>
             </div>
-            <div class="day-grid" id="day-grid">
-              <!-- Rendered Dynamically -->
-            </div>
+            <div class="day-grid" id="day-grid"></div>
           </div>
 
           <!-- Resources & Tips -->
           <div class="grid-2">
             <div class="card">
               <div class="card-title">🌐 Recommended Free Resources</div>
-              <ul style="color: var(--text-secondary); font-size: 14.5px; line-height: 1.8; padding-left: 20px;">
-                <li><strong>IndiaBIX</strong>: Excellent database for online tests and sectional papers.</li>
-                <li><strong>GeeksforGeeks Aptitude</strong>: Great formulas, explanations, and coding MCQs.</li>
-                <li><strong>CareerRide (YouTube)</strong>: Top-tier video lessons for Quantitative & Logical tricks.</li>
-                <li><strong>R.S. Aggarwal</strong>: The gold standard practice book for service/consulting companies.</li>
+              <ul style="color:var(--text-secondary);font-size:14.5px;line-height:1.8;padding-left:20px;">
+                <li><strong>IndiaBIX</strong> — Excellent database for online tests and sectional papers.</li>
+                <li><strong>GeeksforGeeks Aptitude</strong> — Great formulas, explanations, and coding MCQs.</li>
+                <li><strong>CareerRide (YouTube)</strong> — Top-tier video lessons for Quantitative &amp; Logical tricks.</li>
+                <li><strong>R.S. Aggarwal</strong> — The gold standard practice book for service/consulting companies.</li>
               </ul>
             </div>
             <div class="card">
               <div class="card-title">💡 Study Strategy</div>
-              <ul style="color: var(--text-secondary); font-size: 14.5px; line-height: 1.8; padding-left: 20px;">
-                <li>Spend <strong>20 mins</strong> reading theory & shortcuts.</li>
-                <li>Practice <strong>40-50 questions</strong> under timers.</li>
+              <ul style="color:var(--text-secondary);font-size:14.5px;line-height:1.8;padding-left:20px;">
+                <li>Spend <strong>20 mins</strong> reading theory &amp; shortcuts.</li>
+                <li>Practice <strong>40–50 questions</strong> under timers.</li>
                 <li>Add tricky questions you miss to the <strong>Mistake Notebook</strong>.</li>
-                <li>Focus on accuracy first, then speed under pressure.</li>
+                <li>Focus on accuracy first, then build speed under pressure.</li>
               </ul>
             </div>
           </div>
         </section>
 
-        <!-- THEORY TAB -->
+        <!-- ══════════ THEORY TAB ══════════ -->
         <section class="tab-pane" id="theory">
           <div class="card" id="theory-content">
-            <div style="text-align: center; padding: 60px; color: var(--text-muted)">
-              <p>Select a day from the left sidebar or the dashboard grid to load study concepts and cheat formulas.</p>
+            <div style="text-align:center;padding:60px;color:var(--text-muted)">
+              <p>Select a day from the sidebar or the dashboard grid to load study concepts and cheat formulas.</p>
             </div>
           </div>
         </section>
 
-        <!-- PRACTICE TAB -->
+        <!-- ══════════ PRACTICE TAB ══════════ -->
         <section class="tab-pane" id="practice">
           <div class="card" id="quiz-container">
-            <div style="text-align: center; padding: 60px; color: var(--text-muted)">
-              <p>Select a day and read the theory first before attempting the practice set questions.</p>
+            <div style="text-align:center;padding:60px;color:var(--text-muted)">
+              <p>Select a day and read the theory first before attempting practice questions.</p>
             </div>
           </div>
         </section>
 
-        <!-- CODE PLAYGROUND TAB -->
+        <!-- ══════════ PLAYGROUND TAB ══════════ -->
         <section class="tab-pane" id="playground">
-          <div class="layout-grid" style="display: grid; grid-template-columns: 300px 1fr; gap: 24px; align-items: start;">
-            <!-- Left Panel: Problem Selector & Instructions -->
-            <div class="card" style="display: flex; flex-direction: column; gap: 20px; min-height: 580px;">
-              <h3 class="card-title" style="color: var(--accent-cyan);">Python Playground</h3>
-              <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
-                Write and execute Python code directly in your browser using Pyodide and NumPy. Great for practicing LeetCode challenges or ML algorithms.
+          <div class="layout-grid" style="display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start;">
+            <div class="card" style="display:flex;flex-direction:column;gap:20px;min-height:580px;">
+              <h3 class="card-title" style="color:var(--accent-cyan);">Python Playground</h3>
+              <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
+                Write and execute Python in-browser using Pyodide + NumPy. Perfect for LeetCode challenges or ML algorithms.
               </p>
-              
-              <div style="display: flex; flex-direction: column; gap: 8px;">
-                <label style="font-size: 12px; font-weight: 600; color: var(--text-primary);">Select Challenge</label>
-                <select id="playground-challenge-select" class="input-field" style="margin: 0; background-color: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 8px 10px; font-family: var(--font-main);">
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <label style="font-size:12px;font-weight:600;color:var(--text-primary);">Select Challenge</label>
+                <select id="playground-challenge-select" class="input-field" style="margin:0;">
                   <option value="custom">Custom Scratchpad</option>
                   <option value="sum_array">Challenge 1: Sum of Array (Warmup)</option>
                   <option value="matrix_mult">Challenge 2: Matrix Multiplication (NumPy)</option>
@@ -225,368 +255,148 @@
                   <option value="relu">Challenge 4: ReLU Activation Function</option>
                 </select>
               </div>
-
-              <div id="playground-challenge-desc" style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 15px;">
-                <h4 style="color: var(--text-primary); margin-top: 0; margin-bottom: 6px;">Scratchpad Mode</h4>
-                <p>Feel free to import <code>numpy</code> or write vanilla Python. Use <code>print()</code> to output results to the console.</p>
+              <div id="playground-challenge-desc" style="font-size:13.5px;color:var(--text-secondary);line-height:1.6;border-top:1px solid var(--border-color);padding-top:15px;">
+                <h4 style="color:var(--text-primary);margin-top:0;margin-bottom:6px;">Scratchpad Mode</h4>
+                <p>Import <code>numpy</code> or write vanilla Python. Use <code>print()</code> to see output.</p>
               </div>
-
-              <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid var(--border-color);">
-                <div style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
-                  <span class="status-indicator" id="pyodide-status-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block;"></span>
+              <div style="margin-top:auto;padding-top:15px;border-top:1px solid var(--border-color);">
+                <div style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:8px;">
+                  <span class="status-indicator" id="pyodide-status-dot" style="width:8px;height:8px;border-radius:50%;background:#6b7280;display:inline-block;"></span>
                   <span id="pyodide-status-text">Pyodide: Not Loaded</span>
                 </div>
               </div>
             </div>
-
-            <!-- Right Panel: Monaco Editor & Output -->
-            <div style="display: flex; flex-direction: column; gap: 24px;">
-              <!-- Monaco Editor Card -->
-              <div class="card" style="padding: 12px; position: relative;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 0 8px;">
-                  <span style="font-family: var(--font-mono); font-size: 12.5px; color: var(--accent-purple);">main.py</span>
-                  <div style="display: flex; gap: 10px;">
-                    <button class="btn btn-secondary" id="playground-reset-btn" style="padding: 6px 12px; font-size: 12.5px;">Reset</button>
-                    <button class="btn btn-primary" id="playground-run-btn" style="padding: 6px 16px; font-size: 12.5px; display: flex; align-items: center; gap: 6px;">
-                      <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
-                      Run Code
-                    </button>
+            <div style="display:flex;flex-direction:column;gap:24px;">
+              <div class="card" style="padding:0;overflow:hidden;border-radius:var(--radius-xl);">
+                <div style="background:var(--bg-tertiary);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-color);">
+                  <span style="font-size:12px;font-weight:600;color:var(--text-secondary);">Editor — Python</span>
+                  <div style="display:flex;gap:8px;">
+                    <button class="btn btn-primary" id="run-code-btn" style="padding:6px 16px;font-size:12px;">▶ Run</button>
+                    <button class="btn btn-secondary" id="clear-code-btn" style="padding:6px 12px;font-size:12px;">Clear</button>
                   </div>
                 </div>
-                <!-- Monaco Container -->
-                <div id="monaco-container" style="height: 380px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: #1e1e1e;"></div>
+                <div id="monaco-editor" style="height:340px;width:100%;"></div>
               </div>
-
-              <!-- Console Output Card -->
-              <div class="card" style="background: #09090b; border: 1px solid var(--border-color); padding: 16px;">
-                <h4 class="card-title" style="margin-top: 0; margin-bottom: 10px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                  <span>Console Output</span>
-                  <button id="playground-clear-console-btn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 11px; font-family: var(--font-mono); outline: none;">Clear</button>
-                </h4>
-                <pre id="playground-console" style="margin: 0; font-family: var(--font-mono); font-size: 12px; color: #a1a1aa; white-space: pre-wrap; min-height: 100px; max-height: 250px; overflow-y: auto;">Click "Run Code" to execute...</pre>
+              <div class="card" style="padding:0;overflow:hidden;">
+                <div style="background:var(--bg-tertiary);padding:8px 16px;border-bottom:1px solid var(--border-color);">
+                  <span style="font-size:12px;font-weight:600;color:var(--text-secondary);">Output Console</span>
+                </div>
+                <pre id="code-output" style="padding:16px;font-family:var(--font-mono);font-size:13px;color:var(--accent-green);min-height:120px;background:var(--bg-primary);margin:0;overflow-x:auto;white-space:pre-wrap;">// Output will appear here after running code</pre>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- CHEAT SHEETS TAB -->
+        <!-- ══════════ CHEAT SHEETS TAB ══════════ -->
         <section class="tab-pane" id="cheatsheets">
-          <div class="card" style="margin-bottom: 24px;">
-            <div class="card-title">📖 Core Formulas Reference Guide</div>
-            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
-              Quick summaries of essential math formulas and concepts across common aptitude categories.
-            </p>
-            <div id="cheatsheets-container">
-              <!-- Rendered Dynamically -->
-            </div>
-          </div>
-          
-          <!-- Mistake Notebook Section -->
-          <div class="grid-2">
-            <!-- Custom Add Mistake -->
-            <div class="card">
-              <div class="card-title">📝 Log a Practice Mistake</div>
-              <div class="notebook-form">
-                <input type="text" id="m-title" class="input-field" placeholder="Error Title (e.g., Ratio Calculation Slip)">
-                <input type="text" id="m-topic" class="input-field" placeholder="Topic Tag (e.g., Time & Work)">
-                <textarea id="m-desc" class="textarea-field" rows="4" placeholder="Describe the mistake, missing formula, or the solution trick..."></textarea>
-                <button class="btn btn-primary" id="add-mistake-btn">Add Note</button>
-              </div>
-            </div>
-            <!-- Mistake List -->
-            <div class="card">
-              <div class="card-title">📓 Mistake Notebook</div>
-              <div class="mistake-list" id="mistake-container">
-                <!-- Loaded from LocalStorage -->
-              </div>
+          <div class="card" id="cheatsheet-content">
+            <div style="text-align:center;padding:60px;color:var(--text-muted)">
+              <p>Select a day from the sidebar to load its formula cheat sheet.</p>
             </div>
           </div>
         </section>
 
-        <!-- ADVISOR TAB -->
+        <!-- ══════════ AI ADVISOR TAB ══════════ -->
         <section class="tab-pane" id="advisor">
           <div class="card advisor-panel">
-            <div class="card-title">🤖 AI Placement Preparation Advisor</div>
-            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">
-              Select your academic background and target companies to generate a customized placement syllabus prep roadmap.
-            </p>
+            <div class="card-title">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+              AI Study Advisor
+            </div>
             <div class="chat-history" id="chat-history">
               <div class="chat-message bot">
-                Hello! I am your AI placement assistant. Select your details below to get a specialized roadmap.
+                👋 Hi! I'm your AI Study Advisor. Ask me anything about your placement prep — weak topics, study plans, formula tricks, or what to focus on today!
               </div>
             </div>
             <div class="chat-inputs">
-              <select id="user-branch">
-                <option value="cse">CSE / IT</option>
-                <option value="entc">ECE / ENTC</option>
-                <option value="mech">Mechanical</option>
-                <option value="civil">Civil</option>
+              <select id="advisor-query-select" class="input-field" style="flex:1;margin:0;">
+                <option value="">Choose a quick question…</option>
+                <option value="plan">📅 Give me a study plan for today</option>
+                <option value="weak">🎯 What are my weakest topics?</option>
+                <option value="streak">🔥 How can I improve my streak?</option>
+                <option value="tips">💡 Give me speed math tricks</option>
+                <option value="mock">📝 Am I ready for mock tests?</option>
               </select>
-              <select id="user-year">
-                <option value="2nd Year">2nd Year</option>
-                <option value="3rd Year">3rd Year</option>
-                <option value="4th Year">4th Year</option>
-              </select>
-              <select id="user-target">
-                <option value="tcs">TCS / Wipro</option>
-                <option value="infosys">Infosys / Accenture</option>
-                <option value="deloitte">Deloitte / PwC</option>
-                <option value="amazon">Amazon / Product Cos</option>
-              </select>
-              <button class="btn btn-primary chat-btn" id="send-advice-btn">Generate Roadmap</button>
+              <button class="btn btn-primary chat-btn" onclick="handleAdvisorQuery()">Ask ✨</button>
             </div>
           </div>
         </section>
 
-        <!-- DSA TRACKER TAB -->
+        <!-- ══════════ DSA TRACKER TAB ══════════ -->
         <section class="tab-pane" id="dsa">
-          <!-- Stats Summary Row -->
-          <div class="grid-3" style="margin-bottom: 24px;">
-            <div class="card stat-card">
-              <div class="stat-icon cyan">🚀</div>
-              <div>
-                <div class="stat-value" id="dsa-solved-count">0/110</div>
-                <div class="stat-label">Problems Solved</div>
-              </div>
+          <div class="card">
+            <div class="card-title">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+              DSA Problem Tracker
             </div>
-            <div class="card stat-card">
-              <div class="stat-icon purple">📈</div>
-              <div>
-                <div class="stat-value" id="dsa-progress-percent">0%</div>
-                <div class="stat-label">Speedrun Completion</div>
-              </div>
-            </div>
-            <div class="card stat-card">
-              <div class="stat-icon amber">🎯</div>
-              <div>
-                <div class="stat-value" id="dsa-active-category">Arrays</div>
-                <div class="stat-label">Current Focus Topic</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Speedrun Strategy Panel -->
-          <div class="card" style="margin-bottom: 24px; background: rgba(139, 92, 246, 0.03); border-color: rgba(139, 92, 246, 0.2);">
-            <div class="card-title" style="color: var(--accent-purple);">
-              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-              60-Day Speedrun Strategy &amp; ROI Rules
-            </div>
-            <div style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
-              <p style="margin-bottom: 12px;">
-                The market placement strategy in 2026 focuses on <strong>becoming very strong at top interview patterns</strong> rather than solving 500+ random questions. This curated sheet contains 110 of the most critical coding questions.
-              </p>
-              <div class="grid-2" style="gap: 24px; margin-top: 10px;">
-                <div>
-                  <h4 style="color: var(--text-primary); margin-bottom: 8px;">Recommended Daily Plan (4 Hours)</h4>
-                  <ul style="padding-left: 20px; margin-bottom: 0;">
-                    <li><strong>Hour 1 (Theory):</strong> Watch video tutorials (NeetCode/Striver) &amp; take pattern notes.</li>
-                    <li><strong>Hour 2-3 (Solve):</strong> Work on 3-4 problems. Spend 20 min trying before learning the pattern.</li>
-                    <li><strong>Hour 4 (Revision):</strong> Write down pattern, time/space complexity, and common tricks.</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 style="color: var(--text-primary); margin-bottom: 8px;">Placement Strategy &amp; ROI Rules</h4>
-                  <ul style="padding-left: 20px; margin-bottom: 0;">
-                    <li><strong>Target:</strong> Comfortably clear OAs for TCS, Infosys, Accenture, Cognizant, Wipro, and startups.</li>
-                    <li><strong>What to Skip:</strong> Segment Trees, Fenwick Trees, Heavy DP/Graphs, Competitive Programming tricks.</li>
-                    <li><strong>Balance:</strong> 50% DSA (110 Qs) + 25% Core CS (DBMS/OS/CN/OOP/SQL) + 25% Project + Resume.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tracker Controls & Filters -->
-          <div class="card" style="margin-bottom: 24px; padding: 18px 24px;">
-            <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
-              <input type="text" id="dsa-search" class="input-field" placeholder="Search problem name..." style="flex: 1; margin: 0; min-width: 200px;">
-              
-              <select id="dsa-filter-topic" class="input-field" style="width: auto; margin: 0; padding-right: 32px; background-color: var(--bg-tertiary);">
-                <option value="all">All Topics</option>
-                <option value="Arrays">Arrays (20)</option>
-                <option value="Strings">Strings (10)</option>
-                <option value="Hashing">Hashing (10)</option>
-                <option value="Two Pointers">Two Pointers (8)</option>
-                <option value="Sliding Window">Sliding Window (8)</option>
-                <option value="Binary Search">Binary Search (8)</option>
-                <option value="Linked List">Linked List (8)</option>
-                <option value="Stack">Stack (8)</option>
-                <option value="Trees">Trees (12)</option>
-                <option value="Heap">Heap (5)</option>
-                <option value="Graph BFS/DFS">Graph BFS/DFS (8)</option>
-                <option value="DP Basics">DP Basics (5)</option>
-              </select>
-
-              <select id="dsa-filter-importance" class="input-field" style="width: auto; margin: 0; padding-right: 32px; background-color: var(--bg-tertiary);">
-                <option value="all">All Importance</option>
-                <option value="Very High">Very High</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-              </select>
-
-              <select id="dsa-filter-status" class="input-field" style="width: auto; margin: 0; padding-right: 32px; background-color: var(--bg-tertiary);">
-                <option value="all">All Statuses</option>
-                <option value="todo">To Do</option>
-                <option value="in_progress">In Progress</option>
-                <option value="completed">Completed</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Problem spreadsheet sheet -->
-          <div class="card" style="padding: 0; overflow: hidden; border-radius: 12px;">
-            <div style="overflow-x: auto; max-height: 500px;">
-              <table class="dsa-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13.5px;">
+            <div style="overflow-x:auto;">
+              <table class="dsa-table" id="dsa-table">
                 <thead>
-                  <tr style="background: var(--bg-tertiary); border-bottom: 1px solid var(--border-color); color: var(--text-primary);">
-                    <th style="padding: 14px 16px; width: 140px;">Status</th>
-                    <th style="padding: 14px 16px;">Problem Name</th>
-                    <th style="padding: 14px 16px; width: 150px;">Topic</th>
-                    <th style="padding: 14px 16px; width: 120px;">Importance</th>
-                    <th style="padding: 14px 16px; width: 80px;">Link</th>
-                    <th style="padding: 14px 16px;">Pattern &amp; Hint</th>
-                    <th style="padding: 14px 16px; width: 250px;">My Personal Notes</th>
+                  <tr>
+                    <th>#</th>
+                    <th>Problem</th>
+                    <th>Topic</th>
+                    <th>Difficulty</th>
+                    <th>Importance</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                    <th>Link</th>
                   </tr>
                 </thead>
-                <tbody id="dsa-problems-body">
-                  <!-- Rendered dynamically -->
-                </tbody>
+                <tbody id="dsa-tbody"></tbody>
               </table>
             </div>
           </div>
         </section>
 
-        <!-- MACHINE LEARNING FOUNDATIONS TAB -->
+        <!-- ══════════ ML FOUNDATIONS TAB ══════════ -->
         <section class="tab-pane" id="ml">
-          <!-- Stats Row -->
-          <div class="grid-3" style="margin-bottom: 24px;">
-            <div class="card stat-card">
-              <div class="stat-icon purple">🧠</div>
-              <div>
-                <div class="stat-value" id="ml-completion-stat">0/5</div>
-                <div class="stat-label">ML Modules Learned</div>
-              </div>
-            </div>
-            <div class="card stat-card">
-              <div class="stat-icon cyan">🧬</div>
-              <div>
-                <div class="stat-value" id="ml-active-layer">Layer 0.1</div>
-                <div class="stat-label">Current Layer Level</div>
-              </div>
-            </div>
-            <div class="card stat-card">
-              <div class="stat-icon amber">💻</div>
-              <div>
-                <div class="stat-value" id="ml-sandbox-status">Idle</div>
-                <div class="stat-label">NumPy Code Sandbox</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Main Layout Split -->
-          <div class="layout-grid" style="display: grid; grid-template-columns: 320px 1fr; gap: 24px; align-items: start;">
-            <!-- Left Column: Chapter Grid & Sandbox -->
-            <div style="display: flex; flex-direction: column; gap: 24px;">
-              <!-- Chapters Selector Card -->
-              <div class="card">
-                <h3 class="card-title" style="margin-bottom: 15px;">ML Modules</h3>
-                <div class="ml-chapters-list" id="ml-chapters-list" style="display: flex; flex-direction: column; gap: 10px;">
-                  <!-- Rendered dynamically -->
-                </div>
-              </div>
-
-              <!-- NumPy Code Sandbox Card -->
-              <div class="card" style="position: relative;">
-                <h3 class="card-title" style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-                  <span>NumPy Sandbox</span>
-                  <span style="font-size: 11px; padding: 2px 6px; border-radius: 4px; background: var(--bg-tertiary); color: var(--accent-cyan); font-family: var(--font-mono);">Python 3.12</span>
-                </h3>
-                <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 12px;">
-                  Inspect or modify the NumPy implementation of the concepts below:
-                </p>
-                <div style="background: #18181b; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; color: #a1a1aa; overflow-x: auto; white-space: pre;" id="ml-code-block">
-                  <!-- NumPy code goes here -->
-                </div>
-                <button class="btn btn-primary" id="ml-run-btn" style="width: 100%; font-size: 13px; font-weight: 600; padding: 10px; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                  <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
-                  Run Python Code Block
-                </button>
-                <div id="ml-console-output" style="margin-top: 12px; background: #09090b; border: 1px solid rgba(156, 179, 213, 0.08); border-radius: 8px; padding: 10px; font-family: var(--font-mono); font-size: 11.5px; color: #34d399; min-height: 50px; display: none; white-space: pre-wrap;">
-                  <!-- Console Output -->
-                </div>
-              </div>
-            </div>
-
-            <!-- Right Column: Theory Sheet & Practice Quiz -->
-            <div style="display: flex; flex-direction: column; gap: 24px;">
-              <!-- Theory Viewer -->
-              <div class="card" id="ml-theory-card">
-                <div class="card-title" id="ml-theory-title" style="color: var(--accent-cyan);">ML Theory &amp; Foundations</div>
-                <div id="ml-theory-content" class="markdown-body" style="font-size: 14.5px; line-height: 1.7; color: var(--text-secondary);">
-                  <!-- Content goes here -->
-                </div>
-              </div>
-
-              <!-- formulas & cheatsheet -->
-              <div class="card">
-                <div class="card-title" style="color: var(--accent-purple);">Quick Formulas &amp; Insights</div>
-                <div id="ml-formulas-content" style="font-size: 13.5px; line-height: 1.6;">
-                  <!-- Formulas go here -->
-                </div>
-              </div>
-
-              <!-- Interactive Quiz Panel -->
-              <div class="card">
-                <div class="card-title" style="color: var(--accent-pink);">Module Practice Questions</div>
-                <div id="ml-quiz-container">
-                  <!-- Quiz rendered dynamically -->
-                </div>
-              </div>
+          <div id="ml-content">
+            <div style="text-align:center;padding:60px;color:var(--text-muted)">
+              <p>ML Foundations content loading…</p>
             </div>
           </div>
         </section>
 
-      </div>
+      </div><!-- /.content-body -->
     </main>
-  </div>
+  </div><!-- /#app-layout -->
 
-  <!-- Mobile Bottom Navigation Bar -->
-  <nav class="mobile-bottom-nav">
-    <div class="mobile-nav-item active nav-tab" data-tab="dashboard">
+  <!-- Mobile Bottom Navigation -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <div class="mobile-nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
-      <span>Dashboard</span>
+      <span>Home</span>
     </div>
-    <div class="mobile-nav-item nav-tab" data-tab="theory">
+    <div class="mobile-nav-item" data-tab="theory" onclick="switchTab('theory')">
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
       <span>Theory</span>
     </div>
-    <div class="mobile-nav-item nav-tab" data-tab="practice">
+    <div class="mobile-nav-item" data-tab="practice" onclick="switchTab('practice')">
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
       <span>Practice</span>
     </div>
-    <div class="mobile-nav-item nav-tab" data-tab="playground">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-      <span>Playground</span>
-    </div>
-    <div class="mobile-nav-item nav-tab" data-tab="cheatsheets">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v12m0 0l-4-4m4 4l4-4m0 6V7m0 0l-4 4m4-4l4 4m5 8V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v14a2 2 0 002 2h4a2 2 0 002-2z"></path></svg>
-      <span>Cheats</span>
-    </div>
-    <div class="mobile-nav-item nav-tab" data-tab="advisor">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-      <span>Advisor</span>
-    </div>
-    <div class="mobile-nav-item nav-tab" data-tab="dsa">
+    <div class="mobile-nav-item" data-tab="dsa" onclick="switchTab('dsa')">
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
       <span>DSA</span>
     </div>
-    <div class="mobile-nav-item nav-tab" data-tab="ml">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"></path></svg>
-      <span>ML</span>
+    <div class="mobile-nav-item" data-tab="advisor" onclick="switchTab('advisor')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+      <span>AI</span>
     </div>
   </nav>
 
-  <script src="data.js?v=2"></script>
-  <script src="app.js?v=2"></script>
+  <!-- ─────────────────────────────────────────
+       SCRIPTS — Load order matters
+  ───────────────────────────────────────── -->
+  <!-- Data -->
+  <script src="data.js"></script>
+  <!-- Feature Modules -->
+  <script src="modules/rings.js"></script>
+  <script src="modules/calendar.js"></script>
+  <script src="modules/ads.js"></script>
+  <!-- Core App -->
+  <script src="app.js"></script>
+
 </body>
 </html>
