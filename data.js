@@ -793,16 +793,94 @@ const SYLLABUS_DATA = {
           ],
           questions: [
             {
-              question: "A can do a piece of work in 10 days and B in 15 days. Working together, how many days will they take to complete the work?",
-              options: ["5 days", "6 days", "7 days", "8 days"],
-              answer: 1,
-              explanation: "LCM(10, 15) = 30. A's efficiency = 3, B's = 2. Together = 5. Days = 30 / 5 = 6 days."
+              question: "A can complete a work in 12 days. How much work does he do in 1 day?",
+              options: ["1/6 work", "1/10 work", "1/12 work", "1/15 work"],
+              answer: 2,
+              explanation: "If whole work = 1, then in 12 days he completes the work. In 1 day, he completes 1/12 of the work."
             },
             {
-              question: "If 12 men or 18 women can do a work in 14 days, in how many days can 8 men and 16 women do it?",
+              question: "A does 1/8 of work per day. How many days to complete work?",
+              options: ["4 days", "6 days", "8 days", "10 days"],
+              answer: 2,
+              explanation: "Days = 1 / (1/8) = 8 days."
+            },
+            {
+              question: "A finishes work in 10 days. B finishes work in 15 days. Find time together.",
+              options: ["4 days", "5 days", "6 days", "8 days"],
+              answer: 2,
+              explanation: "Together time = (a * b) / (a + b) = (10 * 15) / (10 + 15) = 150 / 25 = 6 days."
+            },
+            {
+              question: "A completes a work in 8 days and B in 24 days. Working together, how many days will they take?",
+              options: ["4 days", "6 days", "8 days", "12 days"],
+              answer: 1,
+              explanation: "Together time = (8 * 24) / (8 + 24) = 192 / 32 = 6 days."
+            },
+            {
+              question: "A takes 12 days, B takes 18 days, and C takes 36 days. Find the time taken when they work together.",
+              options: ["4 days", "5 days", "6 days", "8 days"],
+              answer: 2,
+              explanation: "Work = LCM(12, 18, 36) = 36. Efficiencies: A = 3, B = 2, C = 1. Total = 6. Time = 36 / 6 = 6 days."
+            },
+            {
+              question: "A finishes a work in 10 days and B in 15 days. Find their efficiency ratio.",
+              options: ["2:3", "3:2", "1:2", "2:1"],
+              answer: 1,
+              explanation: "Time ratio = 10:15 = 2:3. Since efficiency is inversely proportional to time, efficiency ratio = 3:2."
+            },
+            {
+              question: "A completes work in 20 days. How much work does he do in 5 days?",
+              options: ["1/2 work", "1/3 work", "1/4 work", "1/5 work"],
+              answer: 2,
+              explanation: "One day = 1/20 work. Five days = 5/20 = 1/4 work."
+            },
+            {
+              question: "12 men complete work in 15 days. How many days will it take for 20 men to complete the same work?",
               options: ["8 days", "9 days", "10 days", "12 days"],
               answer: 1,
-              explanation: "12 Men = 18 Women => 1 Man = 1.5 Women. 8 Men + 16 Women = 8(1.5) + 16 = 28 Women. If 18 women take 14 days, 28 women take (18 * 14) / 28 = 9 days."
+              explanation: "Using M1 * D1 = M2 * D2: 12 * 15 = 20 * D2 => 180 = 20 * D2 => D2 = 9 days."
+            },
+            {
+              question: "A finishes work in 20 days. If A's efficiency increases by 25%, find the new time taken to complete the work.",
+              options: ["15 days", "16 days", "18 days", "22 days"],
+              answer: 1,
+              explanation: "Old efficiency = 1, new efficiency = 1.25. Time is inversely proportional to efficiency: 20 / 1.25 = 16 days."
+            },
+            {
+              question: "A completes a work in 10 days. After 4 days B joins. Together they finish the remaining work in 3 more days. Find the time B would take alone.",
+              options: ["8 days", "10 days", "12 days", "15 days"],
+              answer: 1,
+              explanation: "A's work in 4 days = 4/10 = 2/5. Remaining work = 3/5. Done together in 3 days, so combined efficiency = (3/5)/3 = 1/5. B's efficiency = 1/5 - 1/10 = 1/10. B takes 10 days."
+            },
+            {
+              question: "A takes 12 days and B takes 18 days. They work alternately. If A starts, find the completion time.",
+              options: ["12 days", "14 days", "14 1/3 days", "15 days"],
+              answer: 2,
+              explanation: "Total work = LCM(12, 18) = 36. A's rate = 3, B's rate = 2. In 2 days = 5 units. In 14 days = 35 units. Remaining 1 unit done by A in 1/3 day. Total = 14 1/3 days."
+            },
+            {
+              question: "A and B work together. Their efficiency ratio is 3:2. If total wages are ₹5000, find the shares of A and B.",
+              options: ["₹2500 each", "₹3000 and ₹2000", "₹3500 and ₹1500", "₹4000 and ₹1000"],
+              answer: 1,
+              explanation: "Wages are distributed in efficiency ratio. A's share = 3/5 * 5000 = ₹3000. B's share = 2/5 * 5000 = ₹2000."
+            },
+            {
+              question: "A can do a work in 15 days. B is 50% more efficient than A. How many days will B take alone?",
+              options: ["8 days", "10 days", "12 days", "15 days"],
+              answer: 1,
+              explanation: "B's efficiency is 1.5 times A's. B's time = 15 / 1.5 = 10 days."
+            },
+            {
+              question: "A is twice as efficient as B. Working together, they complete the work in 12 days. Find B's time alone.",
+              options: ["24 days", "30 days", "36 days", "48 days"],
+              answer: 2,
+              explanation: "A:B efficiency = 2:1. Together efficiency = 3. Total work = 3 * 12 = 36 units. B alone (1 unit/day) takes 36 days."
+            },
+            {
+              question: "A and B together complete a work in 8 days. A alone completes it in 24 days. Find B's time alone.",
+              options: ["10 days", "12 days", "15 days", "18 days"],
+              answer: 1,
+              explanation: "Combined rate = 1/8. A's rate = 1/24. B's rate = 1/8 - 1/24 = 3/24 - 1/24 = 2/24 = 1/12. B takes 12 days."
             }
           ]
         },
@@ -821,16 +899,94 @@ const SYLLABUS_DATA = {
           ],
           questions: [
             {
-              question: "Two pipes A and B can fill a tank in 20 and 30 minutes respectively. If both pipes are opened together, the time taken to fill the tank is:",
-              options: ["10 minutes", "12 minutes", "15 minutes", "18 minutes"],
+              question: "Pipe A can fill a tank in 14 hours. How much of the tank does it fill in 5 hours?",
+              options: ["3/14", "5/14", "7/14", "9/14"],
               answer: 1,
-              explanation: "Time = (20 * 30) / (20 + 30) = 600 / 50 = 12 minutes."
+              explanation: "In 1 hour: 1/14 tank. In 5 hours: 5/14 tank."
             },
             {
-              question: "A pipe can fill a tank in 6 hours. Due to a leak in the bottom, it is filled in 7 hours. If the tank is full, how much time will the leak take to empty it?",
-              options: ["30 hours", "36 hours", "42 hours", "48 hours"],
+              question: "Pipe A fills a tank in 21 hours and Pipe B fills it in 28 hours. How long together?",
+              options: ["10 hours", "12 hours", "14 hours", "16 hours"],
+              answer: 1,
+              explanation: "Using LCM method: LCM(21, 28) = 84. A = 4, B = 3. Together rate = 7. Time = 84 / 7 = 12 hours."
+            },
+            {
+              question: "Pipe A fills in 24 hr, B in 36 hr, and C in 72 hr. Find the time to fill if all are open.",
+              options: ["8 hours", "10 hours", "12 hours", "15 hours"],
               answer: 2,
-              explanation: "Leak rate = 1/6 - 1/7 = 1/42. Therefore, the leak takes 42 hours to empty the tank."
+              explanation: "LCM(24, 36, 72) = 72. Rates: A=3, B=2, C=1. Combined rate = 6. Time = 72 / 6 = 12 hours."
+            },
+            {
+              question: "Pipe A fills a tank in 16 hr. A leak in the bottom empties it in 48 hr. Find actual filling time.",
+              options: ["20 hours", "24 hours", "28 hours", "32 hours"],
+              answer: 1,
+              explanation: "LCM = 48. A = 3, Leak = -1. Net rate = 2. Time = 48 / 2 = 24 hours."
+            },
+            {
+              question: "Pipe A fills a tank in 18 hr. A leak empties it in 12 hr. If both are open, will the tank fill?",
+              options: ["Fills in 36 hr", "Fills in 18 hr", "Never fills (empties)", "Fills in 6 hr"],
+              answer: 2,
+              explanation: "LCM = 36. Fill = 2, Leak = -3. Net rate = -1. Since net rate is negative, the tank will never fill."
+            },
+            {
+              question: "Pipe A fills a tank in 20 hr. Pipe B fills it in 30 hr. A works alone for 4 hr, then B joins. Find total time.",
+              options: ["12 hours", "13.6 hours", "15.2 hours", "16 hours"],
+              answer: 1,
+              explanation: "LCM = 60. A = 3, B = 2. A alone 4 hr = 12 units. Remaining = 48 units. Together time = 48 / 5 = 9.6 hr. Total time = 4 + 9.6 = 13.6 hours."
+            },
+            {
+              question: "Pipe A fills in 15 hr and B fills in 30 hr. Both work for 6 hr, then B is closed. Find additional time for A.",
+              options: ["4 hours", "5 hours", "6 hours", "8 hours"],
+              answer: 2,
+              explanation: "LCM = 30. A = 2, B = 1. Together rate = 3. In 6 hr, work = 18. Remaining = 12. A alone takes 12 / 2 = 6 hours."
+            },
+            {
+              question: "Pipe A fills in 12 hr. After 3 hr, a leak starts. The leak alone empties the tank in 24 hr. Find total time.",
+              options: ["18 hours", "20 hours", "21 hours", "24 hours"],
+              answer: 2,
+              explanation: "LCM = 24. A = 2, Leak = -1. First 3 hr (A alone) = 6 units. Remaining = 18 units. Net rate = 1. Time = 18 / 1 = 18 hr. Total = 3 + 18 = 21 hours."
+            },
+            {
+              question: "Pipe A fills in 12 hr, B in 18 hr, and leak empties in 36 hr. All open. Find filling time.",
+              options: ["8 hours", "9 hours", "10 hours", "12 hours"],
+              answer: 1,
+              explanation: "LCM = 36. A = 3, B = 2, Leak = -1. Net rate = 4. Time = 36 / 4 = 9 hours."
+            },
+            {
+              question: "Pipe A fills in 8 hr. Pipe B fills in 24 hr. Operating alternately, A starts. Find completion time.",
+              options: ["10 hours", "11 hours", "11 1/3 hours", "12 hours"],
+              answer: 2,
+              explanation: "LCM = 24. A = 3, B = 1. 2-day cycle = 4 units. In 10 days = 20 units. Day 11 (A) = 3 units (total 23). Remaining 1 unit done by B in 1/3 day. Total = 11 1/3 hours."
+            },
+            {
+              question: "Pipe A fills in 10 hr, B in 15 hr, and C empties in 30 hr. After 2 hours, C is closed. How much more time is required?",
+              options: ["4 hours", "4.4 hours", "5 hours", "5.6 hours"],
+              answer: 1,
+              explanation: "LCM = 30. A = 3, B = 2, C = -1. Net rate = 4. In 2 hr = 8 units. Remaining = 22. After C closes, rate = 5. Additional time = 22 / 5 = 4.4 hours."
+            },
+            {
+              question: "Two pipes fill a tank in 6 hr and 12 hr. A leak empties it in 24 hr. Find actual time.",
+              options: ["4 hours", "4.8 hours", "5.2 hours", "6 hours"],
+              answer: 1,
+              explanation: "LCM = 24. Rate A = 4, B = 2, Leak = -1. Net rate = 5. Time = 24 / 5 = 4.8 hours."
+            },
+            {
+              question: "Pipe A fills in 8 hr, B in 12 hr. A works alone for 2 hr, then both work. Find total time.",
+              options: ["4.8 hours", "5 hours", "5.6 hours", "6.2 hours"],
+              answer: 2,
+              explanation: "LCM = 24. A = 3, B = 2. A alone for 2 hr = 6 units. Remaining = 18. Together time = 18 / 5 = 3.6 hr. Total = 2 + 3.6 = 5.6 hours."
+            },
+            {
+              question: "Pipe A fills in 9 hr, B in 18 hr, and a leak empties in 54 hr. Find filling time.",
+              options: ["6 hours", "6.75 hours", "7.2 hours", "8 hours"],
+              answer: 1,
+              explanation: "LCM = 54. A = 6, B = 3, Leak = -1. Net rate = 8. Time = 54 / 8 = 6.75 hours."
+            },
+            {
+              question: "Pipe A fills in 20 hr, B in 30 hr, and C empties in 60 hr. All open for 5 hr, then C is closed. Find total time.",
+              options: ["10 hours", "12 hours", "13 hours", "15 hours"],
+              answer: 2,
+              explanation: "LCM = 60. A = 3, B = 2, C = -1. Net rate = 4. First 5 hr = 20 units. Remaining = 40. After C closes, rate = 5. Time = 40 / 5 = 8 hr. Total = 5 + 8 = 13 hours."
             }
           ]
         },
@@ -850,16 +1006,46 @@ const SYLLABUS_DATA = {
           ],
           questions: [
             {
-              question: "A person covers a distance of 120 km in 3 hours. What is his speed in m/s?",
-              options: ["11.11 m/s", "10 m/s", "15 m/s", "12.5 m/s"],
-              answer: 0,
-              explanation: "Speed = 120 / 3 = 40 km/h. Convert to m/s: 40 * 5/18 = 200/18 = 11.11 m/s."
+              question: "A train moves at 72 km/hr. Convert this speed into m/s.",
+              options: ["15 m/s", "20 m/s", "25 m/s", "30 m/s"],
+              answer: 1,
+              explanation: "Speed in m/s = 72 * 5 / 18 = 4 * 5 = 20 m/s."
             },
             {
-              question: "Excluding exclusions, the speed of a bus is 54 km/hr and including exclusions, it is 45 km/hr. For how many minutes does the bus stop per hour?",
-              options: ["8 minutes", "10 minutes", "12 minutes", "15 minutes"],
+              question: "A car travels 180 km in 3 hours. Find its speed.",
+              options: ["50 km/hr", "60 km/hr", "70 km/hr", "80 km/hr"],
               answer: 1,
-              explanation: "Stoppage time per hour = (Difference in speed) / (Speed without stoppages) = (54 - 45) / 54 = 9/54 = 1/6 hours = 10 minutes."
+              explanation: "Speed = Distance / Time = 180 / 3 = 60 km/hr."
+            },
+            {
+              question: "Two vehicles move at 80 km/hr and 50 km/hr in opposite directions. Find their relative speed.",
+              options: ["30 km/hr", "100 km/hr", "130 km/hr", "150 km/hr"],
+              answer: 2,
+              explanation: "Opposite directions relative speed = S1 + S2 = 80 + 50 = 130 km/hr."
+            },
+            {
+              question: "Two cities are 390 km apart. Two cars start towards each other at 60 km/hr and 70 km/hr. When will they meet?",
+              options: ["2.5 hours", "3 hours", "3.5 hours", "4 hours"],
+              answer: 1,
+              explanation: "Relative speed = 60 + 70 = 130 km/hr. Time = Distance / Relative Speed = 390 / 130 = 3 hours."
+            },
+            {
+              question: "A person covers half the distance at 40 km/hr and the remaining half at 60 km/hr. Find his average speed.",
+              options: ["45 km/hr", "48 km/hr", "50 km/hr", "52 km/hr"],
+              answer: 1,
+              explanation: "Average Speed = 2ab / (a+b) = (2 * 40 * 60) / (40 + 60) = 4800 / 100 = 48 km/hr."
+            },
+            {
+              question: "If speed increases by 20%, find the percentage decrease in travel time.",
+              options: ["15%", "16.67%", "20%", "25%"],
+              answer: 1,
+              explanation: "New speed = 1.2 * Old speed. New time = Old time / 1.2 = (5/6) * Old time. Decrease = 1/6 = 16.67%."
+            },
+            {
+              question: "A man reaches destination 1 hour late when traveling at 40 km/hr, and on time at 50 km/hr. Find the distance.",
+              options: ["150 km", "180 km", "200 km", "250 km"],
+              answer: 2,
+              explanation: "Difference in time = 1 hour. Let distance = D. D/40 - D/50 = 1 => 5D - 4D = 200 => D = 200 km."
             }
           ]
         },
