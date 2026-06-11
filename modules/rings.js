@@ -40,13 +40,29 @@ const RingsModule = (() => {
   }
 
   function updateAll(state) {
-    const completed = state.completedDays ? state.completedDays.size : 0;
-    const total = 35;
-    const coursePercent = Math.round((completed / total) * 100);
+    let completed = 0;
+    if (state.completedDays) {
+      completed = Array.isArray(state.completedDays) ? state.completedDays.length : state.completedDays.size;
+    }
+    
+    let totalDays = 35;
+    if (typeof SYLLABUS_DATA !== 'undefined' && SYLLABUS_DATA.weeks) {
+      totalDays = 0;
+      SYLLABUS_DATA.weeks.forEach(w => {
+        totalDays += w.days.length;
+      });
+    }
+    const coursePercent = totalDays > 0 ? Math.round((completed / totalDays) * 100) : 0;
 
-    const dsaDone = state.dsaProblems
-      ? state.dsaProblems.filter(p => p.status === 'completed').length : 0;
-    const dsaTotal = state.dsaProblems ? state.dsaProblems.length : 1;
+    let dsaDone = 0;
+    let dsaTotal = 1;
+    if (typeof DSA_PROBLEMS !== 'undefined') {
+      dsaTotal = DSA_PROBLEMS.length;
+      dsaDone = Object.values(state.dsaProgress || {}).filter(p => p && p.status === 'completed').length;
+    } else if (state.dsaProblems) {
+      dsaDone = state.dsaProblems.filter(p => p.status === 'completed').length;
+      dsaTotal = state.dsaProblems.length;
+    }
     const dsaPercent = Math.round((dsaDone / dsaTotal) * 100);
 
     const streakVal = state.streak || 0;

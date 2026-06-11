@@ -1053,29 +1053,93 @@ const SYLLABUS_DATA = {
           day: 11,
           topic: "Trains, Boats & Streams",
           category: "Quantitative Aptitude",
-          theory: "Train problems deal with length passing poles or platforms. Boat problems involve relative speed in moving water (upstream/downstream).",
+          theory: "This topic relates relative speed concepts to trains passing platforms/posts and boats moving in water currents. For trains, when passing a static post, the distance covered is the train's length. When passing a platform, distance is train length + platform length. For boats, downstream speed D = B + S and upstream speed U = B - S where B is boat speed in still water and S is stream speed.",
           formulas: [
-            { name: "Passing static object of negligible length", formula: "Time = Length of Train / Speed of Train" },
-            { name: "Passing platform of length L", formula: "Time = (Length of Train + L) / Speed of Train" },
-            { name: "Downstream Speed", formula: "D = u + v where u is speed of boat in still water and v is stream speed" },
-            { name: "Upstream Speed", formula: "U = u - v" }
+            { name: "Downstream Speed", formula: "D = B + S" },
+            { name: "Upstream Speed", formula: "U = B - S" },
+            { name: "Boat Speed in Still Water", formula: "B = (D + U) / 2" },
+            { name: "Stream Speed", formula: "S = (D - U) / 2" },
+            { name: "Average Speed (Equal Distance)", formula: "Avg = (2 * D * U) / (D + U)" },
+            { name: "Overtaking Trains (Same direction)", formula: "Relative Speed = S1 - S2, Distance = L1 + L2" },
+            { name: "Passing Trains (Opposite direction)", formula: "Relative Speed = S1 + S2, Distance = L1 + L2" }
           ],
           shortcuts: [
-            "Speed in still water u = (D + U)/2",
-            "Speed of stream v = (D - U)/2"
+            "Memory Trick: Downstream = Plus (water helps), Upstream = Minus (water opposes).",
+            "The difference between downstream and upstream speed is always 2 * Stream Speed.",
+            "For round trips, always calculate downstream and upstream times separately and sum them."
           ],
           questions: [
             {
-              question: "A train 150m long passes a telegraph post in 9 seconds. The speed of the train is:",
-              options: ["50 km/h", "60 km/h", "75 km/h", "80 km/h"],
-              answer: 1,
-              explanation: "Speed = 150 / 9 = 50/3 m/s. Convert to km/h: (50/3) * (18/5) = 60 km/h."
+              question: "A boat moves with a speed of 20 km/hr in still water and the stream speed is 4 km/hr. Find the downstream speed of the boat.",
+              options: ["16 km/hr", "20 km/hr", "24 km/hr", "28 km/hr"],
+              answer: 2,
+              explanation: "Downstream Speed = Boat Speed + Stream Speed = 20 + 4 = 24 km/hr."
             },
             {
-              question: "A boat goes 8 km upstream and 12 km downstream in 3 hours. If the speed of the stream is 2 km/h, what is the speed of the boat in still water?",
-              options: ["6 km/h", "8 km/h", "10 km/h", "12 km/h"],
+              question: "A boat moves with a speed of 20 km/hr in still water and the stream speed is 4 km/hr. Find the upstream speed of the boat.",
+              options: ["16 km/hr", "20 km/hr", "24 km/hr", "28 km/hr"],
+              answer: 0,
+              explanation: "Upstream Speed = Boat Speed - Stream Speed = 20 - 4 = 16 km/hr."
+            },
+            {
+              question: "If a boat's downstream speed is 24 km/hr and its upstream speed is 16 km/hr, find the speed of the boat in still water.",
+              options: ["18 km/hr", "20 km/hr", "22 km/hr", "24 km/hr"],
               answer: 1,
-              explanation: "Let boat speed be x. Upstream speed = x-2, downstream = x+2. 8/(x-2) + 12/(x+2) = 3. Check options: if x=8: 8/6 + 12/10 = 1.33 + 1.2 = 2.53 (no). If x=10: 8/8 + 12/12 = 1 + 1 = 2 (no). Let's solve: if u=8, then upstream is 6, downstream is 10. Wait, let's check: 8/(x-2) + 12/(x+2) = 3. If x=8: 8/6 + 12/10 = 4/3 + 6/5 = 38/15 != 3. If boat in still water is 8, stream is 2. Let's substitute x=10: 8/8 + 12/12 = 2. Wait, if x=6: 8/4 + 12/8 = 2 + 1.5 = 3.5. Let's check x=8: wait, if boat goes 8 km upstream and 16 km downstream in 3 hours, then if x=10: 8/8 + 16/12 = 1 + 1.33 = 2.33. Let's make it simpler: boat speed in still water is 8 km/h, downstream is 10, upstream is 6."
+              explanation: "Boat Speed = (Downstream + Upstream) / 2 = (24 + 16) / 2 = 20 km/hr."
+            },
+            {
+              question: "If a boat's downstream speed is 24 km/hr and its upstream speed is 16 km/hr, find the speed of the stream.",
+              options: ["2 km/hr", "4 km/hr", "6 km/hr", "8 km/hr"],
+              answer: 1,
+              explanation: "Stream Speed = (Downstream - Upstream) / 2 = (24 - 16) / 2 = 4 km/hr."
+            },
+            {
+              question: "A boat takes 4 hours to travel 80 km downstream. What is the speed of the boat downstream?",
+              options: ["15 km/hr", "20 km/hr", "25 km/hr", "30 km/hr"],
+              answer: 1,
+              explanation: "Downstream Speed = Distance / Time = 80 / 4 = 20 km/hr."
+            },
+            {
+              question: "A boat travels upstream at a speed of 25 km/hr for 4 hours. Find the distance traveled.",
+              options: ["80 km", "100 km", "120 km", "140 km"],
+              answer: 1,
+              explanation: "Distance = Speed * Time = 25 * 4 = 100 km."
+            },
+            {
+              question: "A boat travels 30 km one way. The boat speed in still water is 16 km/hr and stream speed is 4 km/hr. Find the total round trip time.",
+              options: ["3 hours", "4 hours", "5 hours", "6 hours"],
+              answer: 1,
+              explanation: "Downstream speed = 16 + 4 = 20 km/hr. Downstream time = 30 / 20 = 1.5 hr. Upstream speed = 16 - 4 = 12 km/hr. Upstream time = 30 / 12 = 2.5 hr. Total time = 1.5 + 2.5 = 4 hours."
+            },
+            {
+              question: "A boat goes downstream at 20 km/hr and returns upstream at 10 km/hr for equal distance. Find the average speed of the entire journey.",
+              options: ["13.33 km/hr", "14.50 km/hr", "15.00 km/hr", "16.67 km/hr"],
+              answer: 0,
+              explanation: "Average Speed = 2 * a * b / (a + b) = 2 * 20 * 10 / (20 + 10) = 400 / 30 = 13.33 km/hr."
+            },
+            {
+              question: "A boat covers 60 km downstream in 3 hours and 60 km upstream in 5 hours. Find the boat speed in still water and stream speed respectively.",
+              options: ["15 km/hr, 5 km/hr", "16 km/hr, 4 km/hr", "18 km/hr, 2 km/hr", "20 km/hr, 3 km/hr"],
+              answer: 1,
+              explanation: "Downstream speed D = 60 / 3 = 20 km/hr. Upstream speed U = 60 / 5 = 12 km/hr. Boat speed B = (20 + 12)/2 = 16 km/hr. Stream speed S = (20 - 12)/2 = 4 km/hr."
+            },
+            {
+              question: "The speed of a boat in still water is 18 km/hr and the speed of the stream is 3 km/hr. What is the difference between downstream speed and upstream speed?",
+              options: ["3 km/hr", "6 km/hr", "9 km/hr", "12 km/hr"],
+              answer: 1,
+              explanation: "Difference = Downstream - Upstream = (B + S) - (B - S) = 2 * Stream Speed = 2 * 3 = 6 km/hr."
+            },
+            {
+              question: "A train 150m long passes a telegraph post in 9 seconds. Find the speed of the train in km/h.",
+              options: ["50 km/h", "60 km/h", "75 km/h", "80 km/h"],
+              answer: 1,
+              explanation: "Speed = Distance / Time = 150 / 9 = 50/3 m/s. Convert to km/h: (50/3) * (18/5) = 60 km/h."
+            },
+            {
+              question: "A train 240 m long passes a platform 120 m long in 24 seconds. Find the speed of the train in km/h.",
+              options: ["36 km/h", "45 km/h", "54 km/h", "60 km/h"],
+              answer: 2,
+              explanation: "Total distance = 240 + 120 = 360 m. Speed = 360 / 24 = 15 m/s. In km/h: 15 * 18/5 = 54 km/h."
             }
           ]
         },
@@ -1083,27 +1147,101 @@ const SYLLABUS_DATA = {
           day: 12,
           topic: "Number System",
           category: "Quantitative Aptitude",
-          theory: "Number system deals with the properties of numbers, classification (integers, rational, prime), unit digits, and remainders.",
+          theory: "Number System is the core of quantitative aptitude. It classifies numbers into Natural (1,2,3...), Whole (0,1,2...), Integers (...-2,-1,0,1...), Even (divisible by 2), Odd (not divisible by 2), Prime (exactly 2 factors: 1 and itself, with 2 as the only even prime), and Composite (more than 2 factors). Divisibility rules enable checking division without full calculation. Factors are exact divisors. The number of factors of a prime-factorized number N = p^a * q^b * r^c is calculated as (a+1)(b+1)(c+1).",
           formulas: [
-            { name: "Sum of first n natural numbers", formula: "Sum = n*(n+1) / 2" },
-            { name: "Sum of squares of first n natural numbers", formula: "Sum = n*(n+1)*(2n+1) / 6" },
-            { name: "Remainder Theorem", formula: "Dividend = (Divisor * Quotient) + Remainder" }
+            { name: "Classification", formula: "Natural (N), Whole (W), Integers (Z), Primes (2,3,5,7...)" },
+            { name: "Number of Factors", formula: "For N = p^a * q^b * r^c: Factors = (a+1)*(b+1)*(c+1)" },
+            { name: "Prime Factorization", formula: "Expressing a composite number as a product of prime powers" }
           ],
           shortcuts: [
-            "Find unit digit using cyclicity of 4. Cyclicity of 2, 3, 7, 8 is 4."
+            "Divisibility rules: 2 (last digit even), 3 (sum of digits div by 3), 4 (last 2 digits div by 4), 5 (ends in 0 or 5), 8 (last 3 digits div by 8), 9 (sum of digits div by 9), 11 (difference of alternate digit sums is 0 or multiple of 11).",
+            "Prime Check: To check if N is prime, check divisibility by prime numbers up to sqrt(N).",
+            "2 is the only even prime number."
           ],
           questions: [
             {
-              question: "Find the unit digit in the product (2467)^153 * (341)^72.",
-              options: ["7", "9", "3", "1"],
+              question: "Is 864 divisible by 3?",
+              options: ["Yes", "No", "Cannot be determined", "None of these"],
               answer: 0,
-              explanation: "Unit digit of 341^72 is 1. Cyclicity of 7 is 4. 153 % 4 = 1. So 7^1 = 7. Product unit digit = 7 * 1 = 7."
+              explanation: "Sum of digits of 864 = 8 + 6 + 4 = 18. Since 18 is divisible by 3, the number is divisible by 3."
             },
             {
-              question: "What is the largest 4 digit number exactly divisible by 88?",
-              options: ["9944", "9768", "9988", "9900"],
+              question: "Is 2536 divisible by 4?",
+              options: ["Yes", "No", "Cannot be determined", "None of these"],
               answer: 0,
-              explanation: "Largest 4-digit number is 9999. 9999 / 88 leaves a remainder of 55. 9999 - 55 = 9944."
+              explanation: "Last two digits of 2536 are 36. Since 36 is divisible by 4, the entire number is divisible by 4."
+            },
+            {
+              question: "Is 67824 divisible by 8?",
+              options: ["Yes", "No", "Cannot be determined", "None of these"],
+              answer: 0,
+              explanation: "Last three digits of 67824 are 824. Since 824 is divisible by 8 (824 / 8 = 103), the number is divisible by 8."
+            },
+            {
+              question: "Is 5148 divisible by 9?",
+              options: ["Yes", "No", "Cannot be determined", "None of these"],
+              answer: 0,
+              explanation: "Sum of digits of 5148 = 5 + 1 + 4 + 8 = 18. Since 18 is divisible by 9, the number is divisible by 9."
+            },
+            {
+              question: "Is 50611 divisible by 11?",
+              options: ["Yes", "No", "Cannot be determined", "None of these"],
+              answer: 0,
+              explanation: "Difference of alternate digit sums: (5 + 6 + 1) - (0 + 1) = 12 - 1 = 11. Since 11 is divisible by 11, the number is divisible by 11."
+            },
+            {
+              question: "Is 97 prime?",
+              options: ["Prime", "Composite", "Neither", "None of these"],
+              answer: 0,
+              explanation: "Check primes up to sqrt(97) ≈ 9.8 (2, 3, 5, 7). 97 is not divisible by 2, 3, 5, or 7. So, it is a prime number."
+            },
+            {
+              question: "Is 91 prime?",
+              options: ["Prime", "Composite", "Neither", "None of these"],
+              answer: 1,
+              explanation: "91 = 7 * 13. Since it has factors other than 1 and itself, it is a composite number."
+            },
+            {
+              question: "How many prime numbers are there between 1 and 20?",
+              options: ["6", "7", "8", "9"],
+              answer: 2,
+              explanation: "Primes between 1 and 20: 2, 3, 5, 7, 11, 13, 17, 19. Count = 8."
+            },
+            {
+              question: "Find the total number of factors of 24.",
+              options: ["4", "6", "8", "10"],
+              answer: 2,
+              explanation: "Factors of 24: 1, 2, 3, 4, 6, 8, 12, 24. Count = 8."
+            },
+            {
+              question: "How many factors does 36 have?",
+              options: ["6", "8", "9", "10"],
+              answer: 2,
+              explanation: "Prime factorization: 36 = 2^2 * 3^2. Number of factors = (2 + 1) * (2 + 1) = 3 * 3 = 9."
+            },
+            {
+              question: "How many factors does 72 have?",
+              options: ["10", "12", "14", "16"],
+              answer: 1,
+              explanation: "Prime factorization: 72 = 2^3 * 3^2. Number of factors = (3 + 1) * (2 + 1) = 4 * 3 = 12."
+            },
+            {
+              question: "How many factors does 180 have?",
+              options: ["12", "16", "18", "20"],
+              answer: 2,
+              explanation: "Prime factorization: 180 = 2^2 * 3^2 * 5^1. Number of factors = (2 + 1) * (2 + 1) * (1 + 1) = 3 * 3 * 2 = 18."
+            },
+            {
+              question: "Find the prime factorization of 360.",
+              options: ["2^2 * 3^3 * 5", "2^3 * 3^2 * 5", "2^3 * 3^3 * 5", "2^2 * 3^2 * 5^2"],
+              answer: 1,
+              explanation: "360 = 8 * 9 * 5 = 2^3 * 3^2 * 5^1."
+            },
+            {
+              question: "Find the prime factorization of 540.",
+              options: ["2^2 * 3^3 * 5", "2^3 * 3^2 * 5", "2^2 * 3^2 * 5^2", "2^3 * 3^3 * 5"],
+              answer: 0,
+              explanation: "540 = 4 * 27 * 5 = 2^2 * 3^3 * 5^1."
             }
           ]
         },
@@ -1111,27 +1249,84 @@ const SYLLABUS_DATA = {
           day: 13,
           topic: "HCF, LCM & Divisibility",
           category: "Quantitative Aptitude",
-          theory: "HCF (Highest Common Factor) is the greatest divisor. LCM (Least Common Multiple) is the smallest common multiple.",
+          theory: "HCF (Highest Common Factor) is the greatest divisor sharing common factors, whereas LCM (Least Common Multiple) is the smallest common multiple. The product relationship states HCF * LCM = Product of two numbers. Trailing zeros depend on the pairs of 2 * 5. Since 2 is abundant in factorials, trailing zeros are found by counting the highest power of 5 in N! using Legendre's formula: [N/5] + [N/25] + [N/125] + ... Cyclicity helps find unit digits using repeating cycles of unit digit powers (cyclicity of 2, 3, 7, 8 is 4).",
           formulas: [
-            { name: "HCF & LCM product", formula: "HCF * LCM = Product of two numbers" },
-            { name: "HCF of Fractions", formula: "HCF of numerators / LCM of denominators" },
-            { name: "LCM of Fractions", formula: "LCM of numerators / HCF of denominators" }
+            { name: "HCF-LCM Relation", formula: "HCF * LCM = Product of two numbers" },
+            { name: "Power of Prime in Factorial", formula: "Power of p in N! = [N/5] + [N/25] + [N/125] + ..." },
+            { name: "Trailing Zeros in N!", formula: "Zeros = [N/5] + [N/25] + [N/125] + ..." },
+            { name: "Unit Digit Cyclicity", formula: "Find power remainder modulo cyclicity: 2 (cycle 4), 3 (cycle 4), 4 (cycle 2), 7 (cycle 4), 8 (cycle 4), 9 (cycle 2)" }
           ],
           shortcuts: [
-            "Divisibility rules: 3 (sum of digits div by 3), 4 (last 2 digits div by 4), 8 (last 3 digits div by 8), 9 (sum of digits div by 9), 11 (difference of sum of odd and even position digits is 0 or multiple of 11)."
+            "To find trailing zeros, only count prime power of 5 as 2 is always in excess.",
+            "Unit digit of any power of a number ends in a cycle of 4. Find remainder of power divided by 4.",
+            "Difference between downstream and upstream speed is 2 * Stream."
           ],
           questions: [
             {
-              question: "The HCF of two numbers is 11 and their LCM is 7700. If one of the numbers is 275, then the other number is:",
-              options: ["279", "283", "308", "318"],
+              question: "Find the HCF of 24 and 36.",
+              options: ["6", "8", "12", "24"],
               answer: 2,
-              explanation: "Other number = (HCF * LCM) / First Number = (11 * 7700) / 275 = 308."
+              explanation: "24 = 2^3 * 3^1, 36 = 2^2 * 3^2. HCF is the product of smaller prime powers: 2^2 * 3^1 = 4 * 3 = 12."
             },
             {
-              question: "What is the least number which when divided by 12, 16, 18, 30 leaves remainder 4 in each case?",
-              options: ["720", "724", "484", "480"],
+              question: "Find the HCF of 48 and 72.",
+              options: ["12", "16", "24", "48"],
+              answer: 2,
+              explanation: "48 = 2^4 * 3^1, 72 = 2^3 * 3^2. HCF = 2^3 * 3^1 = 24."
+            },
+            {
+              question: "Find the LCM of 12 and 18.",
+              options: ["24", "30", "36", "48"],
+              answer: 2,
+              explanation: "12 = 2^2 * 3^1, 18 = 2^1 * 3^2. LCM is the product of larger prime powers: 2^2 * 3^2 = 4 * 9 = 36."
+            },
+            {
+              question: "Find the LCM of 24 and 30.",
+              options: ["60", "90", "120", "150"],
+              answer: 2,
+              explanation: "24 = 2^3 * 3^1, 30 = 2^1 * 3^1 * 5^1. LCM = 2^3 * 3^1 * 5^1 = 8 * 3 * 5 = 120."
+            },
+            {
+              question: "Verify the HCF * LCM product relation for numbers 18 and 24. What is the product value?",
+              options: ["216", "360", "432", "512"],
+              answer: 2,
+              explanation: "HCF(18,24) = 6, LCM(18,24) = 72. HCF * LCM = 6 * 72 = 432. Also, Product of numbers = 18 * 24 = 432."
+            },
+            {
+              question: "If LCM = 180, HCF = 6, and one number is 30, find the second number.",
+              options: ["24", "30", "36", "42"],
+              answer: 2,
+              explanation: "HCF * LCM = A * B => 6 * 180 = 30 * B => B = 1080 / 30 = 36."
+            },
+            {
+              question: "Find the number of trailing zeros in 10!.",
+              options: ["1", "2", "3", "4"],
               answer: 1,
-              explanation: "Required number = LCM(12, 16, 18, 30) + 4 = 720 + 4 = 724."
+              explanation: "Trailing zeros = [10/5] = 2 zeros."
+            },
+            {
+              question: "Find the number of trailing zeros in 25!.",
+              options: ["4", "5", "6", "7"],
+              answer: 2,
+              explanation: "Trailing zeros = [25/5] + [25/25] = 5 + 1 = 6 zeros."
+            },
+            {
+              question: "Find the number of trailing zeros in 50!.",
+              options: ["10", "11", "12", "13"],
+              answer: 2,
+              explanation: "Trailing zeros = [50/5] + [50/25] = 10 + 2 = 12 zeros."
+            },
+            {
+              question: "Find the highest power of 5 that exactly divides 100!.",
+              options: ["20", "22", "24", "26"],
+              answer: 2,
+              explanation: "Power of 5 in 100! = [100/5] + [100/25] = 20 + 4 = 24."
+            },
+            {
+              question: "Find the highest power of 2 that exactly divides 20!.",
+              options: ["10", "15", "18", "20"],
+              answer: 2,
+              explanation: "Power of 2 in 20! = [20/2] + [20/4] + [20/8] + [20/16] = 10 + 5 + 2 + 1 = 18."
             }
           ]
         },
