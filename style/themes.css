@@ -1,0 +1,66 @@
+/* ============================================================
+   THEMES — Light/Dark and future brand themes
+   Theme token overrides live in tokens.css.
+   This file handles theme-specific component rendering.
+   ============================================================ */
+
+/* ---- THEME TOGGLE BUTTON ---- */
+.theme-toggle-container { display: flex; align-items: center; }
+
+.theme-btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.theme-btn:hover {
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow-blue);
+  transform: translateY(-1px);
+}
+
+body.light-theme     .theme-btn .sun-icon  { display: none;  }
+body.light-theme     .theme-btn .moon-icon { display: block; }
+body:not(.light-theme) .theme-btn .sun-icon  { display: block; }
+body:not(.light-theme) .theme-btn .moon-icon { display: none;  }
+
+/* ---- LIGHT THEME SPECIFIC OVERRIDES ---- */
+body.light-theme .sidebar {
+  box-shadow: 2px 0 12px rgba(28,25,23,0.05);
+}
+
+body.light-theme .topbar {
+  box-shadow: 0 1px 12px rgba(28,25,23,0.05);
+}
+
+body.light-theme .card:hover {
+  box-shadow: 0 8px 24px rgba(28,25,23,0.08), 0 0 12px rgba(99,102,241,0.06);
+}
+
+body.light-theme .mobile-bottom-nav {
+  background: rgba(246,246,242,0.92);
+  box-shadow: 0 -4px 16px rgba(28,25,23,0.06);
+}
+
+/* ---- LOADING SKELETON ---- */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--bg-hover) 50%, var(--bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-text { height: 14px; width: 100%; margin-bottom: 8px; }
+.skeleton-text.w-3\/4 { width: 75%; }
+.skeleton-text.w-1\/2 { width: 50%; }
+.skeleton-card { height: 120px; width: 100%; }
