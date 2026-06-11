@@ -1,40 +1,41 @@
 /**
- * pages/cheatsheet.js — Quick Reference Cheat Sheet per subject
+ * pages/cheatsheet.js — Cheat Sheet Page
+ * Quick reference formulas for a given subject.
  */
 export async function renderCheatsheet(subjectId) {
   const app = document.getElementById('page-content');
-  app.innerHTML = '<div class="skeleton-page"></div>';
+  app.innerHTML = `<div class="page-loading">Loading cheat sheet…</div>`;
 
   let manifest;
   try {
     const mod = await import(`../data/${subjectId}/index.js`);
     manifest = mod.default;
-  } catch {
-    app.innerHTML = `<div class="empty-state"><h2>No cheat sheet for "${subjectId}"</h2></div>`;
+  } catch(e) {
+    app.innerHTML = `<div class="empty-state"><h2>Cheat sheet not found</h2></div>`;
     return;
   }
 
-  const allFormulas = manifest.chapters.flatMap(ch => {
-    const formulas = ch.formulas ?? [];
-    return formulas.map(f => ({ ...f, chapter: ch.title }));
-  });
+  const cards = await Promise.all(
+    manifest.chapters.map(async ch => {
+      try {
+        const mod = await import(`../data/${subjectId}/${ch.id}.js`);
+        const data = mod.default;
+        const formulaRows = (data.formulas || []).map(f =>
+          `<tr><td class="cs-td cs-td--name">${f.name}</td><td class="cs-td"><code>${f.formula}</code></td>${f.example ? `<td class="cs-td cs-td--ex">${f.example}</td>` : '<td></td>'}</tr>`
+        ).join('');
+        return formulaRows ? `
+          <div class="cs-card">
+            <div class="cs-card__title">${data.icon || ''} ${data.title}</div>
+            <table class="cs-table"><thead><tr><th>Name</th><th>Formula</th><th>Example</th></tr></thead><tbody>${formulaRows}</tbody></table>
+          </div>` : '';
+      } catch { return ''; }
+    })
+  );
 
   app.innerHTML = `
     <div class="page page--cheatsheet">
-      <div class="cheatsheet-header">
-        <h1>${manifest.icon} ${manifest.title} — Cheat Sheet</h1>
-        <button class="btn btn--ghost btn--sm" onclick="window.print()">🖨️ Print</button>
-      </div>
-      <div class="cheatsheet-grid">
-        ${allFormulas.map(f => `
-          <div class="cheatsheet-card">
-            <div class="cheatsheet-card__chapter">${f.chapter}</div>
-            <div class="cheatsheet-card__name">${f.name}</div>
-            <code class="cheatsheet-card__formula">${f.formula}</code>
-            ${f.example ? `<div class="cheatsheet-card__example">${f.example}</div>` : ''}
-          </div>
-        `).join('')}
-      </div>
+      <h1 class="page-title">📋 ${manifest.label} — Cheat Sheet</h1>
+      <div class="cs-grid">${cards.join('')}</div>
     </div>
   `;
 }

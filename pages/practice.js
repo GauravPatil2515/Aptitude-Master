@@ -1,212 +1,166 @@
 /**
  * pages/practice.js — Practice / Quiz Page
- * Full-screen one-question-at-a-time with timer, hints, AI explain
+ * Full-screen one-question-at-a-time quiz with timer, hints, AI explain.
  */
 import { store } from '../state/store.js';
-import Router from '../router.js';
-
-let _session = null;
 
 export async function renderPractice(subjectId, chapterId) {
   const app = document.getElementById('page-content');
-  app.innerHTML = '<div class="skeleton-page"></div>';
+  app.innerHTML = `<div class="page-loading">Loading questions…</div>`;
 
-  const key = `${subjectId}-${chapterId}`;
-  let chapterData;
+  let chapter;
   try {
     const mod = await import(`../data/${subjectId}/${chapterId}.js`);
-    chapterData = mod.default;
-  } catch {
-    Router._render404(`/practice/${subjectId}/${chapterId}`);
+    chapter = mod.default;
+  } catch(e) {
+    app.innerHTML = `<div class="empty-state"><h2>No questions found</h2></div>`;
     return;
   }
 
-  const questions = chapterData.questions ?? [];
+  const questions = chapter.questions || [];
   if (!questions.length) {
-    app.innerHTML = `<div class="empty-state"><div class="empty-state__icon">📭</div><h2>No questions yet</h2><p>Check back soon!</p></div>`;
+    app.innerHTML = `<div class="empty-state"><h2>No questions for this chapter yet.</h2>
+      <a href="#/chapter/${subjectId}/${chapterId}" class="btn btn--primary">← Back to Notes</a></div>`;
     return;
   }
 
-  _session = {
-    questions,
-    current: 0,
-    answers: {},
-    marked: new Set(),
-    startTime: Date.now(),
-    chapterId: chapterData.id,
-    subjectId,
-    aiTutorPrompt: chapterData.aiTutorPrompt ?? '',
-  };
+  let current = 0;
+  let score = 0;
+  let answered = false;
+  let timerVal = 0;
+  let timerInterval = null;
+  const flagged = new Set();
 
-  _renderQuestion(app);
-}
+  function renderQ() {
+    answered = false;
+    clearInterval(timerInterval);
+    timerVal = questions[current].timeLimit ?? 90;
 
-function _renderQuestion(app) {
-  const { questions, current, marked } = _session;
-  const q = questions[current];
-  const total = questions.length;
-  const progress = Math.round(((current) / total) * 100);
-
-  app.innerHTML = `
-    <div class="page page--practice">
-
-      <div class="practice-topbar">
-        <button class="btn btn--ghost btn--sm" onclick="Router.navigate('#/chapter/${_session.subjectId}/${_session.chapterId.replace(_session.subjectId + '-', '')}')">
-          ← Back
-        </button>
-        <div class="practice-progress">
-          <div class="practice-progress__bar" style="width:${progress}%"></div>
-        </div>
-        <div class="practice-meta">
-          <span>Q ${current + 1} of ${total}</span>
-          <span class="practice-timer" id="practice-timer">⏱ 00:00</span>
-        </div>
-      </div>
-
-      <div class="practice-body">
-        <div class="question-card" id="question-card">
-          <div class="question-card__tags">
-            <span class="badge badge--${q.difficulty}">${q.difficulty}</span>
-            ${q.tags?.map(t => `<span class="badge badge--ghost">${t}</span>`).join('') ?? ''}
-            ${marked.has(current) ? '<span class="badge badge--amber">⭐ Marked</span>' : ''}
+    const q = questions[current];
+    app.innerHTML = `
+      <div class="page page--practice">
+        <div class="practice-header">
+          <div class="practice-meta">
+            <span class="badge badge--subject">${chapter.title}</span>
+            <span class="practice-counter">Q ${current + 1} of ${questions.length}</span>
           </div>
+          <div class="practice-timer" id="practice-timer">⏱ ${timerVal}s</div>
+          <a href="#/chapter/${subjectId}/${chapterId}" class="btn btn--ghost btn--sm">← Notes</a>
+        </div>
 
-          <p class="question-card__text">${q.text}</p>
-
-          <div class="options-grid" id="options-grid">
+        <div class="practice-card">
+          <p class="practice-question">${q.text}</p>
+          <div class="practice-options" id="practice-options">
             ${q.options.map((opt, i) => `
-              <button class="option-btn" data-index="${i}"
-                      onclick="selectAnswer(${i})">
-                <span class="option-btn__letter">${String.fromCharCode(65 + i)}</span>
-                <span class="option-btn__text">${opt}</span>
-              </button>
+              <button class="option-btn" data-idx="${i}">${String.fromCharCode(65+i)}) ${opt}</button>
             `).join('')}
           </div>
-
-          <div class="question-actions">
-            <button class="btn btn--ghost btn--sm" onclick="skipQuestion()">Skip</button>
-            <button class="btn btn--ghost btn--sm" onclick="toggleMark(${current})">
-              ${marked.has(current) ? '⭐ Unmark' : '☆ Mark for Review'}
-            </button>
-          </div>
         </div>
 
-        <!-- Explanation (shown after answer) -->
-        <div class="explanation-card" id="explanation-card" style="display:none">
-          <div class="explanation-card__result" id="result-indicator"></div>
-          <div class="explanation-card__text" id="explanation-text"></div>
-          <div class="explanation-card__actions">
-            <button class="btn btn--ghost btn--sm" onclick="askAIExplain()">🧠 Ask AI Different Method</button>
-            <button class="btn btn--primary" onclick="nextQuestion()"
-                    id="next-btn">${current + 1 < total ? 'Next Question →' : 'See Results'}</button>
-          </div>
-          <div class="ai-explain-output" id="ai-explain-output"></div>
+        <div class="practice-actions">
+          <button class="btn btn--ghost" id="skip-btn">Skip</button>
+          <button class="btn btn--ghost" id="hint-btn">Hint 💡</button>
+          <button class="btn btn--ghost ${flagged.has(current) ? 'btn--flagged' : ''}" id="flag-btn">
+            ${flagged.has(current) ? '⭐ Flagged' : 'Mark ⭐'}
+          </button>
         </div>
+
+        <div class="practice-feedback" id="practice-feedback" style="display:none"></div>
       </div>
+    `;
 
-    </div>
-  `;
+    // Timer
+    timerInterval = setInterval(() => {
+      timerVal--;
+      const el = document.getElementById('practice-timer');
+      if (el) el.textContent = `⏱ ${timerVal}s`;
+      if (timerVal <= 0) { clearInterval(timerInterval); handleAnswer(-1); }
+    }, 1000);
 
-  _startTimer();
-}
+    // Option click
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => handleAnswer(parseInt(btn.dataset.idx)));
+    });
 
-let _timerInterval = null;
-function _startTimer() {
-  clearInterval(_timerInterval);
-  let elapsed = 0;
-  _timerInterval = setInterval(() => {
-    elapsed++;
-    const mm = String(Math.floor(elapsed / 60)).padStart(2, '0');
-    const ss = String(elapsed % 60).padStart(2, '0');
-    const el = document.getElementById('practice-timer');
-    if (el) el.textContent = `⏱ ${mm}:${ss}`;
-  }, 1000);
-}
-
-window.selectAnswer = function(idx) {
-  if (!_session) return;
-  const q = _session.questions[_session.current];
-  const correct = idx === q.answer;
-  _session.answers[_session.current] = { chosen: idx, correct };
-  clearInterval(_timerInterval);
-
-  // Visual feedback on options
-  document.querySelectorAll('.option-btn').forEach((btn, i) => {
-    btn.disabled = true;
-    if (i === q.answer) btn.classList.add('option-btn--correct');
-    else if (i === idx && !correct) btn.classList.add('option-btn--wrong');
-  });
-
-  const expl = document.getElementById('explanation-card');
-  const result = document.getElementById('result-indicator');
-  const explText = document.getElementById('explanation-text');
-  if (expl && result && explText) {
-    expl.style.display = 'block';
-    result.textContent = correct ? '✅ Correct!' : '❌ Incorrect';
-    result.className = 'explanation-card__result ' + (correct ? 'text-success' : 'text-error');
-    explText.textContent = q.explanation ?? '';
+    document.getElementById('skip-btn')?.addEventListener('click', () => nextQ());
+    document.getElementById('flag-btn')?.addEventListener('click', () => {
+      flagged.has(current) ? flagged.delete(current) : flagged.add(current);
+      renderQ();
+    });
+    document.getElementById('hint-btn')?.addEventListener('click', () => {
+      const fb = document.getElementById('practice-feedback');
+      if (fb) { fb.style.display = 'block'; fb.innerHTML = `<div class="feedback feedback--hint">💡 ${q.hint || 'Try eliminating wrong answers first.'}</div>`; }
+    });
   }
 
-  store.recordAnswer(_session.chapterId, q.id, correct);
-};
+  function handleAnswer(idx) {
+    if (answered) return;
+    answered = true;
+    clearInterval(timerInterval);
+    const q = questions[current];
+    const correct = idx === q.answer;
+    if (correct) score++;
 
-window.skipQuestion = function() {
-  clearInterval(_timerInterval);
-  _session.current++;
-  if (_session.current >= _session.questions.length) _renderResults();
-  else _renderQuestion(document.getElementById('page-content'));
-};
+    document.querySelectorAll('.option-btn').forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === q.answer) btn.classList.add('option-btn--correct');
+      else if (i === idx) btn.classList.add('option-btn--wrong');
+    });
 
-window.nextQuestion = function() {
-  _session.current++;
-  if (_session.current >= _session.questions.length) _renderResults();
-  else _renderQuestion(document.getElementById('page-content'));
-};
-
-window.toggleMark = function(idx) {
-  if (_session.marked.has(idx)) _session.marked.delete(idx);
-  else _session.marked.add(idx);
-  _renderQuestion(document.getElementById('page-content'));
-};
-
-window.askAIExplain = async function() {
-  if (!_session) return;
-  const out = document.getElementById('ai-explain-output');
-  if (!out) return;
-  out.innerHTML = '<span class="ai-typing">Thinking…</span>';
-  const q = _session.questions[_session.current - 1] ?? _session.questions[_session.current];
-  try {
-    const { askAI } = await import('../api/ai.js');
-    const reply = await askAI(
-      _session.aiTutorPrompt || 'You are an expert aptitude tutor.',
-      `Explain this question step-by-step in a different method:\n${q.text}\nCorrect Answer: ${q.options[q.answer]}\n${q.explanation ?? ''}`
-    );
-    out.innerHTML = reply;
-  } catch {
-    out.innerHTML = '⚠️ AI unavailable.';
+    const fb = document.getElementById('practice-feedback');
+    if (fb) {
+      fb.style.display = 'block';
+      fb.innerHTML = `
+        <div class="feedback ${correct ? 'feedback--correct' : 'feedback--wrong'}">
+          ${correct ? '✅ Correct!' : '❌ Wrong!'}
+          <span class="feedback__explanation">${q.explanation || ''}</span>
+        </div>
+        <div class="feedback-actions">
+          <button class="btn btn--ghost btn--sm" id="ai-explain-btn">Ask AI to Explain →</button>
+          <button class="btn btn--primary btn--sm" id="next-btn">${current < questions.length - 1 ? 'Next →' : 'Finish ✓'}</button>
+        </div>
+      `;
+      document.getElementById('next-btn')?.addEventListener('click', () => nextQ());
+      document.getElementById('ai-explain-btn')?.addEventListener('click', async () => {
+        const btn = document.getElementById('ai-explain-btn');
+        if (btn) btn.textContent = '⏳ Asking AI…';
+        try {
+          const { askAI } = await import('../api/ai.js');
+          const reply = await askAI(
+            `You are a placement exam tutor. Explain aptitude questions step by step.`,
+            `Explain this question: "${q.text}" — Correct answer: ${q.options[q.answer]}. Explanation: ${q.explanation}`
+          );
+          if (btn) { btn.textContent = ''; btn.className = 'ai-reply'; btn.textContent = reply; }
+        } catch(e) { if (btn) btn.textContent = 'AI unavailable'; }
+      });
+    }
   }
-};
 
-function _renderResults() {
-  clearInterval(_timerInterval);
-  const app = document.getElementById('page-content');
-  const { questions, answers } = _session;
-  const total = questions.length;
-  const correct = Object.values(answers).filter(a => a.correct).length;
-  const pct = Math.round((correct / total) * 100);
-  const timeTaken = Math.round((Date.now() - _session.startTime) / 1000);
+  function nextQ() {
+    clearInterval(timerInterval);
+    if (current < questions.length - 1) { current++; renderQ(); }
+    else showResults();
+  }
 
-  app.innerHTML = `
-    <div class="page page--results">
-      <div class="results-card">
-        <div class="results-card__score ${pct >= 70 ? 'text-success' : 'text-error'}">${pct}%</div>
-        <h2 class="results-card__title">${pct >= 70 ? '🎉 Great work!' : '📚 Keep practising!'}</h2>
-        <p class="results-card__meta">${correct} / ${total} correct · ${Math.floor(timeTaken/60)}m ${timeTaken%60}s</p>
-        <div class="results-actions">
-          <button class="btn btn--ghost" onclick="renderPractice('${_session.subjectId}', '${_session.chapterId.replace(_session.subjectId+'-','')}')">Retry</button>
-          <a href="#/subject/${_session.subjectId}" class="btn btn--primary">Back to Subject</a>
+  function showResults() {
+    const pct = Math.round((score / questions.length) * 100);
+    store.setScore(subjectId, chapterId, pct);
+    app.innerHTML = `
+      <div class="page page--results">
+        <div class="results-card">
+          <div class="results-card__icon">${pct >= 70 ? '🎉' : '📚'}</div>
+          <h2 class="results-card__title">${pct >= 70 ? 'Great job!' : 'Keep practicing!'}</h2>
+          <div class="results-card__score">${score} / ${questions.length}</div>
+          <div class="results-card__pct">${pct}%</div>
+          <div class="results-card__actions">
+            <a href="#/practice/${subjectId}/${chapterId}" class="btn btn--primary">Try Again</a>
+            <a href="#/chapter/${subjectId}/${chapterId}" class="btn btn--ghost">← Back to Notes</a>
+            <a href="#/subject/${subjectId}" class="btn btn--ghost">All Chapters</a>
+          </div>
         </div>
       </div>
-    </div>
-  `;
+    `;
+  }
+
+  renderQ();
 }
