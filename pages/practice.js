@@ -1,12 +1,17 @@
 /**
  * pages/practice.js — Practice / Quiz Page
  * Full-screen one-question-at-a-time quiz with timer, hints, AI explain.
+ * Keyboard shortcuts: 1-4 (select option), Enter (next), H (hint), S (skip)
  */
 import { store } from '../state/store.js';
 
 export async function renderPractice(subjectId, chapterId) {
   const app = document.getElementById('page-content');
-  app.innerHTML = `<div class="page-loading">Loading questions…</div>`;
+  app.innerHTML = `
+    <div class="page-loading">
+      <div class="page-loading__spinner"></div>
+      <div class="page-loading__text">Loading questions…</div>
+    </div>`;
 
   let chapter;
   try {
@@ -30,13 +35,47 @@ export async function renderPractice(subjectId, chapterId) {
   let timerVal = 0;
   let timerInterval = null;
   const flagged = new Set();
+  let destroyed = false;
+
+  // Cleanup on route change
+  const cleanup = () => {
+    destroyed = true;
+    clearInterval(timerInterval);
+    window.removeEventListener('keydown', handleKeydown);
+  };
+  const origHashChange = window.onhashchange;
+  window.addEventListener('hashchange', () => { cleanup(); if (origHashChange) origHashChange(); }, { once: true });
+
+  function handleKeydown(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    // Number keys 1-4 select option
+    if (!answered && (e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4')) {
+      const idx = parseInt(e.key) - 1;
+      const btn = document.querySelector(`.option-btn[data-idx="${idx}"]`);
+      if (btn && !btn.disabled) handleAnswer(idx);
+    }
+    // Enter = next question / finish
+    if (e.key === 'Enter' && answered) nextQ();
+    // H = hint
+    if (e.key === 'h' || e.key === 'H') {
+      const hintBtn = document.getElementById('hint-btn');
+      if (hintBtn) hintBtn.click();
+    }
+    // S = skip
+    if ((e.key === 's' || e.key === 'S') && !answered) nextQ();
+  }
+  window.addEventListener('keydown', handleKeydown);
 
   function renderQ() {
+    if (destroyed) return;
     answered = false;
     clearInterval(timerInterval);
     timerVal = questions[current].timeLimit ?? 90;
 
     const q = questions[current];
+    const pct = Math.round(((current) / questions.length) * 100);
+
     app.innerHTML = `
       <div class="page page--practice">
         <div class="practice-header">
@@ -48,20 +87,27 @@ export async function renderPractice(subjectId, chapterId) {
           <a href="#/chapter/${subjectId}/${chapterId}" class="btn btn--ghost btn--sm">← Notes</a>
         </div>
 
+        <!-- Progress bar -->
+        <div class="practice-progress">
+          <div class="practice-progress__fill" style="width:${pct}%"></div>
+        </div>
+
         <div class="practice-card">
           <p class="practice-question">${q.text}</p>
           <div class="practice-options" id="practice-options">
             ${q.options.map((opt, i) => `
-              <button class="option-btn" data-idx="${i}">${String.fromCharCode(65+i)}) ${opt}</button>
-            `).join('')}
+              <button class="option-btn" data-idx="${i}">
+                <span class="option-btn__key">${i + 1}</span>
+                <span class="option-btn__label">${String.fromCharCode(65+i)}) ${opt}</span>
+              </button>`).join('')}
           </div>
         </div>
 
         <div class="practice-actions">
-          <button class="btn btn--ghost" id="skip-btn">Skip</button>
-          <button class="btn btn--ghost" id="hint-btn">Hint 💡</button>
+          <button class="btn btn--ghost" id="skip-btn">Skip <span class="practice-key-hint">S</span></button>
+          <button class="btn btn--ghost" id="hint-btn">Hint <span class="practice-key-hint">H</span></button>
           <button class="btn btn--ghost ${flagged.has(current) ? 'btn--flagged' : ''}" id="flag-btn">
-            ${flagged.has(current) ? '⭐ Flagged' : 'Mark ⭐'}
+            ${flagged.has(current) ? '⭐ Flagged' : 'Flag ⭐'}
           </button>
         </div>
 
@@ -71,9 +117,13 @@ export async function renderPractice(subjectId, chapterId) {
 
     // Timer
     timerInterval = setInterval(() => {
+      if (destroyed) { clearInterval(timerInterval); return; }
       timerVal--;
       const el = document.getElementById('practice-timer');
-      if (el) el.textContent = `⏱ ${timerVal}s`;
+      if (el) {
+        el.textContent = `⏱ ${timerVal}s`;
+        el.classList.toggle('practice-timer--urgent', timerVal <= 10);
+      }
       if (timerVal <= 0) { clearInterval(timerInterval); handleAnswer(-1); }
     }, 1000);
 
@@ -94,7 +144,7 @@ export async function renderPractice(subjectId, chapterId) {
   }
 
   function handleAnswer(idx) {
-    if (answered) return;
+    if (answered || destroyed) return;
     answered = true;
     clearInterval(timerInterval);
     const q = questions[current];
@@ -117,7 +167,9 @@ export async function renderPractice(subjectId, chapterId) {
         </div>
         <div class="feedback-actions">
           <button class="btn btn--ghost btn--sm" id="ai-explain-btn">Ask AI to Explain →</button>
-          <button class="btn btn--primary btn--sm" id="next-btn">${current < questions.length - 1 ? 'Next →' : 'Finish ✓'}</button>
+          <button class="btn btn--primary btn--sm" id="next-btn">
+            ${current < questions.length - 1 ? 'Next →' : 'Finish ✓'}
+          </button>
         </div>
       `;
       document.getElementById('next-btn')?.addEventListener('click', () => nextQ());
@@ -137,12 +189,15 @@ export async function renderPractice(subjectId, chapterId) {
   }
 
   function nextQ() {
+    if (destroyed) return;
     clearInterval(timerInterval);
     if (current < questions.length - 1) { current++; renderQ(); }
     else showResults();
   }
 
   function showResults() {
+    if (destroyed) return;
+    cleanup();
     const pct = Math.round((score / questions.length) * 100);
     store.setScore(subjectId, chapterId, pct);
     app.innerHTML = `

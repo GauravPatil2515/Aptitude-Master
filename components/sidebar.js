@@ -2,15 +2,15 @@
  * components/sidebar.js — Left Navigation Component
  * 2-level hierarchy: Subjects → Chapters
  */
-import Router from '../router.js';
 import { store } from '../state/store.js';
 
 const SUBJECTS = [
-  { id: 'aptitude',  label: 'Aptitude',         icon: '📐' },
-  { id: 'core-cs',  label: 'Core CS',           icon: '💻' },
-  { id: 'dsa',      label: 'DSA Tracker',       icon: '📊' },
-  { id: 'sql',      label: 'SQL',               icon: '🗃️' },
-  { id: 'ml',       label: 'ML & AI',           icon: '🤖' },
+  { id: 'aptitude',    label: 'Aptitude',         icon: '📐' },
+  { id: 'core-cs',    label: 'Core CS',           icon: '💻' },
+  { id: 'dsa',        label: 'DSA Tracker',       icon: '📊' },
+  { id: 'sql',        label: 'SQL',               icon: '🗃️' },
+  { id: 'ml',         label: 'ML & AI',           icon: '🧠' },
+  { id: 'ai-engineer',label: 'AI Engineer',       icon: '🤖' },
 ];
 
 export function renderSidebar() {
@@ -24,11 +24,11 @@ export function renderSidebar() {
     const pct = s.progress?.[sub.id] ?? 0;
     const isActive = currentPath.includes(`/${sub.id}`);
     return `
-      <div class="sidebar-item ${isActive ? 'sidebar-item--active' : ''}" data-href="#/subject/${sub.id}">
+      <a href="#/subject/${sub.id}" class="sidebar-item ${isActive ? 'sidebar-item--active' : ''}">
         <span class="sidebar-item__icon">${sub.icon}</span>
         <span class="sidebar-item__label">${sub.label}</span>
         <span class="sidebar-item__pct">${pct}%</span>
-      </div>`;
+      </a>`;
   }).join('');
 
   sidebar.innerHTML = `
@@ -37,7 +37,11 @@ export function renderSidebar() {
         <span class="sidebar-logo__icon">🎯</span>
         <span class="sidebar-logo__text">AptitudeMaster</span>
       </a>
-      <button class="sidebar-collapse-btn" id="sidebar-collapse" title="Collapse sidebar">←</button>
+      <button class="sidebar-collapse-btn" id="sidebar-collapse" title="Toggle sidebar">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+        </svg>
+      </button>
     </div>
 
     <div class="sidebar-progress-bar">
@@ -70,11 +74,6 @@ export function renderSidebar() {
       </button>
     </div>
   `;
-
-  // Click nav items
-  sidebar.querySelectorAll('[data-href]').forEach(el => {
-    el.addEventListener('click', () => Router.navigate(el.dataset.href));
-  });
 
   // Collapse toggle
   document.getElementById('sidebar-collapse')?.addEventListener('click', () => {

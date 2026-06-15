@@ -4,9 +4,17 @@
  */
 import { store } from '../state/store.js';
 
+const statusIcon = { todo: '○', in_progress: '◑', completed: '✅' };
+const statusLabel = { todo: 'Todo', in_progress: 'In Progress', completed: 'Done' };
+const statusCycle = { todo: 'in_progress', in_progress: 'completed', completed: 'todo' };
+
 export async function renderDSA() {
   const app = document.getElementById('page-content');
-  app.innerHTML = `<div class="page-loading">Loading DSA tracker…</div>`;
+  app.innerHTML = `
+    <div class="page-loading">
+      <div class="page-loading__spinner"></div>
+      <div class="page-loading__text">Loading DSA tracker…</div>
+    </div>`;
 
   let manifest;
   try {
@@ -21,14 +29,39 @@ export async function renderDSA() {
   const dsaState = s.dsa || {};
 
   function getStatus(id) { return dsaState[id] || 'todo'; }
-  function cycleStatus(id) {
-    const cycle = { todo: 'in_progress', in_progress: 'completed', completed: 'todo' };
-    store.setDSA(id, cycle[getStatus(id)]);
-    renderDSA();
+
+  function updateStats() {
+    const total = document.querySelectorAll('.dsa-row').length;
+    const solved = document.querySelectorAll('.dsa-row--completed').length;
+    const pct = total ? Math.round(solved / total * 100) : 0;
+    const solvedEl = document.querySelector('#dsa-solved-count');
+    const pctEl = document.querySelector('#dsa-pct-count');
+    if (solvedEl) solvedEl.textContent = `${solved}/${total}`;
+    if (pctEl) pctEl.textContent = `${pct}%`;
   }
 
-  const statusIcon = { todo: '○', in_progress: '◑', completed: '✅' };
-  const statusLabel = { todo: 'Todo', in_progress: 'In Progress', completed: 'Done' };
+  function cycleStatus(id) {
+    const current = getStatus(id);
+    const next = statusCycle[current];
+    store.setDSA(id, next);
+
+    // Update only the affected row — no full re-render
+    const btn = document.querySelector(`.status-btn[data-id="${id}"]`);
+    if (!btn) return;
+    const row = btn.closest('.dsa-row');
+    if (!row) return;
+
+    // Update button
+    btn.className = `status-btn status-btn--${next}`;
+    btn.title = statusLabel[next];
+    btn.textContent = statusIcon[next];
+
+    // Update row class
+    row.className = `dsa-row dsa-row--${next}`;
+
+    // Update stats
+    updateStats();
+  }
 
   let totalSolved = 0, total = 0;
   const topicSections = manifest.topics.map(topic => {
@@ -39,7 +72,7 @@ export async function renderDSA() {
       return `
         <tr class="dsa-row dsa-row--${st}">
           <td class="dsa-cell">
-            <button class="status-btn status-btn--${st}" data-id="${p.id}" title="Click to cycle status">
+            <button class="status-btn status-btn--${st}" data-id="${p.id}" title="${statusLabel[st]}">
               ${statusIcon[st]}
             </button>
           </td>
@@ -59,13 +92,15 @@ export async function renderDSA() {
       </tbody>`;
   }).join('');
 
+  const pct = total ? Math.round(totalSolved / total * 100) : 0;
+
   app.innerHTML = `
     <div class="page page--dsa">
       <div class="dsa-header">
         <h1 class="page-title">📊 DSA Tracker</h1>
         <div class="dsa-stats">
-          <div class="dsa-stat"><span class="dsa-stat__val" style="color:var(--accent-cyan)">${totalSolved}/${total}</span><span class="dsa-stat__label">Solved</span></div>
-          <div class="dsa-stat"><span class="dsa-stat__val" style="color:var(--accent-purple)">${total ? Math.round(totalSolved/total*100) : 0}%</span><span class="dsa-stat__label">Progress</span></div>
+          <div class="dsa-stat"><span class="dsa-stat__val" id="dsa-solved-count" style="color:var(--accent-cyan)">${totalSolved}/${total}</span><span class="dsa-stat__label">Solved</span></div>
+          <div class="dsa-stat"><span class="dsa-stat__val" id="dsa-pct-count" style="color:var(--accent-purple)">${pct}%</span><span class="dsa-stat__label">Progress</span></div>
         </div>
       </div>
       <div class="card" style="padding:0;overflow:hidden">
@@ -99,6 +134,7 @@ export async function renderDSA() {
     </div>
   `;
 
+  // Status cycle click — updates DOM in-place, no re-render
   document.querySelectorAll('.status-btn').forEach(btn => {
     btn.addEventListener('click', () => cycleStatus(btn.dataset.id));
   });

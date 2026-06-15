@@ -20,5 +20,6 @@ export default {
     { id: 'probability',    title: 'Probability',          icon: '🎲', difficulty: 'hard', estimatedTime: 65 },
     { id: 'logical-reasoning', title: 'Logical Reasoning', icon: '🧩', difficulty: 'medium', estimatedTime: 60 },
     { id: 'verbal-ability', title: 'Verbal Ability',       icon: '🗣️',  difficulty: 'medium', estimatedTime: 45 },
+    { id: 'data-interpretation', title: 'Data Interpretation', icon: '📊', difficulty: 'medium', estimatedTime: 90 },
   ]
 };

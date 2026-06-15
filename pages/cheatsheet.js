@@ -4,7 +4,11 @@
  */
 export async function renderCheatsheet(subjectId) {
   const app = document.getElementById('page-content');
-  app.innerHTML = `<div class="page-loading">Loading cheat sheet…</div>`;
+  app.innerHTML = `
+    <div class="page-loading">
+      <div class="page-loading__spinner"></div>
+      <div class="page-loading__text">Loading cheat sheet…</div>
+    </div>`;
 
   let manifest;
   try {

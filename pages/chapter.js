@@ -8,7 +8,11 @@ import Router from '../router.js';
 
 export async function renderChapter(subjectId, chapterId) {
   const app = document.getElementById('page-content');
-  app.innerHTML = `<div class="page-loading">Loading chapter…</div>`;
+  app.innerHTML = `
+    <div class="page-loading">
+      <div class="page-loading__spinner"></div>
+      <div class="page-loading__text">Loading chapter…</div>
+    </div>`;
 
   let chapter;
   try {

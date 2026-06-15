@@ -1,0 +1,2067 @@
+A starts, B joins
+Alternate days
+Wage distribution
+One-Page Revision Sheet
+E=
+T
+1
+	​
+
+W=ET
+A+B=
+a+b
+ab
+	​
+
+M
+1
+	​
+
+D
+1
+	​
+
+=M
+2
+	​
+
+D
+2
+	​
+
+
+Efficiency ratio = inverse of time ratio.
+
+LCM method:
+
+Take work = LCM of times
+Efficiency = LCM / days
+Time = Work / Total Efficiency
+
+This LCM method solves most placement Time & Work questions much faster than using fractions. Next, practice should focus on 20–30 mixed Time & Work questions because pattern recognition is everything in this topic.
+
+give me question with solve explanation 
+
+Perfect. Time & Work is learned by patterns, not theory. Let's do basic → medium → placement level with detailed explanations.
+
+Type 1: Single Person
+Q1
+
+A can complete a work in 12 days.
+
+How much work does he do in 1 day?
+
+Step 1
+
+If whole work = 1
+
+Then in 12 days:
+
+1
+
+In 1 day:
+
+12
+1
+	​
+
+
+Answer = 1/12 work per day
+
+Shortcut
+
+If someone takes N days:
+
+Efficiency=
+N
+1
+	​
+
+Q2
+
+A does
+
+8
+1
+	​
+
+
+of work per day.
+
+How many days to complete work?
+
+Work = 1
+
+Each day:
+
+8
+1
+	​
+
+
+Days:
+
+1÷
+8
+1
+	​
+
+=8
+
+Answer = 8 days
+
+Type 2: Two People Together
+Q3
+
+A finishes work in 10 days.
+
+B finishes work in 15 days.
+
+Find time together.
+
+Method 1 (Fractions)
+
+A's efficiency:
+
+10
+1
+	​
+
+
+B's efficiency:
+
+15
+1
+	​
+
+
+Together:
+
+10
+1
+	​
+
++
+15
+1
+	​
+
+
+LCM = 30
+
+30
+3
+	​
+
++
+30
+2
+	​
+
+=
+30
+5
+	​
+
+=
+6
+1
+	​
+
+
+Time:
+
+6
+
+Answer = 6 days
+
+Method 2 (Placement Shortcut)
+
+Use:
+
+a+b
+ab
+	​
+
+25
+10×15
+	​
+
+=6
+
+Much faster.
+
+Q4
+
+A = 8 days
+
+B = 24 days
+
+Together?
+
+Shortcut:
+
+8+24
+8×24
+	​
+
+32
+192
+	​
+
+=6
+
+Answer = 6 days
+
+Type 3: Three People Together
+Q5
+
+A = 12 days
+
+B = 18 days
+
+C = 36 days
+
+Find time together.
+
+LCM Method
+
+Take work = LCM(12,18,36)
+
+36
+
+A efficiency:
+
+36/12=3
+
+B efficiency:
+
+36/18=2
+
+C efficiency:
+
+36/36=1
+
+Total efficiency:
+
+3+2+1=6
+
+Time:
+
+36/6=6
+
+Answer = 6 days
+
+Why LCM Method?
+
+No fractions.
+
+Most placement students use this.
+
+Type 4: Efficiency Ratio
+Q6
+
+A finishes in 10 days.
+
+B finishes in 15 days.
+
+Find efficiency ratio.
+
+Time ratio:
+
+10:15
+
+Efficiency ratio = inverse
+
+15:10=3:2
+
+Answer = 3:2
+
+Shortcut
+
+Days ↓
+
+Efficiency ↑
+
+Inverse relationship.
+
+Type 5: Work Done in Some Days
+Q7
+
+A completes work in 20 days.
+
+How much work in 5 days?
+
+One day:
+
+20
+1
+	​
+
+
+Five days:
+
+20
+5
+	​
+
+=
+4
+1
+	​
+
+
+Answer = 1/4 work
+
+Type 6: Men and Work
+Q8
+
+12 men complete work in 15 days.
+
+How many days for 20 men?
+
+Men × Days = Constant
+
+12×15=20×x
+180=20x
+x=9
+
+Answer = 9 days
+
+Type 7: Efficiency Increase
+Q9
+
+A finishes work in 20 days.
+
+Efficiency increases by 25%.
+
+Find new time.
+
+Old efficiency:
+
+1
+
+New efficiency:
+
+1.25
+
+Time inversely proportional.
+
+20/1.25=16
+
+Answer = 16 days
+
+Shortcut
+
+Efficiency ↑25%
+
+Time becomes:
+
+125
+100
+	​
+
+=
+5
+4
+	​
+
+
+of original.
+
+20×
+5
+4
+	​
+
+=16
+Type 8: A Starts, B Joins
+
+Very important.
+
+Q10
+
+A completes work in 10 days.
+
+After 4 days B joins.
+
+Together they finish in 3 more days.
+
+Find B's time.
+
+A's work in 4 days:
+
+4×
+10
+1
+	​
+
+=
+5
+2
+	​
+
+
+Remaining:
+
+1−
+5
+2
+	​
+
+=
+5
+3
+	​
+
+
+Completed in next 3 days.
+
+Together efficiency:
+
+5
+3
+	​
+
+÷3=
+5
+1
+	​
+
+
+B's efficiency:
+
+5
+1
+	​
+
+−
+10
+1
+	​
+
+=
+10
+1
+	​
+
+
+Thus B alone:
+
+10
+
+Answer = 10 days
+
+Type 9: Alternate Days
+Q11
+
+A = 12 days
+
+B = 18 days
+
+Work alternately.
+
+A starts.
+
+Find completion time.
+
+Take work = 36
+
+A = 3 units/day
+
+B = 2 units/day
+
+Day 1:
+
+3
+
+Day 2:
+
+5
+
+Day 3:
+
+8
+
+Day 4:
+
+10
+
+Day 5:
+
+13
+
+Day 6:
+
+15
+
+Day 7:
+
+18
+
+Day 8:
+
+20
+
+Day 9:
+
+23
+
+Day 10:
+
+25
+
+Day 11:
+
+28
+
+Day 12:
+
+30
+
+Day 13:
+
+33
+
+Day 14:
+
+35
+
+Remaining:
+
+1
+
+A works next.
+
+Efficiency = 3
+
+Time:
+
+1/3
+
+Total:
+
+14+
+3
+1
+	​
+
+
+Answer = 14⅓ days
+
+Type 10: Wage Distribution
+Q12
+
+A and B work together.
+
+Efficiency ratio:
+
+3:2
+
+Total wages = ₹5000
+
+Find shares.
+
+Ratio:
+
+3:2
+
+Total parts:
+
+5
+
+A:
+
+5000×
+5
+3
+	​
+
+=3000
+
+B:
+
+5000×
+5
+2
+	​
+
+=2000
+
+Answer = ₹3000, ₹2000
+
+Placement-Level Questions
+Q13
+
+A can do a work in 15 days.
+
+B is 50% more efficient than A.
+
+How many days will B take?
+
+Assume A efficiency = 1
+
+B efficiency:
+
+1.5
+
+Time inversely proportional.
+
+15/1.5=10
+
+Answer = 10 days
+
+Q14
+
+A is twice as efficient as B.
+
+Together they complete work in 12 days.
+
+Find B's time alone.
+
+Ratio:
+
+A:B=2:1
+
+Let efficiencies:
+
+2x,x
+
+Together:
+
+3x
+
+Work completed in 12 days:
+
+3x=
+12
+1
+	​
+
+x=
+36
+1
+	​
+
+
+Thus B:
+
+36 days
+
+Answer = 36 days
+
+Q15
+
+A and B together complete work in 8 days.
+
+A alone completes in 24 days.
+
+Find B's time.
+
+Together efficiency:
+
+1/8
+
+A:
+
+1/24
+
+B:
+
+1/8−1/24
+3/24−1/24
+2/24=1/12
+
+Thus B:
+
+12 days
+
+Answer = 12 days
+
+Fast Revision Sheet
+Efficiency
+E=
+T
+1
+	​
+
+Two Persons
+a+b
+ab
+	​
+
+Men & Days
+M
+1
+	​
+
+D
+1
+	​
+
+=M
+2
+	​
+
+D
+2
+	​
+
+Work Done
+Efficiency×Days
+Efficiency Ratio
+
+Inverse of time ratio.
+
+LCM Method
+
+Take work = LCM of all times.
+
+Efficiency:
+
+Days
+LCM
+	​
+
+
+Time:
+
+Total Efficiency
+Work
+	​
+
+
+These 15 solved patterns cover the majority of Time & Work questions seen in placement aptitude rounds. The next step is a mixed set of 20 placement-level questions that combine efficiency, alternate work, wages, and worker additions/removals.
+
+Perfect. I'll give you fresh placement-style Pipes & Cisterns questions that are not the standard textbook examples.
+
+Type 1: Basic Filling
+Q1
+
+Pipe A can fill a tank in 14 hours.
+
+How much tank does it fill in 5 hours?
+
+Solution
+
+1 hour:
+
+14
+1
+	​
+
+
+5 hours:
+
+14
+5
+	​
+
+
+Answer = 5/14 tank
+
+Type 2: Two Pipes Together
+Q2
+
+Pipe A fills a tank in 21 hours.
+
+Pipe B fills the same tank in 28 hours.
+
+How long together?
+
+Solution
+
+LCM(21,28)
+
+84
+
+A:
+
+84/21=4
+
+B:
+
+84/28=3
+
+Together:
+
+7
+
+Time:
+
+84/7=12
+
+Answer = 12 hours
+
+Type 3: Three Filling Pipes
+Q3
+
+A fills in 24 hr.
+
+B fills in 36 hr.
+
+C fills in 72 hr.
+
+Find time together.
+
+Solution
+
+LCM:
+
+72
+
+Efficiencies:
+
+3,2,1
+
+Total:
+
+6
+
+Time:
+
+72/6=12
+
+Answer = 12 hours
+
+Type 4: Fill + Leak
+Q4
+
+A fills a tank in 16 hr.
+
+Leak empties it in 48 hr.
+
+Actual filling time?
+
+Solution
+
+LCM = 48
+
+A:
+
+3
+
+Leak:
+
+1
+
+Net:
+
+2
+
+Time:
+
+48/2=24
+
+Answer = 24 hours
+
+Type 5: Strong Leak
+Q5
+
+A fills tank in 18 hr.
+
+Leak empties tank in 12 hr.
+
+Both open.
+
+Will tank fill?
+
+Solution
+
+LCM = 36
+
+Fill:
+
+2
+
+Leak:
+
+3
+
+Net:
+
+−1
+
+Negative.
+
+Answer: Tank never fills; it empties.
+
+Type 6: Pipe Starts Later
+Q6
+
+A fills tank in 20 hr.
+
+B fills tank in 30 hr.
+
+A works alone for 4 hr.
+
+Then B joins.
+
+Find total time.
+
+Solution
+
+LCM = 60
+
+A:
+
+3
+
+B:
+
+2
+
+A alone 4 hr:
+
+4×3=12
+
+Remaining:
+
+60−12=48
+
+Together:
+
+5
+
+Time:
+
+48/5=9.6
+
+Total:
+
+4+9.6=13.6
+
+Answer = 13.6 hours
+
+Type 7: Pipe Closed Midway
+Q7
+
+A fills in 15 hr.
+
+B fills in 30 hr.
+
+Both work for 6 hr.
+
+Then B closes.
+
+Find additional time.
+
+Solution
+
+LCM = 30
+
+A:
+
+2
+
+B:
+
+1
+
+Together:
+
+3
+
+Work done:
+
+3×6=18
+
+Remaining:
+
+12
+
+A alone:
+
+12/2=6
+
+Answer = 6 hours
+
+Type 8: Leak Appears Later
+Q8
+
+A fills tank in 12 hr.
+
+After 3 hr a leak starts.
+
+Leak alone empties tank in 24 hr.
+
+Find total time.
+
+Solution
+
+LCM = 24
+
+Pipe:
+
+2
+
+Leak:
+
+1
+
+First 3 hr:
+
+3×2=6
+
+Remaining:
+
+18
+
+Net:
+
+2−1=1
+
+Time:
+
+18
+
+Total:
+
+21
+
+Answer = 21 hours
+
+Type 9: Two Fillers + Leak
+Q9
+
+A fills in 12 hr.
+
+B fills in 18 hr.
+
+Leak empties in 36 hr.
+
+All open.
+
+Find filling time.
+
+Solution
+
+LCM = 36
+
+A:
+
+3
+
+B:
+
+2
+
+Leak:
+
+1
+
+Net:
+
+3+2−1=4
+
+Time:
+
+36/4=9
+
+Answer = 9 hours
+
+Type 10: Alternate Pipes
+Q10
+
+A fills tank in 8 hr.
+
+B fills tank in 24 hr.
+
+They operate alternately.
+
+A starts.
+
+Find completion time.
+
+Solution
+
+LCM = 24
+
+A:
+
+3
+
+B:
+
+1
+
+2-day cycle:
+
+4
+
+After 10 days:
+
+20
+
+After day 11:
+
+23
+
+Remaining:
+
+1
+
+A needs:
+
+1/3
+
+day.
+
+Total:
+
+11
+3
+1
+	​
+
+
+Answer = 11⅓ hours
+
+Placement-Level Questions
+Q11
+
+Pipe A fills tank in 10 hr.
+
+Pipe B fills tank in 15 hr.
+
+Pipe C empties tank in 30 hr.
+
+After 2 hours, C is closed.
+
+How much more time is required?
+
+Solution
+
+LCM = 30
+
+A=3, B=2, C=1
+
+First 2 hr:
+
+(3+2−1)×2=8
+
+Remaining:
+
+22
+
+After C closes:
+
+Rate:
+
+5
+
+Time:
+
+22/5=4.4
+
+Total:
+
+6.4
+
+Answer = 6.4 hr
+
+Q12
+
+Two pipes fill a tank in 6 hr and 12 hr.
+
+Leak empties it in 24 hr.
+
+Find actual time.
+
+Solution
+
+LCM = 24
+
+Efficiencies:
+
+4+2−1=5
+
+Time:
+
+24/5=4.8
+
+Answer = 4.8 hr
+
+Q13
+
+A fills in 8 hr.
+
+B fills in 12 hr.
+
+A works alone for 2 hr.
+
+Then both work.
+
+Find total time.
+
+Solution
+
+LCM = 24
+
+A=3
+
+B=2
+
+A alone:
+
+6
+
+Remaining:
+
+18
+
+Together:
+
+5
+
+Time:
+
+18/5=3.6
+
+Total:
+
+5.6
+
+Answer = 5.6 hr
+
+Challenge Questions
+Q14
+
+A fills in 9 hr.
+
+B fills in 18 hr.
+
+Leak empties in 54 hr.
+
+Find filling time.
+
+Solution
+
+LCM = 54
+
+A=6
+
+B=3
+
+Leak=1
+
+Net:
+
+8
+
+Time:
+
+54/8=6.75
+
+Answer = 6.75 hr
+
+Q15
+
+A fills tank in 20 hr.
+
+B fills tank in 30 hr.
+
+C empties tank in 60 hr.
+
+All open for 5 hr.
+
+Then C is closed.
+
+Find total time.
+
+Solution
+
+LCM = 60
+
+A=3
+
+B=2
+
+C=1
+
+Net:
+
+4
+
+First 5 hr:
+
+20
+
+Remaining:
+
+40
+
+After closing C:
+
+Rate:
+
+5
+
+Time:
+
+40/5=8
+
+Total:
+
+13
+
+Answer = 13 hr
+
+Ultimate Revision
+Pipe fills in N hr
+N
+1
+	​
+
+Two Fillers
+a+b
+ab
+	​
+
+Fill + Leak
+a
+1
+	​
+
+−
+b
+1
+	​
+
+LCM Method
+Tank = LCM.
+Efficiency = LCM ÷ Time.
+Net Efficiency = Fillers − Leaks.
+Time = Work ÷ Efficiency.
+
+If you can solve Q9–Q15 comfortably, you're already above the difficulty of most campus-placement Pipes & Cisterns questions. The next topic (Time, Speed & Distance) is even more important because it leads into Trains and Boats & Streams, which are very frequently tested.
+
+done
+
+Excellent. You've now covered:
+
+Percentages
+Ratio & Proportion
+Averages
+Profit & Loss
+SI & CI
+Mixtures & Alligations
+Time & Work
+Pipes & Cisterns
+
+These alone already cover a large chunk of placement aptitude.
+
+Now we move to one of the highest-frequency topics:
+
+Day 10 — Time, Speed & Distance (TSD)
+
+This topic is extremely important because it directly leads to:
+
+Trains
+Boats & Streams
+Relative Speed
+Circular Tracks
+Race Problems
+The Only Formula You Really Need
+Distance=Speed×Time
+
+or
+
+D=S×T
+
+From this:
+
+Speed=
+Time
+Distance
+	​
+
+Time=
+Speed
+Distance
+	​
+
+
+Everything in TSD comes from these.
+
+Unit Conversion (Must Memorize)
+km/hr → m/s
+×
+18
+5
+	​
+
+
+Example:
+
+72×
+18
+5
+	​
+
+=20 m/s
+m/s → km/hr
+×
+5
+18
+	​
+
+
+Example:
+
+20×
+5
+18
+	​
+
+=72 km/hr
+Type 1: Direct Formula
+Example 1
+
+A car travels at 60 km/hr for 4 hours.
+
+Find distance.
+
+Solution
+D=60×4
+=240
+
+Answer = 240 km
+
+Example 2
+
+Distance = 300 km
+
+Speed = 75 km/hr
+
+Find time.
+
+T=
+75
+300
+	​
+
+=4
+
+Answer = 4 hr
+
+Type 2: Average Speed
+
+Very important.
+
+Example 3
+
+A car travels:
+
+60 km at 30 km/hr
+60 km at 60 km/hr
+
+Find average speed.
+
+Wrong Method
+2
+30+60
+	​
+
+=45
+
+Wrong.
+
+Correct
+
+Time first:
+
+First part:
+
+60/30=2
+
+Second part:
+
+60/60=1
+
+Total distance:
+
+120
+
+Total time:
+
+3
+
+Average speed:
+
+120/3=40
+
+Answer = 40 km/hr
+
+Golden Shortcut
+
+Equal distances:
+
+Average Speed=
+a+b
+2ab
+	​
+
+
+Example:
+
+30 and 60
+
+90
+2(30)(60)
+	​
+
+=40
+Type 3: Relative Speed
+
+Most important.
+
+Same Direction
+Relative Speed=∣S
+1
+	​
+
+−S
+2
+	​
+
+∣
+
+Example:
+
+Car A = 80 km/hr
+
+Car B = 60 km/hr
+
+80−60=20
+
+Answer = 20 km/hr
+
+Opposite Direction
+Relative Speed=S
+1
+	​
+
++S
+2
+	​
+
+
+Example:
+
+60 and 40
+
+100
+
+Answer = 100 km/hr
+
+Type 4: Overtaking
+Example 4
+
+A car moving at 80 km/hr overtakes another moving at 60 km/hr.
+
+Distance between them = 100 km.
+
+Time to catch?
+
+Relative speed:
+
+80−60=20
+
+Time:
+
+100/20=5
+
+Answer = 5 hr
+
+Type 5: Meeting Problems
+Example 5
+
+Two cities are 300 km apart.
+
+Cars start toward each other.
+
+Speeds:
+
+60 and 40 km/hr.
+
+Find meeting time.
+
+Relative speed:
+
+60+40=100
+
+Time:
+
+300/100=3
+
+Answer = 3 hr
+
+Type 6: Speed Change
+
+Very common.
+
+Example 6
+
+Speed increases by 25%.
+
+Find percentage decrease in time.
+
+Time inversely proportional to speed.
+
+Multiplier:
+
+1.25
+
+New time:
+
+1.25
+1
+	​
+
+=0.8
+
+Time decreases by:
+
+20%
+
+Answer = 20% decrease
+
+Important Table
+Speed Change	Time Change
++25%	-20%
++20%	-16.67%
++50%	-33.33%
+-20%	+25%
+-25%	+33.33%
+Type 7: Delayed Arrival
+
+Placement favorite.
+
+Example 7
+
+A person travels at 40 km/hr and reaches 30 minutes late.
+
+At 50 km/hr he reaches on time.
+
+Find distance.
+
+Difference in time:
+
+30 min=0.5 hr
+
+Let distance = D
+
+40
+D
+	​
+
+−
+50
+D
+	​
+
+=0.5
+
+LCM:
+
+200
+5D−4D
+	​
+
+=0.5
+D=100
+
+Answer = 100 km
+
+Type 8: Circular Track
+Example 8
+
+Track = 400 m
+
+Runner A = 8 m/s
+
+Runner B = 6 m/s
+
+Same direction.
+
+Time to meet?
+
+Relative speed:
+
+8−6=2
+
+Time:
+
+400/2=200
+
+seconds.
+
+Answer = 200 sec
+
+Placement-Level Practice (Try Yourself)
+Q1
+
+A train moves at 72 km/hr.
+
+Convert to m/s.
+
+Q2
+
+A car travels 180 km in 3 hours.
+
+Find speed.
+
+Q3
+
+Two vehicles move at 80 and 50 km/hr in opposite directions.
+
+Find relative speed.
+
+Q4
+
+Two cities are 390 km apart.
+
+Cars move toward each other at 60 and 70 km/hr.
+
+When will they meet?
+
+Q5
+
+A person covers half the distance at 40 km/hr and half at 60 km/hr.
+
+Find average speed.
+
+Q6
+
+Speed increases by 20%.
+
+Find percentage decrease in time.
+
+Q7
+
+A man reaches destination 1 hour late at 40 km/hr and on time at 50 km/hr.
+
+Find distance.
+
+Answers
+20 m/s
+60 km/hr
+130 km/hr
+3 hr
+48 km/hr
+16.67%
+200 km
+One-Page Revision Sheet
+Core Formula
+D=ST
+S=
+T
+D
+	​
+
+T=
+S
+D
+	​
+
+Conversion
+km/hr→m/s=×
+18
+5
+	​
+
+m/s→km/hr=×
+5
+18
+	​
+
+Relative Speed
+
+Same direction:
+
+∣S
+1
+	​
+
+−S
+2
+	​
+
+∣
+
+Opposite direction:
+
+S
+1
+	​
+
++S
+2
+	​
+
+Equal Distances Average Speed
+a+b
+2ab
+	​
+
+Speed ↑
+
+Time ↓ inversely.
+
+This topic is the foundation for Trains and Boats & Streams, which are among the most common aptitude questions after percentages and time-work. Next, solve 15–20 mixed TSD questions before moving to trains.
+
+give me notes for topi pipes and cistens , minimal and imp
+Pipes & Cisterns — Minimal Placement Notes
+
+Think:
+
+Pipe = Worker
+
+Tank = Work
+
+Everything is just Time & Work.
+
+1. Core Formula
+
+If a pipe fills a tank in N hours:
+
+Efficiency=
+N
+1
+	​
+
+
+tank/hour
+
+2. Two Filling Pipes
+
+A fills in a hr
+
+B fills in b hr
+
+Together:
+
+a
+1
+	​
+
++
+b
+1
+	​
+
+
+Shortcut:
+
+a+b
+ab
+	​
+
+	​
+
+Example
+
+10 hr and 15 hr
+
+10+15
+10×15
+	​
+
+=6
+3. Filling + Emptying Pipe
+
+Fill pipe = +
+
+Empty pipe = –
+
+a
+1
+	​
+
+−
+b
+1
+	​
+
+Example
+
+Fill = 12 hr
+
+Empty = 18 hr
+
+12
+1
+	​
+
+−
+18
+1
+	​
+
+=
+36
+1
+	​
+
+
+Time = 36 hr
+
+4. Golden LCM Method
+
+Most useful for placements.
+
+Step 1
+
+Take tank capacity = LCM of times.
+
+Step 2
+
+Efficiency:
+
+Time
+LCM
+	​
+
+Example
+
+12 hr and 18 hr
+
+LCM = 36
+
+Pipe A:
+
+36/12=3
+
+Pipe B:
+
+36/18=2
+
+Together:
+
+5
+
+Time:
+
+36/5
+5. Leak Problems
+
+Treat leak as a negative pipe.
+
+Net Rate=Fill Rate−Leak Rate
+Example
+
+Fill = 10 hr
+
+Leak = 30 hr
+
+LCM = 30
+
+Fill = 3
+
+Leak = 1
+
+Net = 2
+
+Time:
+
+30/2=15
+6. Pipe Starts Later
+Method
+Find work done by first pipe.
+Subtract from total.
+Use combined efficiency for remaining work.
+Formula
+Work Done=Efficiency×Time
+7. Pipe Closed Later
+Method
+Work done together.
+Remaining work.
+Remaining pipe completes it.
+8. Alternate Pipes
+Method
+Use LCM.
+Find work completed in one cycle.
+Repeat cycles.
+Handle remaining work.
+Most Asked Patterns
+Pattern 1
+
+Two filling pipes together.
+
+Pattern 2
+
+Fill + Leak.
+
+Pattern 3
+
+Pipe joins later.
+
+Pattern 4
+
+Pipe removed later.
+
+Pattern 5
+
+Two fillers + one leak.
+
+Pattern 6
+
+Alternate operation.
+
+Must Remember
+Efficiency
+T
+1
+	​
+
+Two Pipes
+a+b
+ab
+	​
+
+Fill + Leak
+a
+1
+	​
+
+−
+b
+1
+	​
+
+LCM Method
+Efficiency=
+Time
+LCM
+	​
+
+30-Second Revision
+Pipe = Worker
+Tank = Work
+
+Efficiency = 1/Time
+
+Two Pipes:
+ab/(a+b)
+
+Fill + Leak:
+1/a - 1/b
+
+Use LCM method:
+LCM = Total Work
+Efficiency = LCM/Time
+
+Work Done = Efficiency × Time
+
+Remaining Work = Total - Completed
+
+For placements, if you master:
+
+Two pipes
+Fill + leak
+Pipe joins later
+Pipe removed later
+LCM method
+
+you can solve about 90% of Pipes & Cisterns questions

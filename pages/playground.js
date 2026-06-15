@@ -43,6 +43,6 @@ export function renderPlayground() {
       </div>
     </div>
   `;
-  // Re-init playground if the global initPlayground fn exists (from old app.js during transition)
-  if (typeof window.initPlayground === 'function') window.initPlayground();
+  // Note: Pyodide/Monaco integration is a future enhancement.
+  // Previously app.js provided initPlayground(), but it has been removed.
 }

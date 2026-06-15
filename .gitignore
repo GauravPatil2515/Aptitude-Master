@@ -3,3 +3,4 @@ __pycache__/
 *.zip
 *.pdf
 converted_images/
+.obsidian/

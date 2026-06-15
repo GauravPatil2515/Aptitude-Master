@@ -11,7 +11,7 @@ const DEFAULT_STATE = {
   dsa: {},        // { 'two-sum': 'completed' }
   scores: {},     // { 'aptitude/percentages': 85 }
   mistakes: [],
-  profile: { branch: '', target: '' },
+  profile: { branch: '', target: '', name: '' },
   theme: 'dark',
   lastSession: null,
   todayAgenda: null,

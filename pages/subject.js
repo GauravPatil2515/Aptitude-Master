@@ -1,61 +1,84 @@
 /**
  * pages/subject.js — Subject Overview Page
- * Shows chapter list, completion ring, quick-start last session.
+ * Modern Leetcode-style chapter list with progress rings
  */
 import { store } from '../state/store.js';
 
 const SUBJECT_META = {
-  aptitude:  { label: 'Aptitude',    icon: '📐', color: 'var(--accent-blue)' },
-  'core-cs': { label: 'Core CS',     icon: '💻', color: 'var(--accent-purple)' },
-  dsa:       { label: 'DSA',         icon: '📊', color: 'var(--accent-cyan)' },
-  sql:       { label: 'SQL',         icon: '🗃️',  color: 'var(--accent-green)' },
-  ml:        { label: 'ML & AI',     icon: '🤖', color: 'var(--accent-amber)' },
+  aptitude:  { label: 'Aptitude',    icon: '📐', color: 'var(--accent-blue)', gradient: 'var(--gradient-blue)' },
+  'core-cs': { label: 'Core CS',     icon: '💻', color: 'var(--accent-violet)', gradient: 'var(--gradient-brand)' },
+  dsa:       { label: 'DSA',         icon: '📊', color: 'var(--accent-cyan)', gradient: 'var(--gradient-green)' },
+  sql:       { label: 'SQL',         icon: '🗃️',  color: 'var(--accent-green)', gradient: 'var(--gradient-green)' },
+  ml:        { label: 'ML & AI',     icon: '🧠', color: 'var(--accent-amber)', gradient: 'var(--gradient-amber)' },
+  'ai-engineer': { label: 'AI Engineer', icon: '🤖', color: 'var(--accent-red)', gradient: 'var(--gradient-red)' },
 };
 
 export async function renderSubject(subjectId) {
   const app = document.getElementById('page-content');
   const meta = SUBJECT_META[subjectId];
-  if (!meta) { app.innerHTML = `<div class="empty-state"><h2>Unknown subject: ${subjectId}</h2></div>`; return; }
+  if (!meta) {
+    app.innerHTML = `<div class="empty-state"><h2>Unknown subject: ${subjectId}</h2></div>`;
+    return;
+  }
 
-  app.innerHTML = `<div class="page-loading">Loading ${meta.label}…</div>`;
+  app.innerHTML = `
+    <div class="page-loading">
+      <div class="page-loading__spinner"></div>
+      <div class="page-loading__text">Loading ${meta.label}…</div>
+    </div>`;
 
   let manifest;
   try {
     const mod = await import(`../data/${subjectId}/index.js`);
     manifest = mod.default;
   } catch(e) {
-    app.innerHTML = `<div class="empty-state"><div class="empty-state__icon">${meta.icon}</div><h2>${meta.label}</h2><p>Content coming soon.</p></div>`;
+    app.innerHTML = `<div class="empty-state">
+      <div class="empty-state__icon">${meta.icon}</div>
+      <h2 class="empty-state__title">${meta.label}</h2>
+      <p class="empty-state__desc">Content coming soon.</p>
+    </div>`;
     return;
   }
 
   const s = store.get();
-  const done = manifest.chapters.filter(c => s.progress?.[subjectId + '/' + c.id]).length;
-  const total = manifest.chapters.length;
+  const chapters = manifest.chapters || manifest.topics || [];
+  const done = chapters.filter(c => s.progress?.[subjectId + '/' + c.id]).length;
+  const total = chapters.length;
   const pct = total ? Math.round((done / total) * 100) : 0;
 
-  const chapterCards = manifest.chapters.map(ch => {
+  const chapterCards = chapters.map(ch => {
     const isDone = !!s.progress?.[subjectId + '/' + ch.id];
+    const score = s.scores?.[subjectId + '/' + ch.id];
+    const diffClass = ch.difficulty === 'easy' ? 'diff-badge easy' : ch.difficulty === 'hard' ? 'diff-badge hard' : 'diff-badge medium';
+    const diffLabel = ch.difficulty === 'easy' ? '★☆☆' : ch.difficulty === 'hard' ? '★★★' : '★★☆';
+
     return `
       <a href="#/chapter/${subjectId}/${ch.id}" class="chapter-card ${isDone ? 'chapter-card--done' : ''}">
         <div class="chapter-card__icon">${ch.icon || '📄'}</div>
         <div class="chapter-card__body">
           <div class="chapter-card__title">${ch.title}</div>
-          <div class="chapter-card__meta">${ch.estimatedTime ?? '?'} min · ${ch.difficulty ?? 'medium'}</div>
+          <div class="chapter-card__meta">
+            <span class="${diffClass}">${diffLabel}</span>
+            <span>⏱ ${ch.estimatedTime ?? '?'} min</span>
+            ${score != null ? `<span style="color:var(--accent-green)">Score: ${score}%</span>` : ''}
+          </div>
         </div>
-        ${isDone ? '<div class="chapter-card__check">✅</div>' : ''}
+        ${isDone ? '<div class="chapter-card__check">✅</div>' : '<div style="color:var(--text-muted);font-size:12px">Start →</div>'}
       </a>`;
   }).join('');
 
   app.innerHTML = `
     <div class="page page--subject">
+
+      <!-- Subject Hero -->
       <div class="subject-hero" style="--subject-color:${meta.color}">
         <div class="subject-hero__icon">${meta.icon}</div>
-        <div>
+        <div style="flex:1">
           <h1 class="subject-hero__title">${meta.label}</h1>
-          <p class="subject-hero__sub">${done}/${total} chapters · ${pct}% complete</p>
+          <p class="subject-hero__sub">${done}/${total} chapters completed · ${pct}% complete</p>
         </div>
         <div class="ring-mini" style="--pct:${pct};--color:${meta.color}">
-          <svg viewBox="0 0 36 36" width="64" height="64">
+          <svg viewBox="0 0 36 36" width="68" height="68">
             <circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--bg-track)" stroke-width="3"/>
             <circle cx="18" cy="18" r="15.9" fill="none" stroke="${meta.color}" stroke-width="3"
               stroke-dasharray="${pct} ${100 - pct}" stroke-linecap="round"
@@ -64,10 +87,19 @@ export async function renderSubject(subjectId) {
           <span class="ring-mini__label">${pct}%</span>
         </div>
       </div>
+
+      <!-- Quick Actions -->
+      <div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;">
+        ${total > 0 ? `<a href="#/practice/${subjectId}/${chapters[0].id}" class="btn btn--primary">⚡ Start Practice</a>` : ''}
+        <a href="#/cheatsheet/${subjectId}" class="btn btn--ghost">📋 Cheat Sheet</a>
+      </div>
+
+      <!-- Chapters -->
       <section class="home-section">
-        <h2 class="section-title">Chapters</h2>
+        <h2 class="section-title">📚 Chapters</h2>
         <div class="chapter-grid">${chapterCards}</div>
       </section>
+
     </div>
   `;
 }
