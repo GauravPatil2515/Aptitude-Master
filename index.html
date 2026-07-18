@@ -85,6 +85,7 @@
     import { renderSidebar } from './components/sidebar.js';
     import { renderTopbar }  from './components/topbar.js';
     import { initSettings }  from './components/settings.js';
+    import { initRipple }    from './modules/ui-ripple.js';
     import { store }         from './state/store.js';
 
     // Restore theme (default is dark; explicit light/dark both honored)
@@ -107,6 +108,7 @@
     renderSidebar();
     renderTopbar();
     initSettings();
+    initRipple();
 
     // Re-render sidebar on every route change to update active states
     window.addEventListener('hashchange', () => {

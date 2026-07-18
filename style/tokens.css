@@ -76,7 +76,7 @@
   --font-sans:      'Inter', system-ui, -apple-system, sans-serif;
   --font-serif:     'Playfair Display', Georgia, serif;
   --font-mono:      'Geist Mono', 'JetBrains Mono', 'Fira Code', monospace;
-  --font-display:   'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:   'Playfair Display', Georgia, serif;
 
   --text-xs:        0.64rem;
   --text-sm:        0.8rem;
@@ -164,12 +164,12 @@ body.light-theme {
   --success:           #3f7d4f;
   --warning:           #b9791f;
 
-  /* Sidebar keeps its dark-green brand identity in light mode */
-  --sidebar:            #2f5d3a;
-  --sidebar-foreground: #f3f7f1;
-  --sidebar-primary:    #f0a35e;
-  --sidebar-accent:     #3a6e47;
-  --sidebar-border:     #3a6e47;
+  /* Sidebar in light mode: warm charcoal (cohesive with beige + orange brand) */
+  --sidebar:            #2b2722;   /* espresso charcoal — matches --primary */
+  --sidebar-foreground: #f3efe8;
+  --sidebar-primary:    #f0a35e;   /* warm orange active */
+  --sidebar-accent:     #3d3830;   /* visible hover/active surface */
+  --sidebar-border:     #3d3830;
 
   --code-bg:   #1b211c;
   --code-fg:   #e6efe6;

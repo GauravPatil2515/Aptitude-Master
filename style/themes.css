@@ -19,7 +19,7 @@
 }
 
 .theme-btn:hover {
-  border-color: var(--accent-indigo);
+  border-color: var(--accent);
   box-shadow: var(--shadow-glow);
   transform: translateY(-1px);
 }
@@ -76,4 +76,16 @@ body,
   transition: background-color var(--transition-base),
               color var(--transition-base),
               border-color var(--transition-base);
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

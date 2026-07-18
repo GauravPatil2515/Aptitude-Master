@@ -24,9 +24,9 @@
   border: 1px solid rgba(248, 113, 113, 0.18);
 }
 .badge--imp {
-  background: rgba(91, 166, 166, 0.10);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
   color: var(--accent);
-  border: 1px solid rgba(91, 166, 166, 0.18);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
   text-transform: none;
   letter-spacing: 0;
 }
@@ -266,9 +266,9 @@
 
 /* ---- TCS NQT badges ---- */
 .badge--tcs-nqt {
-  background: rgba(91, 166, 166, 0.10);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
   color: var(--accent);
-  border: 1px solid rgba(91, 166, 166, 0.18);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
 }
 .badge--tcs-none {
   color: var(--text-muted);
