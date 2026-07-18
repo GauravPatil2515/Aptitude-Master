@@ -50,8 +50,9 @@ export function renderHome() {
     </a>`).join('');
 
   const totalChapters = 62;
-  const visitedChapters = Object.keys(s.progress || {}).filter(k => !k.includes('/') && k !== 'overall').length;
-  const overallPct = Math.round((visitedChapters / subjects.length) * 100);
+  const chapterKeys = Object.keys(s.progress || {}).filter(k => k.includes('/') && s.progress[k]);
+  const chaptersCompleted = chapterKeys.length;
+  const overallPct = Math.round(subjects.reduce((sum, sub) => sum + (s.progress?.[sub.id] ?? 0), 0) / subjects.length);
 
   app.innerHTML = `
     <div class="page page--home">
@@ -89,8 +90,8 @@ export function renderHome() {
         <div class="card stat-card">
           <div class="stat-icon green"></div>
           <div>
-            <div class="stat-value">${Object.keys(s.scores || {}).length}</div>
-            <div class="stat-label">Modules Completed</div>
+            <div class="stat-value">${chaptersCompleted}</div>
+            <div class="stat-label">Chapters Completed</div>
           </div>
         </div>
         <div class="card stat-card">
@@ -235,29 +236,14 @@ export function renderHome() {
 
       <!-- Progress Section -->
       <section class="home-section" style="margin-bottom: var(--space-8);">
-        <h2 class="section-title" style="font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; color: var(--text-primary);">📈 Progress Tracker</h2>
+        <h2 class="section-title" style="font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; color: var(--text-primary);">Progress Tracker</h2>
         <div class="card">
           <div class="progress-list">${progressBars}</div>
         </div>
       </section>
 
-      <!-- Subjects Grid -->
-      <section class="home-section" style="margin-bottom: var(--space-8);">
-        <h2 class="section-title" style="font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; color: var(--text-primary);">Subjects</h2>
-        <div class="subject-grid">
-          ${subjects.map(sub => `
-            <a href="#/subject/${sub.id}" class="subject-card">
-              <div class="subject-card__icon" style="color:${sub.color}">${sub.icon}</div>
-              <div class="subject-card__label" style="font-weight: 600;">${sub.label}</div>
-              <div class="subject-card__pct" style="color:${sub.color}">${s.progress?.[sub.id] ?? 0}%</div>
-            </a>`).join('')}
-        </div>
-      </section>
-
     </div>
   `;
-
-  // Event listeners for roadmap checkboxes
   document.querySelectorAll('.roadmap-checkbox').forEach(cb => {
     cb.addEventListener('change', (e) => {
       const idx = parseInt(e.target.dataset.index);
