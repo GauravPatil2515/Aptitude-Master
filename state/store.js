@@ -9,6 +9,9 @@ const DEFAULT_STATE = {
   lastStudied: null,
   progress: {},   // { 'aptitude': 60, 'aptitude/percentages': 'visited' }
   dsa: {},        // { 'two-sum': 'completed' }
+  dsaNotes: {},   // { 'two-sum': 'Use hash map' }
+  sql: {},        // { 'sql_175': 'completed' }
+  sqlNotes: {},   // { 'sql_175': 'LEFT JOIN pattern' }
   scores: {},     // { 'aptitude/percentages': 85 }
   mistakes: [],
   profile: { branch: '', target: '', name: '' },
@@ -44,6 +47,22 @@ export const store = {
   setDSA(problemId, status) {
     _state.dsa = _state.dsa || {};
     _state.dsa[problemId] = status;
+    saveState(_state);
+  },
+
+  setDSANotes(notes) {
+    _state.dsaNotes = { ...(_state.dsaNotes || {}), ...notes };
+    saveState(_state);
+  },
+
+  setSQL(problemId, status) {
+    _state.sql = _state.sql || {};
+    _state.sql[problemId] = status;
+    saveState(_state);
+  },
+
+  setSQLNotes(notes) {
+    _state.sqlNotes = { ...(_state.sqlNotes || {}), ...notes };
     saveState(_state);
   },
 
