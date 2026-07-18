@@ -3,12 +3,12 @@
  * 200+ SQL problems grouped by topic with company tags and patterns.
  */
 export const SQL_TOPICS = [
-  { id: 'basic',       title: 'Basic SELECT & Filtering', icon: '🔍' },
-  { id: 'join',        title: 'JOIN Operations',          icon: '🔗' },
-  { id: 'aggregation', title: 'Aggregation & GROUP BY',   icon: '📊' },
-  { id: 'subquery',    title: 'Subqueries & CTEs',        icon: '🔄' },
-  { id: 'window',      title: 'Window Functions',         icon: '🪟' },
-  { id: 'advanced',    title: 'Advanced SQL',             icon: '⚡' },
+  { id: 'basic',       title: 'Basic SELECT & Filtering' },
+  { id: 'join',        title: 'JOIN Operations' },
+  { id: 'aggregation', title: 'Aggregation & GROUP BY' },
+  { id: 'subquery',    title: 'Subqueries & CTEs' },
+  { id: 'window',      title: 'Window Functions' },
+  { id: 'advanced',    title: 'Advanced SQL' },
 ];
 
 export const SQL_PROBLEMS = [

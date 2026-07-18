@@ -122,10 +122,10 @@ export async function renderDSA() {
       const noteVal = dsaNotes[p.id] || '';
 
       const resHTML = `
-        <div style="display:flex; gap: 10px; align-items:center;">
-          ${p.link ? `<a href="${p.link}" target="_blank" title="Solve on LeetCode" class="dsa-icon-link">🎯</a>` : ''}
-          ${p.youtube ? `<a href="${p.youtube}" target="_blank" title="Watch Striver's Video" class="dsa-icon-link" style="filter:none;">🎥</a>` : ''}
-          ${p.article ? `<a href="${p.article}" target="_blank" title="Optimal Solution Article" class="dsa-icon-link" style="filter:none;">📝</a>` : ''}
+        <div class="dsa-res-links">
+          ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener" class="dsa-res-link" title="Solve on LeetCode">Solve</a>` : ''}
+          ${p.youtube ? `<a href="${p.youtube}" target="_blank" rel="noopener" class="dsa-res-link" title="Watch Striver's Video">Video</a>` : ''}
+          ${p.article ? `<a href="${p.article}" target="_blank" rel="noopener" class="dsa-res-link" title="Optimal Solution Article">Article</a>` : ''}
         </div>
       `;
 
@@ -144,7 +144,7 @@ export async function renderDSA() {
           </td>
           <td class="dsa-cell"><span class="badge badge--diff-${p.difficulty}">${p.difficulty}</span></td>
           <td class="dsa-cell"><span class="badge badge--imp">${p.importance || 'Medium'}</span></td>
-          <td class="dsa-cell">${p.tcsNqt ? `<span class="badge badge--tcs-nqt" style="font-size:10px;">🎯 TCS NQT</span>` : `<span class="badge badge--tcs-none">—</span>`}</td>
+          <td class="dsa-cell">${p.tcsNqt ? `<span class="badge badge--tcs-nqt" style="font-size:10px;">TCS NQT</span>` : `<span class="badge badge--tcs-none">—</span>`}</td>
           <td class="dsa-cell">${resHTML}</td>
           <td class="dsa-cell dsa-cell--hint">${p.pattern || '—'}</td>
           <td class="dsa-cell">
@@ -176,7 +176,7 @@ export async function renderDSA() {
     <div class="page page--dsa">
       <div class="dsa-header" style="margin-bottom: var(--space-6);">
         <div>
-          <h1 class="page-title" style="margin-bottom:4px; font-family:var(--font-display);">📊 DSA Tracker</h1>
+          <h1 class="page-title" style="margin-bottom:4px; font-family:var(--font-display);">DSA Tracker</h1>
           <p style="color:var(--text-muted);font-size:var(--text-sm)">Striver's A2Z SDE Sheet — Master coding patterns & solutions</p>
         </div>
         <div class="dsa-stats">

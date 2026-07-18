@@ -224,7 +224,7 @@ export async function renderMock(mockId) {
         <aside class="mock-console-aside" style="position: sticky; top: var(--space-6); height: calc(100vh - 120px); display:flex; flex-direction:column; gap: var(--space-4); max-height: calc(100vh - 120px); overflow-y:auto; padding-right: 2px;">
           <div class="card" style="padding: var(--space-4);">
             <h3 style="font-size: var(--text-sm); font-weight:700; margin-bottom: var(--space-3); color: var(--text-primary); text-transform:uppercase; letter-spacing: var(--tracking-snug);">
-              📊 Exam Console
+              Exam Console
             </h3>
             <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-bottom: var(--space-3);">
               Attempted: <strong id="attempted-count-display" style="color:var(--accent-indigo);">0</strong> / 50 questions

@@ -120,7 +120,7 @@ export function renderSQLSheet() {
     return `
       <tbody class="sql-topic-group">
         <tr class="sql-topic-header">
-          <td colspan="6" class="sql-topic-header__cell">${topic.icon} ${topic.title} <span style="color:var(--text-muted);font-weight:400">(${groupSolved}/${problems.length})</span></td>
+          <td colspan="6" class="sql-topic-header__cell">${topic.title} <span style="color:var(--text-muted);font-weight:400">(${groupSolved}/${problems.length})</span></td>
         </tr>
         ${rows}
       </tbody>`;
