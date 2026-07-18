@@ -68,15 +68,25 @@ export function renderHome() {
           </p>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px;">
-          ${s.lastSession ? `
-            <a href="${s.lastSession.href}" class="btn btn--ghost btn--sm" style="font-weight: 600;">
-              Resume: ${s.lastSession.label}
-            </a>` : ''}
           <a href="#/mock/tcs-1" class="btn btn--primary btn--sm" style="font-weight: 700;">
             Run TCS Mock Test
           </a>
         </div>
       </div>
+
+      ${
+        s.lastSession ? `
+        <a href="${s.lastSession.href}" class="continue-card" aria-label="Continue where you left off">
+          <div class="continue-card__icon" aria-hidden="true">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <div class="continue-card__body">
+            <div class="continue-card__eyebrow">Continue where you left off</div>
+            <div class="continue-card__title">${s.lastSession.label.replace(/\b\w/g, c => c.toUpperCase())}</div>
+          </div>
+          <span class="continue-card__arrow" aria-hidden="true">→</span>
+        </a>` : ''
+      }
 
       <!-- Stats Row -->
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:28px;">
@@ -157,11 +167,11 @@ export function renderHome() {
                 
                 <!-- Phase 1 -->
                 <div class="roadmap-phase-row" style="display:flex; align-items:start; gap:12px; padding:10px 14px; border-radius:var(--radius-md); background:var(--bg-tertiary); border:1px solid var(--border-color); transition: var(--transition-fast);">
-                  <input type="checkbox" class="roadmap-checkbox" data-index="0" ${roadmapProgress[0] ? 'checked' : ''} style="margin-top:4px; width:16px; height:16px; accent-color:var(--accent-indigo); cursor:pointer;">
+                  <input type="checkbox" class="roadmap-checkbox" data-index="0" ${roadmapProgress[0] ? 'checked' : ''} style="margin-top:4px; width:16px; height:16px; accent-color:var(--accent); cursor:pointer;">
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 1 (Day 1-3): Quant Aptitude</strong>
-                      <a href="#/chapter/aptitude/percentages" style="font-size:11px; color:var(--accent-indigo); font-weight:700; flex-shrink:0;">Study ↗</a>
+                      <a href="#/chapter/aptitude/percentages" style="font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0;">Study ↗</a>
                     </div>
                     <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Percentages, Profit & Loss, Simple & Compound Interest</div>
                   </div>
@@ -169,11 +179,11 @@ export function renderHome() {
 
                 <!-- Phase 2 -->
                 <div class="roadmap-phase-row" style="display:flex; align-items:start; gap:12px; padding:10px 14px; border-radius:var(--radius-md); background:var(--bg-tertiary); border:1px solid var(--border-color); transition: var(--transition-fast);">
-                  <input type="checkbox" class="roadmap-checkbox" data-index="1" ${roadmapProgress[1] ? 'checked' : ''} style="margin-top:4px; width:16px; height:16px; accent-color:var(--accent-indigo); cursor:pointer;">
+                  <input type="checkbox" class="roadmap-checkbox" data-index="1" ${roadmapProgress[1] ? 'checked' : ''} style="margin-top:4px; width:16px; height:16px; accent-color:var(--accent); cursor:pointer;">
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 2 (Day 4-6): Logical Reasoning</strong>
-                      <a href="#/chapter/aptitude/logical-reasoning" style="font-size:11px; color:var(--accent-indigo); font-weight:700; flex-shrink:0;">Study ↗</a>
+                      <a href="#/chapter/aptitude/logical-reasoning" style="font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0;">Study ↗</a>
                     </div>
                     <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Syllogisms, Blood Relations, Series, Coding-Decoding</div>
                   </div>
@@ -181,11 +191,11 @@ export function renderHome() {
 
                 <!-- Phase 3 -->
                 <div class="roadmap-phase-row" style="display:flex; align-items:start; gap:12px; padding:10px 14px; border-radius:var(--radius-md); background:var(--bg-tertiary); border:1px solid var(--border-color); transition: var(--transition-fast);">
-                  <input type="checkbox" class="roadmap-checkbox" data-index="2" ${roadmapProgress[2] ? 'checked' : ''} style="margin-top:4px; width:16px; height:16px; accent-color:var(--accent-indigo); cursor:pointer;">
+                  <input type="checkbox" class="roadmap-checkbox" data-index="2" ${roadmapProgress[2] ? 'checked' : ''} style="margin-top:4px; width:16px; height:16px; accent-color:var(--accent); cursor:pointer;">
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 3 (Day 7-9): Verbal Ability</strong>
-                      <a href="#/chapter/aptitude/verbal-ability" style="font-size:11px; color:var(--accent-indigo); font-weight:700; flex-shrink:0;">Study ↗</a>
+                      <a href="#/chapter/aptitude/verbal-ability" style="font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0;">Study ↗</a>
                     </div>
                     <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Synonyms, Antonyms, One-word substitutes, Idioms</div>
                   </div>
@@ -193,7 +203,7 @@ export function renderHome() {
 
                 <!-- Phase 4 -->
                 <div class="roadmap-phase-row" style="display:flex; align-items:start; gap:12px; padding:10px 14px; border-radius:var(--radius-md); background:var(--bg-tertiary); border:1px solid var(--border-color); transition: var(--transition-fast);">
-                  <input type="checkbox" class="roadmap-checkbox" data-index="3" ${roadmapProgress[3] ? 'checked' : ''} style="margin-top:4px; width:16px; height:16px; accent-color:var(--accent-indigo); cursor:pointer;">
+                  <input type="checkbox" class="roadmap-checkbox" data-index="3" ${roadmapProgress[3] ? 'checked' : ''} style="margin-top:4px; width:16px; height:16px; accent-color:var(--accent); cursor:pointer;">
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 4 (Day 10-12): DSA Coding</strong>
@@ -205,7 +215,7 @@ export function renderHome() {
 
                 <!-- Phase 5 -->
                 <div class="roadmap-phase-row" style="display:flex; align-items:start; gap:12px; padding:10px 14px; border-radius:var(--radius-md); background:var(--bg-tertiary); border:1px solid var(--border-color); transition: var(--transition-fast);">
-                  <input type="checkbox" class="roadmap-checkbox" data-index="4" ${roadmapProgress[4] ? 'checked' : ''} style="margin-top:4px; width:16px; height:16px; accent-color:var(--accent-indigo); cursor:pointer;">
+                  <input type="checkbox" class="roadmap-checkbox" data-index="4" ${roadmapProgress[4] ? 'checked' : ''} style="margin-top:4px; width:16px; height:16px; accent-color:var(--accent); cursor:pointer;">
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 5 (Day 13-15): Mocks & Review</strong>

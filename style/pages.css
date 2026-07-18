@@ -124,6 +124,51 @@ p, li {
   box-shadow: var(--shadow-md);
 }
 
+.continue-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  padding: 14px 18px;
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--foreground);
+  transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.continue-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px -14px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.continue-card__icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+.continue-card__body { flex: 1; min-width: 0; }
+.continue-card__eyebrow {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: var(--tracking-wider, 0.04em);
+  color: var(--accent);
+}
+.continue-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--foreground);
+  margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.continue-card__arrow {
+  font-size: 20px; color: var(--accent); flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+.continue-card:hover .continue-card__arrow { transform: translateX(3px); }
+
 @media (min-width: 640px) {
   .home-hero {
     flex-direction: row;
