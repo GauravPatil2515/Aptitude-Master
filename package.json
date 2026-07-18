@@ -1,0 +1,13 @@
+{
+  "name": "aptitudemaster",
+  "version": "1.0.0",
+  "description": "Placement prep platform — aptitude, DSA, SQL, Core CS & ML with AI tutor",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8099",
+    "test": "node scripts/check.js",
+    "serve": "python3 -m http.server 8099"
+  },
+  "keywords": ["aptitude", "placement", "dsa", "sql", "interview-prep"],
+  "license": "MIT"
+}
