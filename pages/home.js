@@ -207,7 +207,7 @@ export function renderHome() {
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 4 (Day 10-12): DSA Coding</strong>
-                      <a href="#/dsa" style="font-size:11px; color:var(--accent-indigo); font-weight:700; flex-shrink:0;">Tracker ↗</a>
+                      <a href="#/dsa" style="font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0;">Tracker ↗</a>
                     </div>
                     <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Arrays, Strings, Trees, Dynamic Programming (TCS NQT tagged Qs)</div>
                   </div>
@@ -219,7 +219,7 @@ export function renderHome() {
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 5 (Day 13-15): Mocks & Review</strong>
-                      <a href="#/mock/tcs-1" style="font-size:11px; color:var(--accent-indigo); font-weight:700; flex-shrink:0;">Mocks ↗</a>
+                      <a href="#/mock/tcs-1" style="font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0;">Mocks ↗</a>
                     </div>
                     <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Simulate full mock test, error log review & strategy tuning</div>
                   </div>
@@ -264,8 +264,8 @@ export function renderHome() {
       // Visual feedback: toggle row background
       const row = e.target.closest('.roadmap-phase-row');
       if (e.target.checked) {
-        row.style.borderColor = 'var(--accent-indigo)';
-        row.style.background = 'rgba(124,106,247,0.03)';
+        row.style.borderColor = 'var(--accent)';
+        row.style.background = 'color-mix(in srgb, var(--accent) 6%, transparent)';
       } else {
         row.style.borderColor = 'var(--border-color)';
         row.style.background = 'var(--bg-tertiary)';
@@ -275,7 +275,7 @@ export function renderHome() {
     // Initial visual feedback
     if (cb.checked) {
       const row = cb.closest('.roadmap-phase-row');
-      row.style.borderColor = 'var(--accent-indigo)';
+      row.style.borderColor = 'var(--accent)';
       row.style.background = 'rgba(124,106,247,0.03)';
     }
   });
