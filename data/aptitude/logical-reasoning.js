@@ -5,7 +5,7 @@ export default {
   id: 'aptitude-logical-reasoning',
   subject: 'aptitude',
   title: 'Logical Reasoning',
-  icon: '🧩',
+  
   difficulty: 'medium',
   estimatedTime: 60,
   prerequisites: [],
@@ -23,7 +23,7 @@ Find the pattern and the next term.
 - Fibonacci: each term = sum of previous two
 - Mixed: +1, +2, +3, +4... or ×2, +1, ×2, +1...
 
-> 💡 2, 6, 18, 54, ? → ×3 each time → **162**
+> 2, 6, 18, 54, ? → ×3 each time → **162**
 
 ---
 
@@ -31,11 +31,11 @@ Find the pattern and the next term.
 
 **Letter shifting:** Each letter is shifted by a fixed number.
 
-> 💡 If CAT = FDW (each +3), then DOG = GRJ
+> If CAT = FDW (each +3), then DOG = GRJ
 
 **Reverse alphabet:** A↔Z, B↔Y, C↔X...
 
-> 💡 MZNV = NAME (M↔N, Z↔A, N↔M, V↔E)
+> MZNV = NAME (M↔N, Z↔A, N↔M, V↔E)
 
 ---
 
@@ -47,7 +47,7 @@ Key terms:
 - **Siblings:** Brothers and sisters
 - **Cousin:** Uncle/aunt's child
 
-> 💡 "A is the brother of B, B is the mother of C" → A is C's **maternal uncle**
+> "A is the brother of B, B is the mother of C" → A is C's **maternal uncle**
 
 ---
 
@@ -59,7 +59,7 @@ Key terms:
 - Right turn: clockwise (N→E→S→W)
 - Left turn: anticlockwise (N→W→S→E)
 
-> 💡 Facing North, turn right → East. Turn left from East → North.
+> Facing North, turn right → East. Turn left from East → North.
 
 ---
 

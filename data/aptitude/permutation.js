@@ -5,7 +5,7 @@ export default {
   id: 'aptitude-permutation',
   subject: 'aptitude',
   title: 'Permutation & Combination',
-  icon: '🔀',
+  
   difficulty: 'hard',
   estimatedTime: 70,
   prerequisites: [],
@@ -15,7 +15,7 @@ export default {
 
 If one task can be done in **m** ways and another in **n** ways, then both together can be done in **m × n** ways.
 
-> 💡 3 shirts × 4 pants = **12 outfits**
+> 3 shirts × 4 pants = **12 outfits**
 
 ---
 
@@ -25,7 +25,7 @@ If one task can be done in **m** ways and another in **n** ways, then both toget
 
 Number of ways to arrange **r** objects from **n** distinct objects.
 
-> 💡 5P2 = 5!/(5−2)! = 5×4 = **20**
+> 5P2 = 5!/(5−2)! = 5×4 = **20**
 
 **Special case:** nPn = n! (arranging all n objects)
 
@@ -37,7 +37,7 @@ Number of ways to arrange **r** objects from **n** distinct objects.
 
 Number of ways to choose **r** objects from **n** distinct objects.
 
-> 💡 5C2 = 5!/(2!×3!) = **10**
+> 5C2 = 5!/(2!×3!) = **10**
 
 **Key relation:** nCr = nPr / r!
 
@@ -56,7 +56,7 @@ Number of ways to choose **r** objects from **n** distinct objects.
 
 **Arranging n objects in a circle = (n−1)!**
 
-> 💡 5 people around a round table = (5−1)! = **24** ways
+> 5 people around a round table = (5−1)! = **24** ways
 
 ---
 
@@ -66,7 +66,7 @@ If n objects have p of one kind, q of another, r of another:
 
 **Arrangements = n! / (p! × q! × r!)**
 
-> 💡 MISSISSIPPI = 11!/(1!×4!×4!×2!) = **34,650**
+> MISSISSIPPI = 11!/(1!×4!×4!×2!) = **34,650**
 
 ---
 

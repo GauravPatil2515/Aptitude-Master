@@ -5,7 +5,7 @@ export default {
   id: 'sql-window-fns',
   subject: 'sql',
   title: 'Window Functions',
-  icon: '🪟',
+  
   difficulty: 'hard',
   estimatedTime: 70,
   prerequisites: ['aggregation', 'subqueries'],
@@ -46,7 +46,7 @@ SELECT name, salary,
 FROM employees;
 \`\`\`
 
-> 💡 **ROW_NUMBER vs RANK vs DENSE_RANK:** For values 100, 100, 90 → ROW_NUMBER: 1,2,3 | RANK: 1,1,3 | DENSE_RANK: 1,1,2
+> **ROW_NUMBER vs RANK vs DENSE_RANK:** For values 100, 100, 90 → ROW_NUMBER: 1,2,3 | RANK: 1,1,3 | DENSE_RANK: 1,1,2
 
 ---
 

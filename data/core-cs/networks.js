@@ -5,7 +5,7 @@ export default {
   id: 'core-cs-networks',
   subject: 'core-cs',
   title: 'Computer Networks',
-  icon: '🌐',
+  
   difficulty: 'medium',
   estimatedTime: 75,
   prerequisites: [],
@@ -23,7 +23,7 @@ export default {
 | 2 | Data Link | Frame delivery, MAC | Ethernet, Switch, Bridge |
 | 1 | Physical | Bit transmission | Cables, Hub, Repeater |
 
-> 💡 **Mnemonic:** "All People Seem To Need Data Processing" (top to bottom)
+> **Mnemonic:** "All People Seem To Need Data Processing" (top to bottom)
 
 ---
 
@@ -52,7 +52,7 @@ export default {
 | D | 224-239 | — | Multicast |
 | E | 240-255 | — | Experimental |
 
-> 💡 Class A: 1.x.x.x to 126.x.x.x (network = first octet)
+> Class A: 1.x.x.x to 126.x.x.x (network = first octet)
 
 ---
 
@@ -64,7 +64,7 @@ export default {
 
 **Number of hosts = 2^(32−CIDR) − 2** (subtract 2 for network and broadcast)
 
-> 💡 /24 → 2^8 − 2 = **254 usable hosts**
+> /24 → 2^8 − 2 = **254 usable hosts**
 
 ---
 
@@ -110,7 +110,7 @@ export default {
 | Bridge | 2 | Connects two LAN segments |
 | Gateway | All | Protocol translation |
 
-> 💡 Switch > Hub (switch sends only to intended recipient, hub broadcasts to all)
+> Switch > Hub (switch sends only to intended recipient, hub broadcasts to all)
   `,
 
   formulas: [

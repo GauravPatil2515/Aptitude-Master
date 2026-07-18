@@ -5,7 +5,7 @@ export default {
   id: 'ai-engineer-advanced-agents',
   subject: 'ai-engineer',
   title: 'Phase 8: Advanced Agent Systems',
-  icon: '🤖',
+  
   difficulty: 'hard',
   estimatedTime: 95,
   prerequisites: ['ai-infra'],

@@ -29,7 +29,7 @@ export default {
 
 **Dot Product:** a·b = Σ(a_i × b_i) = |a||b|cos(θ)
 
-> 💡 Dot product = 0 means vectors are perpendicular (orthogonal)
+> Dot product = 0 means vectors are perpendicular (orthogonal)
 
 ---
 
@@ -47,7 +47,7 @@ export default {
 
 **Gradient:** Vector of partial derivatives. Points in direction of steepest ascent.
 
-> 💡 **Gradient descent:** Move opposite to gradient to minimize a function.
+> **Gradient descent:** Move opposite to gradient to minimize a function.
 
 ---
 

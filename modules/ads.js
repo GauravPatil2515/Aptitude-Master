@@ -46,7 +46,7 @@ const AdsModule = (() => {
       };
       el.innerHTML = `
         <div class="ad-placeholder" data-size="${sizes[type] || ''}">
-          <span>📢 Ad Slot — ${sizes[type] || type}</span>
+          <span>Ad Slot — ${sizes[type] || type}</span>
           <small>Replace publisher ID in modules/ads.js</small>
         </div>`;
       return;

@@ -38,7 +38,7 @@ export async function renderCheatsheet(subjectId) {
 
   app.innerHTML = `
     <div class="page page--cheatsheet">
-      <h1 class="page-title">📋 ${manifest.label} — Cheat Sheet</h1>
+      <h1 class="page-title">${manifest.label} — Cheat Sheet</h1>
       <div class="cs-grid">${cards.join('')}</div>
     </div>
   `;

@@ -5,12 +5,12 @@
 import { store } from '../state/store.js';
 
 const SUBJECT_META = {
-  aptitude:  { label: 'Aptitude',    icon: '📐', color: 'var(--accent-blue)', gradient: 'var(--gradient-blue)' },
-  'core-cs': { label: 'Core CS',     icon: '💻', color: 'var(--accent-violet)', gradient: 'var(--gradient-brand)' },
-  dsa:       { label: 'DSA',         icon: '📊', color: 'var(--accent-cyan)', gradient: 'var(--gradient-green)' },
-  sql:       { label: 'SQL',         icon: '🗃️',  color: 'var(--accent-green)', gradient: 'var(--gradient-green)' },
-  ml:        { label: 'ML & AI',     icon: '🧠', color: 'var(--accent-amber)', gradient: 'var(--gradient-amber)' },
-  'ai-engineer': { label: 'AI Engineer', icon: '🤖', color: 'var(--accent-red)', gradient: 'var(--gradient-red)' },
+  aptitude:  { label: 'Aptitude',    color: 'var(--accent-blue)', initial: 'A' },
+  'core-cs': { label: 'Core CS',     color: 'var(--accent-violet)', initial: 'C' },
+  dsa:       { label: 'DSA',         color: 'var(--accent-cyan)', initial: 'D' },
+  sql:       { label: 'SQL',         color: 'var(--accent-green)', initial: 'S' },
+  ml:        { label: 'ML & AI',     color: 'var(--accent-amber)', initial: 'M' },
+  'ai-engineer': { label: 'AI Engineer', color: 'var(--accent-red)', initial: 'AI' },
 };
 
 export async function renderSubject(subjectId) {
@@ -54,16 +54,16 @@ export async function renderSubject(subjectId) {
 
     return `
       <a href="#/chapter/${subjectId}/${ch.id}" class="chapter-card ${isDone ? 'chapter-card--done' : ''}">
-        <div class="chapter-card__icon">${ch.icon || '📄'}</div>
+        <div class="chapter-card__icon">${(ch.title || '?').trim().charAt(0).toUpperCase()}</div>
         <div class="chapter-card__body">
           <div class="chapter-card__title">${ch.title}</div>
           <div class="chapter-card__meta">
             <span class="${diffClass}">${diffLabel}</span>
-            <span>⏱ ${ch.estimatedTime ?? '?'} min</span>
+            <span>Time: ${ch.estimatedTime ?? '?'} min</span>
             ${score != null ? `<span style="color:var(--accent-green)">Score: ${score}%</span>` : ''}
           </div>
         </div>
-        ${isDone ? '<div class="chapter-card__check">✅</div>' : '<div style="color:var(--text-muted);font-size:12px">Start →</div>'}
+        ${isDone ? '<div class="chapter-card__check">Done</div>' : '<div style="color:var(--text-muted);font-size:12px">Start →</div>'}
       </a>`;
   }).join('');
 
@@ -72,7 +72,7 @@ export async function renderSubject(subjectId) {
 
       <!-- Subject Hero -->
       <div class="subject-hero" style="--subject-color:${meta.color}">
-        <div class="subject-hero__icon">${meta.icon}</div>
+        <div class="subject-hero__icon">${meta.initial}</div>
         <div style="flex:1">
           <h1 class="subject-hero__title">${meta.label}</h1>
           <p class="subject-hero__sub">${done}/${total} chapters completed · ${pct}% complete</p>
@@ -90,13 +90,13 @@ export async function renderSubject(subjectId) {
 
       <!-- Quick Actions -->
       <div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;">
-        ${total > 0 ? `<a href="#/practice/${subjectId}/${chapters[0].id}" class="btn btn--primary">⚡ Start Practice</a>` : ''}
-        <a href="#/cheatsheet/${subjectId}" class="btn btn--ghost">📋 Cheat Sheet</a>
+        ${total > 0 ? `<a href="#/practice/${subjectId}/${chapters[0].id}" class="btn btn--primary">Start Practice</a>` : ''}
+        <a href="#/cheatsheet/${subjectId}" class="btn btn--ghost">Cheat Sheet</a>
       </div>
 
       <!-- Chapters -->
       <section class="home-section">
-        <h2 class="section-title">📚 Chapters</h2>
+        <h2 class="section-title">Chapters</h2>
         <div class="chapter-grid">${chapterCards}</div>
       </section>
 

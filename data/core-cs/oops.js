@@ -5,7 +5,7 @@ export default {
   id: 'core-cs-oops',
   subject: 'core-cs',
   title: 'OOPs Concepts',
-  icon: '🔧',
+  
   difficulty: 'medium',
   estimatedTime: 70,
   prerequisites: [],
@@ -32,7 +32,7 @@ Bundling data and methods that operate on that data within a single unit (class)
 - **Private:** Accessible only within the class
 - **Protected:** Accessible within class and subclasses
 
-> 💡 Getters and setters provide controlled access to private fields.
+> Getters and setters provide controlled access to private fields.
 
 ---
 
@@ -43,7 +43,7 @@ Hiding implementation details and showing only essential features.
 **Abstract class:** Cannot be instantiated, may have abstract methods (no body).
 **Interface:** Pure abstraction — all methods are abstract (in Java).
 
-> 💡 A car's steering wheel is an abstraction — you don't need to know how the wheels turn.
+> A car's steering wheel is an abstraction — you don't need to know how the wheels turn.
 
 ---
 
@@ -58,7 +58,7 @@ A class (child/subclass) inherits properties and methods from another class (par
 - **Multiple:** A + B → C (not supported in Java directly, use interfaces)
 - **Hybrid:** Combination of above
 
-> 💡 Java doesn't support multiple inheritance with classes to avoid the "diamond problem."
+> Java doesn't support multiple inheritance with classes to avoid the "diamond problem."
 
 ---
 

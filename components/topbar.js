@@ -15,7 +15,7 @@ export function renderTopbar() {
       <nav id="breadcrumb" class="breadcrumb" aria-label="breadcrumb"></nav>
     </div>
     <div class="topbar-right">
-      <a href="#/practice/aptitude/percentages" class="btn btn--primary btn--sm">⚡ Quick Practice</a>
+      <a href="#/practice/aptitude/percentages" class="btn btn--primary btn--sm">Quick Practice</a>
     </div>
   `;
 

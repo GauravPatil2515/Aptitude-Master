@@ -5,7 +5,7 @@ export default {
   id: 'sql-aggregation',
   subject: 'sql',
   title: 'Aggregation & GROUP BY',
-  icon: '📊',
+  
   difficulty: 'medium',
   estimatedTime: 50,
   prerequisites: ['basics'],
@@ -24,7 +24,7 @@ Functions that operate on a set of values and return a single value.
 | MAX(col) | Maximum value | MAX(salary) → 150000 |
 | MIN(col) | Minimum value | MIN(salary) → 25000 |
 
-> 💡 COUNT(*) counts all rows including NULLs. COUNT(col) ignores NULLs in that column.
+> COUNT(*) counts all rows including NULLs. COUNT(col) ignores NULLs in that column.
 
 ---
 
@@ -61,7 +61,7 @@ GROUP BY department
 HAVING AVG(salary) > 50000;
 \`\`\`
 
-> 💡 **WHERE filters rows, HAVING filters groups.**
+> **WHERE filters rows, HAVING filters groups.**
 
 ---
 

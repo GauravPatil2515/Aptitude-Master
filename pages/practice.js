@@ -83,7 +83,7 @@ export async function renderPractice(subjectId, chapterId) {
             <span class="badge badge--subject">${chapter.title}</span>
             <span class="practice-counter">Q ${current + 1} of ${questions.length}</span>
           </div>
-          <div class="practice-timer" id="practice-timer">⏱ ${timerVal}s</div>
+          <div class="practice-timer" id="practice-timer">${timerVal}s</div>
           <a href="#/chapter/${subjectId}/${chapterId}" class="btn btn--ghost btn--sm">← Notes</a>
         </div>
 
@@ -107,7 +107,7 @@ export async function renderPractice(subjectId, chapterId) {
           <button class="btn btn--ghost" id="skip-btn">Skip <span class="practice-key-hint">S</span></button>
           <button class="btn btn--ghost" id="hint-btn">Hint <span class="practice-key-hint">H</span></button>
           <button class="btn btn--ghost ${flagged.has(current) ? 'btn--flagged' : ''}" id="flag-btn">
-            ${flagged.has(current) ? '⭐ Flagged' : 'Flag ⭐'}
+            ${flagged.has(current) ? 'Flagged' : 'Flag'}
           </button>
         </div>
 
@@ -121,7 +121,7 @@ export async function renderPractice(subjectId, chapterId) {
       timerVal--;
       const el = document.getElementById('practice-timer');
       if (el) {
-        el.textContent = `⏱ ${timerVal}s`;
+        el.textContent = `${timerVal}s`;
         el.classList.toggle('practice-timer--urgent', timerVal <= 10);
       }
       if (timerVal <= 0) { clearInterval(timerInterval); handleAnswer(-1); }
@@ -139,7 +139,7 @@ export async function renderPractice(subjectId, chapterId) {
     });
     document.getElementById('hint-btn')?.addEventListener('click', () => {
       const fb = document.getElementById('practice-feedback');
-      if (fb) { fb.style.display = 'block'; fb.innerHTML = `<div class="feedback feedback--hint">💡 ${q.hint || 'Try eliminating wrong answers first.'}</div>`; }
+      if (fb) { fb.style.display = 'block'; fb.innerHTML = `<div class="feedback feedback--hint">${q.hint || 'Try eliminating wrong answers first.'}</div>`; }
     });
   }
 
@@ -162,7 +162,7 @@ export async function renderPractice(subjectId, chapterId) {
       fb.style.display = 'block';
       fb.innerHTML = `
         <div class="feedback ${correct ? 'feedback--correct' : 'feedback--wrong'}">
-          ${correct ? '✅ Correct!' : '❌ Wrong!'}
+          ${correct ? 'Correct!' : 'Wrong!'}
           <span class="feedback__explanation">${q.explanation || ''}</span>
         </div>
         <div class="feedback-actions">
@@ -203,7 +203,7 @@ export async function renderPractice(subjectId, chapterId) {
     app.innerHTML = `
       <div class="page page--results">
         <div class="results-card">
-          <div class="results-card__icon">${pct >= 70 ? '🎉' : '📚'}</div>
+          <div class="results-card__icon">${pct >= 70 ? '✓' : '↻'}</div>
           <h2 class="results-card__title">${pct >= 70 ? 'Great job!' : 'Keep practicing!'}</h2>
           <div class="results-card__score">${score} / ${questions.length}</div>
           <div class="results-card__pct">${pct}%</div>

@@ -5,7 +5,7 @@ export default {
   id: 'ai-engineer-advanced-rag',
   subject: 'ai-engineer',
   title: 'Phase 2: Advanced RAG',
-  icon: '🕸️',
+  
   difficulty: 'hard',
   estimatedTime: 90,
   prerequisites: ['retrieval-systems'],

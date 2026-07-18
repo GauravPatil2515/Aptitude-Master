@@ -5,7 +5,7 @@ export default {
   id: 'ai-engineer-production-ai',
   subject: 'ai-engineer',
   title: 'Phase 5: Production AI Eng',
-  icon: '🚀',
+  
   difficulty: 'medium',
   estimatedTime: 90,
   prerequisites: ['mcp'],

@@ -5,7 +5,7 @@ export default {
   id: 'sql-subqueries',
   subject: 'sql',
   title: 'Subqueries & CTEs',
-  icon: '🧱',
+  
   difficulty: 'hard',
   estimatedTime: 65,
   prerequisites: ['joins', 'aggregation'],
@@ -55,7 +55,7 @@ FROM employees e
 WHERE e.salary > (SELECT AVG(salary) FROM employees WHERE dept_id = e.dept_id);
 \`\`\`
 
-> 💡 This finds employees earning above their department average.
+> This finds employees earning above their department average.
 
 ---
 
@@ -75,7 +75,7 @@ SELECT * FROM employees e
 WHERE EXISTS (SELECT 1 FROM departments d WHERE d.id = e.dept_id AND d.location = 'Delhi');
 \`\`\`
 
-> 💡 EXISTS stops at first match; IN builds the full list first.
+> EXISTS stops at first match; IN builds the full list first.
 
 ---
 

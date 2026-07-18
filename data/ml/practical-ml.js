@@ -5,7 +5,7 @@ export default {
   id: 'ml-practical-ml',
   subject: 'ml',
   title: 'Practical ML',
-  icon: '🛠️',
+  
   difficulty: 'medium',
   estimatedTime: 75,
   prerequisites: ['core-ml'],
@@ -34,7 +34,7 @@ export default {
 - **Normalization (Min-Max):** x' = (x − min)/(max − min) → [0, 1]
 - **Standardization (Z-score):** x' = (x − μ)/σ → mean=0, std=1
 
-> 💡 Use standardization for SVM, KNN, PCA. Normalization for neural networks.
+> Use standardization for SVM, KNN, PCA. Normalization for neural networks.
 
 ### Encoding Categorical Variables
 - **Label Encoding:** Assign numbers (0, 1, 2...) — for ordinal data
@@ -87,7 +87,7 @@ export default {
 - Train multiple different models
 - Use their predictions as input to a meta-model
 
-> 💡 **XGBoost** is the most winning algorithm in Kaggle competitions.
+> **XGBoost** is the most winning algorithm in Kaggle competitions.
 
 ---
 

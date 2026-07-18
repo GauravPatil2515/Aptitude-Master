@@ -5,7 +5,7 @@ export default {
   id: 'ai-engineer-llm-foundations',
   subject: 'ai-engineer',
   title: 'Phase 0: LLM Foundations',
-  icon: '🧠',
+  
   difficulty: 'easy',
   estimatedTime: 45,
   prerequisites: [],

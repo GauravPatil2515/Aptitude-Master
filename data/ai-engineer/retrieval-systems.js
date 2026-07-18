@@ -5,7 +5,7 @@ export default {
   id: 'ai-engineer-retrieval-systems',
   subject: 'ai-engineer',
   title: 'Phase 1: Retrieval Systems',
-  icon: '🔍',
+  
   difficulty: 'medium',
   estimatedTime: 60,
   prerequisites: ['llm-foundations'],

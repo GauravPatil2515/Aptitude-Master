@@ -12,6 +12,8 @@ import { renderDSA } from './pages/dsa.js';
 import { renderPlayground } from './pages/playground.js';
 import { renderCheatsheet } from './pages/cheatsheet.js';
 import { renderAITutor } from './pages/ai-tutor.js';
+import { renderSQLSheet } from './pages/sql-sheet.js';
+import { renderMock } from './pages/mock.js';
 
 // Route definitions: pattern → handler
 const ROUTES = [
@@ -20,9 +22,11 @@ const ROUTES = [
   { pattern: /^\/chapter\/([\w-]+)\/([\w-]+)$/, handler: ([subject, chapter]) => renderChapter(subject, chapter) },
   { pattern: /^\/practice\/([\w-]+)\/([\w-]+)$/, handler: ([subject, chapter]) => renderPractice(subject, chapter) },
   { pattern: /^\/dsa$/, handler: () => renderDSA() },
+  { pattern: /^\/sql-sheet$/, handler: () => renderSQLSheet() },
   { pattern: /^\/playground$/, handler: () => renderPlayground() },
   { pattern: /^\/cheatsheet\/([\w-]+)$/, handler: ([subject]) => renderCheatsheet(subject) },
   { pattern: /^\/ai-tutor$/, handler: () => renderAITutor() },
+  { pattern: /^\/mock\/([\w-]+)$/, handler: ([mockId]) => renderMock(mockId) },
 ];
 
 const Router = {
@@ -82,7 +86,9 @@ const Router = {
     if (!app) return;
     app.innerHTML = `
       <div class="empty-state">
-        <div class="empty-state__icon">🗺️</div>
+        <div class="empty-state__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;opacity:.5"><path d="M9 17H7a4 4 0 0 1 0-8h1M15 7h2a4 4 0 0 1 0 8h-1M8 12h8"/></svg>
+        </div>
         <h2 class="empty-state__title">Page not found</h2>
         <p class="empty-state__desc">No route matched: <code>${path}</code></p>
         <a href="#/home" class="btn btn--primary">Go Home</a>

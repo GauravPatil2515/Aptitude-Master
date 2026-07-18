@@ -38,7 +38,7 @@ export async function renderChapter(subjectId, chapterId) {
     </div>`).join('');
 
   const shortcuts = (chapter.shortcuts || []).map(s => `
-    <div class="shortcut-item">⚡ ${s}</div>`).join('');
+    <div class="shortcut-item">${s}</div>`).join('');
 
   app.innerHTML = `
     <div class="page page--chapter">
@@ -58,13 +58,13 @@ export async function renderChapter(subjectId, chapterId) {
           <h1 class="chapter-notes__title">${chapter.title}</h1>
           <div class="chapter-notes__meta">
             <span class="badge badge--diff-${chapter.difficulty ?? 'medium'}">${chapter.difficulty ?? 'medium'}</span>
-            <span class="badge badge--time">⏱ ${chapter.estimatedTime ?? '?'} min</span>
+            <span class="badge badge--time">${chapter.estimatedTime ?? '?'} min</span>
           </div>
           <div class="chapter-notes__body markdown-body">
             ${renderMarkdown(chapter.notes || '_No notes yet._')}
           </div>
           <div class="chapter-notes__actions">
-            <button class="btn btn--ghost" id="ask-ai-btn">🧠 Ask AI to Explain</button>
+            <button class="btn btn--ghost" id="ask-ai-btn">Ask AI to Explain</button>
             <a href="#/practice/${subjectId}/${chapterId}" class="btn btn--primary">▶ Start Practice →</a>
           </div>
         </article>
@@ -80,7 +80,7 @@ export async function renderChapter(subjectId, chapterId) {
       <!-- AI Drawer -->
       <div class="ai-drawer" id="ai-drawer">
         <div class="ai-drawer__header">
-          <span>🤖 Ask AI — ${chapter.title}</span>
+          <span>Ask AI — ${chapter.title}</span>
           <button class="ai-drawer__close" id="ai-drawer-close">✕</button>
         </div>
         <div class="ai-drawer__messages" id="ai-messages"></div>

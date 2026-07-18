@@ -5,7 +5,7 @@ export default {
   id: 'ai-engineer-ai-infra',
   subject: 'ai-engineer',
   title: 'Phase 7: AI Infrastructure',
-  icon: '🏗️',
+  
   difficulty: 'medium',
   estimatedTime: 80,
   prerequisites: ['local-models'],

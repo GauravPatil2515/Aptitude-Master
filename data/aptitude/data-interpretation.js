@@ -7,7 +7,7 @@ export default {
   id: 'aptitude-data-interpretation',
   subject: 'aptitude',
   title: 'Data Interpretation',
-  icon: '📊',
+  
   difficulty: 'medium',
   estimatedTime: 90,
   prerequisites: ['percentages', 'ratio-proportion'],
@@ -140,7 +140,7 @@ Laptop sales (units): 2020=1200, 2021=1500, 2022=1800, 2023=2400, 2024=3000
 - **2022 as % of 2024:** 1800/3000 × 100 = 60%
 - **Total 2022+2023:** 1800+2400 = 4200
 
-> ⚠️ **Important:** Growth% and "A as % of B" are NOT the same!
+> **Important:** Growth% and "A as % of B" are NOT the same!
 
 ---
 
@@ -174,7 +174,7 @@ Total Expense: ₹20,00,000
 | 66.67% | 2/3 |
 | 75% | 3/4 |
 
-> 💡 25% of 840 = 840/4 = **210** (much faster than 0.25 × 840!)
+> 25% of 840 = 840/4 = **210** (much faster than 0.25 × 840!)
 
 ---
 

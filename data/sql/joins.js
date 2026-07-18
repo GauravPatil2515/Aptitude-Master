@@ -5,7 +5,7 @@ export default {
   id: 'sql-joins',
   subject: 'sql',
   title: 'JOINs',
-  icon: '🔗',
+  
   difficulty: 'medium',
   estimatedTime: 55,
   prerequisites: ['basics'],
@@ -86,7 +86,7 @@ UNION
 | UNION | Combines results, removes duplicates |
 | UNION ALL | Combines results, keeps duplicates (faster) |
 
-> 💡 Both require same number of columns with compatible types.
+> Both require same number of columns with compatible types.
 
 ---
 

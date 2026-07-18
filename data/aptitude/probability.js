@@ -5,7 +5,7 @@ export default {
   id: 'aptitude-probability',
   subject: 'aptitude',
   title: 'Probability',
-  icon: '🎲',
+  
   difficulty: 'hard',
   estimatedTime: 65,
   prerequisites: ['permutation'],
@@ -20,7 +20,7 @@ export default {
 - P = 0: Impossible event
 - P = 1: Certain event
 
-> 💡 Probability of getting a head on a coin toss = 1/2
+> Probability of getting a head on a coin toss = 1/2
 
 ---
 
@@ -28,7 +28,7 @@ export default {
 
 **P(not E) = 1 − P(E)**
 
-> 💡 P(at least 1 head in 3 tosses) = 1 − P(all tails) = 1 − 1/8 = **7/8**
+> P(at least 1 head in 3 tosses) = 1 − P(all tails) = 1 − 1/8 = **7/8**
 
 ---
 
@@ -46,7 +46,7 @@ For **mutually exclusive** events: P(A or B) = P(A) + P(B)
 
 For **independent** events: P(A and B) = P(A) × P(B)
 
-> 💡 P(2 heads in 2 tosses) = 1/2 × 1/2 = **1/4**
+> P(2 heads in 2 tosses) = 1/2 × 1/2 = **1/4**
 
 ---
 
@@ -65,7 +65,7 @@ For **independent** events: P(A and B) = P(A) × P(B)
 - Face cards: J, Q, K (12 total)
 - Aces: 4
 
-> 💡 P(face card) = 12/52 = 3/13
+> P(face card) = 12/52 = 3/13
 
 ---
 
@@ -74,7 +74,7 @@ For **independent** events: P(A and B) = P(A) × P(B)
 - **Without replacement:** Total decreases each draw
 - **With replacement:** Total stays the same (independent events)
 
-> 💡 Bag has 3 red, 2 blue. P(2 red without replacement) = 3/5 × 2/4 = **3/10**
+> Bag has 3 red, 2 blue. P(2 red without replacement) = 3/5 × 2/4 = **3/10**
   `,
 
   formulas: [

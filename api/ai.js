@@ -32,7 +32,7 @@ export async function askAI(systemPrompt, userMessage) {
 async function callDirect(systemPrompt, userMessage) {
   const apiKey = localStorage.getItem('groq_api_key');
   if (!apiKey) {
-    throw new Error('No Groq API key found. Add it via Settings (⚙️) or set localStorage.groq_api_key.');
+    throw new Error('No Groq API key found. Add it via Settings or set localStorage.groq_api_key.');
   }
 
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {

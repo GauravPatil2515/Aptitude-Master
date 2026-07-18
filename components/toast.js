@@ -16,7 +16,7 @@ function getContainer() {
 
 export function showToast(message, type = 'info', duration = 3000) {
   const container = getContainer();
-  const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
+  const icons = { success: '✓', error: '✕', info: 'i', warning: '!' };
   const toast = document.createElement('div');
   toast.className = `toast toast--${type}`;
   toast.innerHTML = `<span class="toast__icon">${icons[type]}</span><span class="toast__msg">${message}</span>`;

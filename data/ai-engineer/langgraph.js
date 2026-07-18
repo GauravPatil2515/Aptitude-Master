@@ -5,7 +5,7 @@ export default {
   id: 'ai-engineer-langgraph',
   subject: 'ai-engineer',
   title: 'Phase 3: LangGraph',
-  icon: '⛓️',
+  
   difficulty: 'hard',
   estimatedTime: 100,
   prerequisites: ['advanced-rag'],

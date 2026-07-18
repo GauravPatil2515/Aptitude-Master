@@ -5,7 +5,7 @@ export default {
   id: 'ml-core-ml',
   subject: 'ml',
   title: 'Core ML Algorithms',
-  icon: '🧠',
+  
   difficulty: 'medium',
   estimatedTime: 90,
   prerequisites: ['math-prereqs'],
@@ -35,7 +35,7 @@ Predicts probability (0 to 1). Uses sigmoid: σ(z) = 1/(1+e^(-z))
 
 **Loss:** Cross-entropy = −[y·log(ŷ) + (1−y)·log(1−ŷ)]
 
-> 💡 Despite "regression" in name, logistic regression is used for classification.
+> Despite "regression" in name, logistic regression is used for classification.
 
 ### Decision Trees
 Tree-like model of decisions. Splits data based on feature values.

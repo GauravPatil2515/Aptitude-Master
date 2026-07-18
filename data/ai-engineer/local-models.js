@@ -5,7 +5,7 @@ export default {
   id: 'ai-engineer-local-models',
   subject: 'ai-engineer',
   title: 'Phase 6: Local Models & Inf',
-  icon: '💻',
+  
   difficulty: 'medium',
   estimatedTime: 75,
   prerequisites: ['production-ai'],

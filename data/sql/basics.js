@@ -5,7 +5,7 @@ export default {
   id: 'sql-basics',
   subject: 'sql',
   title: 'SQL Basics',
-  icon: '📝',
+  
   difficulty: 'easy',
   estimatedTime: 40,
   prerequisites: [],
@@ -74,7 +74,7 @@ SELECT * FROM products LIMIT 10;
 | IS NULL | Check for NULL |
 | AND, OR, NOT | Logical operators |
 
-> 💡 \`WHERE name LIKE 'A%'\` finds names starting with A
+> \`WHERE name LIKE 'A%'\` finds names starting with A
 
 ---
 
@@ -116,7 +116,7 @@ GROUP BY department
 HAVING AVG(salary) > 50000;
 \`\`\`
 
-> 💡 **Execution order:** FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
+> **Execution order:** FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
   `,
 
   formulas: [

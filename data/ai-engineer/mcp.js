@@ -5,7 +5,7 @@ export default {
   id: 'ai-engineer-mcp',
   subject: 'ai-engineer',
   title: 'Phase 4: Model Context Protocol',
-  icon: '🔌',
+  
   difficulty: 'hard',
   estimatedTime: 85,
   prerequisites: ['langgraph'],

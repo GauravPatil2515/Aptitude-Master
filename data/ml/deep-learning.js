@@ -5,7 +5,7 @@ export default {
   id: 'ml-deep-learning',
   subject: 'ml',
   title: 'Deep Learning Basics',
-  icon: '🕷️',
+  
   difficulty: 'hard',
   estimatedTime: 100,
   prerequisites: ['core-ml'],
@@ -35,7 +35,7 @@ Deep learning uses neural networks with multiple layers to learn hierarchical re
 | Tanh | (e^x − e^(-x))/(e^x + e^(-x)) | (-1,1) | Hidden layers |
 | Softmax | e^(x_i)/Σe^(x_j) | (0,1) | Multi-class output |
 
-> 💡 **ReLU** is most common for hidden layers. It's simple and avoids vanishing gradient.
+> **ReLU** is most common for hidden layers. It's simple and avoids vanishing gradient.
 
 ---
 
@@ -69,7 +69,7 @@ Designed for image data.
 
 **Architecture:** Input → [Conv → ReLU → Pooling] × N → FC → Output
 
-> 💡 CNNs exploit spatial locality — nearby pixels are more related.
+> CNNs exploit spatial locality — nearby pixels are more related.
 
 ---
 
@@ -100,7 +100,7 @@ h_t = f(W_hh × h_(t-1) + W_xh × x_t)
 - Feed-forward layers
 - Layer normalization
 
-> 💡 Transformers power GPT, BERT, and most modern LLMs.
+> Transformers power GPT, BERT, and most modern LLMs.
 
 ---
 
@@ -125,7 +125,7 @@ h_t = f(W_hh × h_(t-1) + W_xh × x_t)
 | Adam | Adaptive learning rates (most popular) |
 | RMSprop | Adaptive learning rate per parameter |
 
-> 💡 **Adam** is the default choice for most deep learning tasks.
+> **Adam** is the default choice for most deep learning tasks.
   `,
 
   formulas: [
