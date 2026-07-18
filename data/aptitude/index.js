@@ -9,9 +9,12 @@ export default {
   description: 'Quantitative aptitude and logical reasoning for campus placements (TCS, Infosys, Wipro, etc.)',
   chapters: [
     { id: 'percentages',    title: 'Percentages',           difficulty: 'easy',   estimatedTime: 40 },
+    { id: 'averages',       title: 'Averages',              difficulty: 'easy',   estimatedTime: 40 },
     { id: 'profit-loss',    title: 'Profit & Loss',         difficulty: 'easy',   estimatedTime: 45 },
+    { id: 'mixtures',       title: 'Mixtures & Alligations', difficulty: 'medium', estimatedTime: 55 },
     { id: 'simple-interest',title: 'Simple & Compound Interest',  difficulty: 'medium', estimatedTime: 50 },
     { id: 'ratio-proportion',title: 'Ratio & Proportion',    difficulty: 'easy',   estimatedTime: 35 },
+    { id: 'progressions',  title: 'Progressions (AP & GP)',  difficulty: 'medium', estimatedTime: 50 },
     { id: 'time-work',      title: 'Time & Work',           difficulty: 'medium', estimatedTime: 50 },
     { id: 'time-speed',     title: 'Time, Speed & Distance',  difficulty: 'medium', estimatedTime: 55 },
     { id: 'number-system',  title: 'Number System',         difficulty: 'medium', estimatedTime: 60 },
