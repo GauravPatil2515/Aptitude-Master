@@ -22,7 +22,7 @@ No build step and no `npm install` are required — the app is plain ES
 modules loaded directly by the browser. For the **AI Tutor** you need a
 Groq API key:
 
-- Local: Settings ⚙️ → paste your Groq key (stored in `localStorage`).
+- Local: open Settings (gear icon in top bar) → paste your Groq key (stored in `localStorage`).
 - Production: set the `GROQ_API_KEY` environment variable on Vercel
   (see `.env.example`); the app proxies through `/api/groq`.
 

@@ -40,7 +40,7 @@ export function renderSidebar() {
     const isActive = currentPath.includes(`/${sub.id}`);
     return `
       <a href="#/subject/${sub.id}" class="sidebar-item ${isActive ? 'sidebar-item--active' : ''}">
-        <span class="sidebar-item__icon">${sub.icon}</span>
+        <span class="sidebar-item__icon" aria-hidden="true">${sub.icon}</span>
         <span class="sidebar-item__label">${sub.label}</span>
         <span class="sidebar-item__pct">${pct}%</span>
       </a>`;
@@ -49,7 +49,7 @@ export function renderSidebar() {
   sidebar.innerHTML = `
     <div class="sidebar-header">
       <a href="#/home" class="sidebar-logo">
-        <span class="sidebar-logo__icon">${ICON.spark}</span>
+        <span class="sidebar-logo__icon" aria-hidden="true">${ICON.spark}</span>
         <span class="sidebar-logo__text">AptitudeMaster</span>
       </a>
       <button class="sidebar-collapse-btn" id="sidebar-collapse" title="Toggle sidebar">
@@ -65,27 +65,27 @@ export function renderSidebar() {
 
     <nav class="sidebar-nav">
       <a href="#/home" class="sidebar-item ${currentPath === '/home' ? 'sidebar-item--active' : ''}">
-        <span class="sidebar-item__icon">${ICON.home}</span>
+        <span class="sidebar-item__icon" aria-hidden="true">${ICON.home}</span>
         <span class="sidebar-item__label">Home</span>
       </a>
       <div class="sidebar-section-title">SUBJECTS</div>
       ${items}
       <div class="sidebar-section-title">EXAMS</div>
       <a href="#/mock/tcs-1" class="sidebar-item ${currentPath === '/mock/tcs-1' ? 'sidebar-item--active' : ''}">
-        <span class="sidebar-item__icon">${ICON.trophy}</span>
+        <span class="sidebar-item__icon" aria-hidden="true">${ICON.trophy}</span>
         <span class="sidebar-item__label">TCS Mock Test</span>
       </a>
       <div class="sidebar-section-title">TOOLS</div>
       <a href="#/sql-sheet" class="sidebar-item ${currentPath === '/sql-sheet' ? 'sidebar-item--active' : ''}">
-        <span class="sidebar-item__icon">${ICON.sql}</span>
+        <span class="sidebar-item__icon" aria-hidden="true">${ICON.sql}</span>
         <span class="sidebar-item__label">SQL Sheet</span>
       </a>
       <a href="#/playground" class="sidebar-item ${currentPath === '/playground' ? 'sidebar-item--active' : ''}">
-        <span class="sidebar-item__icon">${ICON.python}</span>
+        <span class="sidebar-item__icon" aria-hidden="true">${ICON.python}</span>
         <span class="sidebar-item__label">Playground</span>
       </a>
       <a href="#/ai-tutor" class="sidebar-item ${currentPath === '/ai-tutor' ? 'sidebar-item--active' : ''}">
-        <span class="sidebar-item__icon">${ICON.ai}</span>
+        <span class="sidebar-item__icon" aria-hidden="true">${ICON.ai}</span>
         <span class="sidebar-item__label">AI Tutor</span>
       </a>
     </nav>

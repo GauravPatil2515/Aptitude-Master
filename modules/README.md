@@ -12,7 +12,7 @@ Self-contained feature modules loaded via `<script>` tags in [[index.html]].
 
 | File | Purpose | Exposes |
 |---|---|---|
-| [[modules/rings.js\|`rings.js`]] | Animated SVG circular progress rings *(planned — not yet implemented)* | `RingsModule` |
+| `rings.js` | *(not implemented)* — animated SVG progress rings were scoped but dropped; progress is shown via sidebar % and the calendar instead | — |
 | [[modules/calendar.js\|`calendar.js`]] | Monthly study-day calendar tracker (`localStorage`) | `CalendarModule` |
 | [[modules/ads.js\|`ads.js`]] | Google AdSense slot manager (dev placeholders + prod tags) | `AdsModule` |
 | [[modules/ai.js\|`ai.js`]] | Smart AI advisor + weak topic detector *(implemented)* | `AIAdvisorModule` |
