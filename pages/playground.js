@@ -60,7 +60,13 @@ export function renderPlayground() {
                 <option value="ml_dotprod">2. Dot Product</option>
                 <option value="ml_gradient">3. Gradient Descent Step</option>
                 <option value="ml_sigmoid">4. Sigmoid & Softmax</option>
-                <option value="ml_corr">5. Correlation Matrix</option>              \n              </optgroup>\n              <optgroup label=\"── Extras ──\">\n                <option value=\"sql_company\">Company‑Specific SQL (Amazon)</option>\n                <option value=\"ml_metrics\">Model Evaluation Metrics</option>\n              </optgroup>\n            </select>
+                <option value="ml_corr">5. Correlation Matrix</option>
+              </optgroup>
+              <optgroup label="── Extras ──">
+                <option value="sql_company">Company‑Specific SQL (Amazon)</option>
+                <option value="ml_metrics">Model Evaluation Metrics</option>
+              </optgroup>
+            </select>
           </div>
 
           <div class="card">
