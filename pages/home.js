@@ -276,7 +276,7 @@ export function renderHome() {
     if (cb.checked) {
       const row = cb.closest('.roadmap-phase-row');
       row.style.borderColor = 'var(--accent)';
-      row.style.background = 'rgba(124,106,247,0.03)';
+      row.style.background = 'color-mix(in srgb, var(--accent) 6%, transparent)';
     }
   });
 
