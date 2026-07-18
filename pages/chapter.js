@@ -140,7 +140,7 @@ function appendAIMessage(role, text) {
 
 /* DSA topic chapter — renders a problem-tracker topic from data/dsa/index.js.
    DSA has no notes/content files, so this builds the topic view directly. */
-const DSA_STATUS = { todo: '○', in_progress: '◑', completed: '●' };
+const DSA_STATUS = { todo: '', in_progress: '', completed: '' };
 const DSA_STATUS_LABEL = { todo: 'Not started', in_progress: 'In progress', completed: 'Completed' };
 
 async function renderDsaChapter(topicId) {

@@ -1,0 +1,82 @@
+/* ---------- Cheat Sheet ---------- */
+.page--cheatsheet { max-width: 1100px; margin: 0 auto; padding: var(--space-6) var(--space-4); }
+
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.cs-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+.cs-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  box-shadow: 0 6px 20px -12px color-mix(in srgb, var(--accent) 50%, transparent);
+  transform: translateY(-2px);
+}
+
+.cs-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--accent) 6%, var(--card));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+.cs-table thead th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider, 0.04em);
+  color: var(--text-muted);
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary, var(--card));
+}
+.cs-td {
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.cs-table tbody tr:last-child .cs-td { border-bottom: none; }
+.cs-td--name {
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.cs-td--ex { color: var(--text-secondary); font-size: var(--text-xs); }
+.cs-td code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--bg-secondary, var(--muted));
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  word-break: break-word;
+}
+
+@media (max-width: 600px) {
+  .cs-grid { grid-template-columns: 1fr; }
+}

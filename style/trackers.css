@@ -45,6 +45,12 @@
   white-space: nowrap;
 }
 
+.company-tag--amazon { background: color-mix(in srgb, #ff9900 14%, transparent); color: color-mix(in srgb, #ff9900 75%, var(--text-primary)); border-color: color-mix(in srgb, #ff9900 30%, transparent); }
+.company-tag--google { background: color-mix(in srgb, #4285f4 14%, transparent); color: color-mix(in srgb, #4285f4 75%, var(--text-primary)); border-color: color-mix(in srgb, #4285f4 30%, transparent); }
+.company-tag--meta { background: color-mix(in srgb, #0866ff 14%, transparent); color: color-mix(in srgb, #0866ff 75%, var(--text-primary)); border-color: color-mix(in srgb, #0866ff 30%, transparent); }
+.company-tag--microsoft { background: color-mix(in srgb, #00a4ef 14%, transparent); color: color-mix(in srgb, #00a4ef 75%, var(--text-primary)); border-color: color-mix(in srgb, #00a4ef 30%, transparent); }
+.company-tag--adobe { background: color-mix(in srgb, #fa0f00 14%, transparent); color: color-mix(in srgb, #fa0f00 75%, var(--text-primary)); border-color: color-mix(in srgb, #fa0f00 30%, transparent); }
+
 /* ---- Generic tracker tables (SQL & DSA) ---- */
 .sql-table,
 .dsa-table {
@@ -148,35 +154,54 @@
 /* ---- Status toggle buttons ---- */
 .sql-status-btn,
 .status-btn {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--card);
-  color: var(--text-muted);
+  color: transparent;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 0;
   line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-fast, 0.15s ease);
+  position: relative;
+}
+.sql-status-btn::before,
+.status-btn::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--text-muted);
+  box-sizing: border-box;
+  transition: all var(--transition-fast, 0.15s ease);
 }
 .sql-status-btn:hover,
-.status-btn:hover {
-  border-color: var(--accent);
+.status-btn:hover { border-color: var(--accent); }
+.sql-status-btn--in_progress::before,
+.status-btn--in_progress::before {
+  border-color: var(--amber, #fbbf24);
+  background: conic-gradient(var(--amber, #fbbf24) 0 50%, transparent 50%);
 }
 .sql-status-btn--completed,
 .status-btn--completed {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
 }
-.sql-status-btn--in_progress,
-.status-btn--in_progress {
-  background: rgba(251, 191, 36, 0.15);
-  border-color: rgba(251, 191, 36, 0.4);
-  color: #fbbf24;
+.sql-status-btn--completed::before,
+.status-btn--completed::before {
+  width: 11px;
+  height: 9px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  /* checkmark */
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translate(1px, -2px);
 }
 
 /* ---- Resource / solve links ---- */

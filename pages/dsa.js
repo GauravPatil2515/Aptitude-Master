@@ -5,7 +5,7 @@
  */
 import { store } from '../state/store.js';
 
-const DSA_STATUS = { todo: '○', in_progress: '◑', completed: '●' };
+const DSA_STATUS = { todo: '', in_progress: '', completed: '' };
 const DSA_STATUS_LABEL = { todo: 'Not started', in_progress: 'In progress', completed: 'Completed' };
 const DSA_STATUS_CYCLE = { todo: 'in_progress', in_progress: 'completed', completed: 'todo' };
 
