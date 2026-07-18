@@ -437,13 +437,77 @@ body {
   text-decoration: none;
 }
 
-.breadcrumb-current {
-  color: var(--foreground);
-  font-weight: 600;
+/* ─── Global search (topbar) ─── */
+.global-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full, 999px);
+  padding: 0 12px;
+  height: 38px;
+  width: 280px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), width var(--transition-fast);
 }
+.global-search:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+  width: 320px;
+}
+.global-search__icon { color: var(--muted-foreground); flex-shrink: 0; }
+.global-search__input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--foreground);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
+  width: 100%;
+  padding: 0;
+}
+.global-search__input::placeholder { color: var(--muted-foreground); }
 
-.breadcrumb-separator {
-  opacity: 0.5;
+.global-search__results {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 360px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg, 0 12px 32px -12px rgba(0,0,0,0.45));
+  padding: 6px;
+  display: none;
+  z-index: 50;
+}
+.global-search__results.search-open { display: block; }
+.search-result {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--foreground);
+  transition: background var(--transition-fast);
+}
+.search-result:hover,
+.search-result.is-active {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.search-result__title { font-size: var(--text-sm); font-weight: 600; }
+.search-result__sub { font-size: var(--text-xs); color: var(--muted-foreground); }
+
+@media (max-width: 720px) {
+  .global-search { width: 44px; padding: 0 12px; }
+  .global-search__input { display: none; }
+  .global-search:focus-within { width: 220px; }
+  .global-search:focus-within .global-search__input { display: block; }
+  .global-search__results { width: 280px; right: -10px; }
 }
 
 /* Theme toggle button */
