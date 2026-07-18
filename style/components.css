@@ -1139,7 +1139,7 @@ body.dark-theme .glass {
   transition: all 0.2s ease;
 }
 .advisor-chip:hover {
-  border-color: var(--accent-indigo, #7c6af7);
+  border-color: var(--accent);
   color: var(--text-primary);
   transform: translateY(-1px);
 }

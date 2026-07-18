@@ -87,9 +87,13 @@
     import { initSettings }  from './components/settings.js';
     import { store }         from './state/store.js';
 
-    // Restore theme
+    // Restore theme (default is dark; explicit light/dark both honored)
     const theme = store.get().theme;
-    if (theme === 'light') document.body.classList.add('light-theme');
+    if (theme === 'light') {
+      document.body.classList.add('light-theme');
+    } else if (theme === 'dark') {
+      document.body.classList.add('dark-forced');
+    }
 
     // Update streak on load
     store.updateStreak();

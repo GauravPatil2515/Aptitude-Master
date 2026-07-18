@@ -106,7 +106,9 @@ export function renderSidebar() {
 
   // Theme toggle
   document.getElementById('theme-toggle-btn')?.addEventListener('click', () => {
-    document.body.classList.toggle('light-theme');
-    store.set('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+    const isLight = document.body.classList.toggle('light-theme');
+    // Mark an explicit dark choice so prefers-color-scheme fallback doesn't override it
+    document.body.classList.toggle('dark-forced', !isLight);
+    store.set('theme', isLight ? 'light' : 'dark');
   });
 }

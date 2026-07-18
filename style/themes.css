@@ -39,7 +39,7 @@ body.light-theme .topbar {
 }
 
 body.light-theme .card:hover {
-  box-shadow: var(--shadow-lg), 0 0 16px rgba(99,102,241,0.08);
+  box-shadow: var(--shadow-lg), 0 0 16px rgba(217,110,44,0.12);
 }
 
 body.light-theme .mobile-bottom-nav {
@@ -48,7 +48,7 @@ body.light-theme .mobile-bottom-nav {
 }
 
 body.light-theme .subject-card:hover {
-  box-shadow: var(--shadow-lg), 0 0 16px rgba(99,102,241,0.08);
+  box-shadow: var(--shadow-lg), 0 0 16px rgba(217,110,44,0.12);
 }
 
 body.light-theme .chapter-card:hover {
@@ -61,4 +61,19 @@ body.light-theme .practice-card {
 
 body.light-theme .results-card {
   box-shadow: var(--shadow-lg);
+}
+
+/* Smooth theme switch (no harsh flash of colours) */
+body,
+.sidebar,
+.topbar,
+.card,
+.modal,
+.dsa-sidebar,
+.dsa-drawer__panel,
+.sql-table,
+.dsa-table {
+  transition: background-color var(--transition-base),
+              color var(--transition-base),
+              border-color var(--transition-base);
 }
