@@ -30,7 +30,9 @@ export async function renderCheatsheet(subjectId) {
         return formulaRows ? `
           <div class="cs-card">
             <div class="cs-card__title">${data.icon || ''} ${data.title}</div>
-            <table class="cs-table"><thead><tr><th>Name</th><th>Formula</th><th>Example</th></tr></thead><tbody>${formulaRows}</tbody></table>
+            <div class="cs-table-wrap">
+              <table class="cs-table"><thead><tr><th>Name</th><th>Formula</th><th>Example</th></tr></thead><tbody>${formulaRows}</tbody></table>
+            </div>
           </div>` : '';
       } catch { return ''; }
     })
