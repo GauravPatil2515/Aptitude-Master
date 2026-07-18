@@ -7,6 +7,7 @@
     "start": "python3 -m http.server 8099",
     "test": "node scripts/check.js",
     "smoke": "node scripts/smoke.cjs",
+    "test:ai": "node scripts/groq-feature-test.cjs",
     "serve": "python3 -m http.server 8099"
   },
   "keywords": ["aptitude", "placement", "dsa", "sql", "interview-prep"],
