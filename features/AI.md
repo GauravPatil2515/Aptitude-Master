@@ -266,7 +266,12 @@ From [[state/store.js]]:
 | `Proxy error: 502` | Edge Function failed | "AI unavailable" |
 | JSON parse failure in `generateSimilarQuestions()` | AI returned non-JSON | Empty array (console warning) |
 
----
+## Planned Improvements
+- Add conversation history to AI Tutor chat (persist across sessions, display in UI)
+- Implement markdown rendering with syntax highlighting and copy‑to‑clipboard buttons on code blocks
+- Ensure AI chat UI follows refined design: no glassmorphism, use Plus Jakarta Sans headings, Inter body, JetBrains Mono code, darker background #0a0a0f, indigo accent #7c6af7, subtle borders
+- Add real coding challenges with starter code in the Playground (instead of blank editor)
+- Improve content density: reduce whitespace, prioritize functional over decorative elements
 
 ```dataview
 LIST FROM #ai

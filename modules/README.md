@@ -12,10 +12,10 @@ Self-contained feature modules loaded via `<script>` tags in [[index.html]].
 
 | File | Purpose | Exposes |
 |---|---|---|
-| [[modules/rings.js\|`rings.js`]] | Animated SVG circular progress rings | `RingsModule` |
+| [[modules/rings.js\|`rings.js`]] | Animated SVG circular progress rings *(planned — not yet implemented)* | `RingsModule` |
 | [[modules/calendar.js\|`calendar.js`]] | Monthly study-day calendar tracker (`localStorage`) | `CalendarModule` |
 | [[modules/ads.js\|`ads.js`]] | Google AdSense slot manager (dev placeholders + prod tags) | `AdsModule` |
-| [[modules/ai.js\|`ai.js`]] *(Phase B)* | Smart AI advisor + weak topic detector | `AIModule` |
+| [[modules/ai.js\|`ai.js`]] | Smart AI advisor + weak topic detector *(implemented)* | `AIAdvisorModule` |
 | [[modules/playground.js\|`playground.js`]] *(Phase B)* | Monaco Editor + Pyodide lazy loader | `PlaygroundModule` |
 
 See also: [[PROJECT.md]] · [[features/AI]] · [[pages/ai-tutor.js]] · [[api/ai.js]]

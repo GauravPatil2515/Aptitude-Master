@@ -1,6 +1,42 @@
+# ─── Dependencies / virtual environments ───
 venv/
+.venv/
+env/
+reference/venv/
+reference/agent-deps/.kilo/node_modules/
+
+# ─── Agent / tooling caches ───
+.kilo/
+.kolo/
+reference/agent-deps/
 __pycache__/
+*.pyc
+
+# ─── Reference material (PDFs, DOCXs, extracted images, agent clones) ───
+# These are NOT part of the app. They live under reference/ for safekeeping.
+reference/
+tcs-20260511T183112Z-3-001/
+converted_images/
 *.zip
 *.pdf
-converted_images/
-.obsidian/
+*.docx
+*.png
+*.jpg
+
+# ─── Secrets / environment ───
+.env
+.env.local
+.env.*.local
+
+# ─── Logs / build output ───
+*.log
+server.log
+dist/
+.cache/
+coverage/
+
+# ─── OS / editor artefacts ───
+.DS_Store
+Thumbs.db
+ehthumbs.db
+.vscode/

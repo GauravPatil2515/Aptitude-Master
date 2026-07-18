@@ -57,7 +57,7 @@ Target users: Indian engineering students preparing for [[TCS]], [[Infosys]], [[
 ### Tech Stack
 
 - **Frontend**: Vanilla JS (ES modules), hash-based [[router.js|SPA router]]
-- **CSS**: Design system with 7 modular stylesheets ([[style/]])
+- **CSS**: Design system with 6 modular stylesheets ([[style/]])
 - **Backend**: Vercel serverless edge functions ([[api/groq.js|Groq API proxy]])
 - **Data**: Per-chapter JS module manifests with dynamic `import()` ([[data/]])
 - **Storage**: `localStorage` (Phase 3: planned Supabase migration)
@@ -65,20 +65,31 @@ Target users: Indian engineering students preparing for [[TCS]], [[Infosys]], [[
 
 ### Two-Era Codebase
 
-This project went through a major refactor (Phase 1 → Phase 2):
+|
 
-1. **Old (monolithic)**: [[app.js|`app.js`]] (1,397 LOC) + [[data.js|`data.js`]] (2,409 LOC) + [[style.css|`style.css`]] (1,345 LOC)
-   - Direct DOM manipulation, tab-based navigation, inline styles
-   - Still present in repo but **not imported** by [[index.html]]
-   - Contains global functions that may conflict
+|This project went through a major refactor (Phase 1 → Phase 2):
 
-2. **New (modular)**: Page components + design system
-   - Hash-based [[router.js|router]] → page modules ([[pages/]])
-   - 6-file CSS design system ([[style/tokens.css]], [[style/layout.css]], [[style/components.css]], [[style/themes.css]], [[style/utilities.css]], [[style/pages.css]])
-   - State management ([[state/store.js]] + [[state/storage.js]])
-   - Reusable components ([[components/]])
+|
 
-**CRITICAL**: The old system is dead code. [[index.html]] only imports the new modular system.
+|1. **Old (monolithic)**: Previously consisted of `app.js` (~1.4 k LOC), `data.js` (~2.4 k LOC) and `style.css` (~1.3 k LOC). These files have been removed from the codebase after the migration to the modular system.
+
+|
+
+|2. **New (modular)**: Page components + design system
+
+|   - Hash-based [[router.js|router]] → page modules ([[pages/]])
+
+|   - 6-file CSS design system ([[style/tokens.css]], [[style/layout.css]], [[style/components.css]], [[style/themes.css]], [[style/utilities.css]], [[style/pages.css]]) — note: README.md/Docs refer to this as a "7-layer" system; on disk there are exactly 6 `.css` files loaded by `index.html`.
+
+|   - State management ([[state/store.js]] + [[state/storage.js]])
+
+|   - Reusable components ([[components/]])
+
+|
+
+|**Note**: The old system has been removed; [[index.html]] now imports only the modular system.
+
+|
 
 ---
 
@@ -95,8 +106,8 @@ This project went through a major refactor (Phase 1 → Phase 2):
 
 ```
 [[router.js]]                  — Hash-router with 8 routes + breadcrumb + 404
-[[app.js]]                     — [DEAD CODE] Old monolithic app, NOT imported
-[[data.js]]                    — [OLD DATA] SYLLABUS_DATA with inline HTML questions
+[[app.js]]                     — [REMOVED] Old monolithic app (deleted after migration to modular system).
+[[data.js]]                    — [REMOVED] Old data file (deleted after migration).
 ```
 
 ### State
@@ -146,12 +157,12 @@ SORT file.name ASC
 | [[style/themes.css]] | Light/dark theme overrides, skeleton loading animation |
 | [[style/utilities.css]] | Atomic helper classes (flex, spacing, typography) |
 | [[style/pages.css]] | Page-specific overrides (hero, quiz, DSA table, AI chat, etc.) |
-| [[style.css]] | [DEAD CODE] Old monolithic stylesheet, loaded in index.html but conflicts |
+| [[style.css]] | [REMOVED] Old monolithic stylesheet (deleted after migration). |
 
 ### Data Modules (per-subject manifests)
 
 ```
-[[data/aptitude/index.js]]      — Manifest: 12 chapters
+[[data/aptitude/index.js]]      — Manifest: 13 chapters (adds Data Interpretation)
 [[data/aptitude/percentages.js]]       — Chapter data: theory, formulas, questions
 [[data/aptitude/profit-loss.js]]       — Chapter data
 [[data/core-cs/index.js]]       — Manifest
@@ -176,7 +187,7 @@ Every chapter data module exports `aiTutorPrompt` — a per-chapter system promp
 ```
 [[modules/ads.js]]             — AdSense slot manager (dev placeholders)
 [[modules/calendar.js]]         — Study calendar (month view, activity tracking)
-[[modules/rings.js]]            — Animated SVG progress rings (depends on global SYLLABUS_DATA)
+[[modules/ai.js]]               — Phase‑B AI advisor / weak‑topic detector (built). Reads `store` (mistakes, low scores, stuck DSA/SQL) → ranks weak topics → renders an "AI Study Advisor" card on the dashboard with a Groq‑backed focus‑plan generator (graceful local fallback when no API key is set).
 ```
 
 ### Config
@@ -238,20 +249,20 @@ Storage key: `aptitudemaster_state_v2` (`localStorage`)
 ### P0 — Broken/Missing
 
 - **CSS class mismatch**: [[components/sidebar.js|`sidebar.js`]] renders BEM classes (`.sidebar-item`, `.sidebar-logo__text`, etc.) but the CSS for these doesn't exist anywhere. Sidebar renders unstyled.
-- **[[style.css]] loaded in [[index.html]] conflicts with modular system**: 1,345-line monolithic file containing duplicated/overridden styles.
+- [RESOLVED] [[style.css]] loaded in [[index.html]] conflicts with modular system: File removed; issue resolved.
 - **Sidebar items are `<div>` not `<a>`**: Keyboard-inaccessible, no link semantics, no focus ring.
 - **Collapse button does nothing**: `.sidebar-collapsed` CSS class isn't defined.
-- **[[style.css]] loads but [[app.js]] doesn't**: Some `style.css` styles target old `app.js` DOM structure. Loading order creates unpredictable specificity.
+- [RESOLVED] [[style.css]] loads but [[app.js]] doesn't: Both files removed; issue resolved.
 
 ### P1 — Functional Bugs
 
-- **[[app.js]] is dead code**: 1,397 lines still served to browsers (in [[index.html]]), global function conflicts.
+- [RESOLVED] [[app.js]] is dead code: File removed; issue resolved.
 - **DSA tracker full re-render**: Calling innerHTML on entire page for each checkbox click.
 - **No loading skeletons**: async data imports show only "Loading..." text.
 - **No keyboard shortcuts in practice**: Must click every answer.
 - **Timer leak**: `setInterval` not cleaned up on route change.
 - **No error boundaries**: Failed data imports show raw path, no way back.
-- **Double theme key**: [[app.js]] uses `localStorage('app-theme')`, [[state/store.js]] uses `state.theme`.
+- [RESOLVED] Dual theme key: app.js removed; only store.theme remains.
 
 ### P2 — UX Improvements
 
@@ -324,6 +335,25 @@ Quick links:
 
 ---
 
+### 2026-06-23 — AI Engineer Roadmap & Shell Refactor
+
+**Features Added:**
+- Added AI Engineer Roadmap 2026 course and updated sidebar subject list (commit ac20c34)
+- Replaced monolithic index.html with clean SPA shell — router‑wired, no inline styles, 2‑level nav (commit 6577f23)
+- Added secure Groq AI edge function + style/utilities.css (commit a20969a)
+- Created `tailwind-css-debugging` skill to help debug Tailwind CSS conflicts
+
+**Documentation & Maintenance:**
+- Updated Obsidian documentation practices: check for double‑extension `.md.md` files and rename to single `.md`
+- Added notes on AptitudeMaster data module pattern and Aditya‑L1 SoLEXS+HEL1OS fusion project to project memory
+- Updated Hermes Agent memory with user UI preferences (typography, color palette, content density)
+
+**Design Improvements (per user preferences):**
+- Avoided AI‑generated glassmorphism; refined color palette with deeper darks (#0a0a0f) and indigo accent (#7c6af7)
+- Planned conversion of DSA/SQL sheets to Striver’s A2Z format (company tags, pattern column, difficulty badges, inline notes, progress tracking)
+- Planned addition of real coding challenges with starter code in the Playground
+- Planned addition of conversation history, markdown rendering, and copy‑on‑click for AI chat interfaces
+
 ## 10. How to Extend
 
 ### Adding a new chapter
@@ -353,8 +383,8 @@ Quick links:
 ### Adding a new subject
 
 1. Create `data/{subject}/index.js` with manifest.
-2. The sidebar hardcoded list in [[components/sidebar.js]] (line 8-15) needs manual addition.
-3. Add metadata to [[pages/subject.js]] `SUBJECT_META` (line 7-13) and [[pages/home.js]] `subjects` array (line 14-20).
+2. The sidebar hardcoded list in [[components/sidebar.js]] (`SUBJECTS` const, lines 7-14) needs manual addition.
+3. Add metadata to [[pages/subject.js]] `SUBJECT_META` (line 7) and [[pages/home.js]] `subjects` array (line 17).
 
 ### Adding a new route
 
