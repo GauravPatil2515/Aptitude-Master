@@ -10,6 +10,7 @@ const DEFAULT_STATE = {
   progress: {},   // { 'aptitude': 60, 'aptitude/percentages': 'visited' }
   dsa: {},        // { 'two-sum': 'completed' }
   dsaNotes: {},   // { 'two-sum': 'Use hash map' }
+  dsaCode: {},    // { 'two-sum': 'function twoSum...' }  user code drafts in solve space
   sql: {},        // { 'sql_175': 'completed' }
   sqlNotes: {},   // { 'sql_175': 'LEFT JOIN pattern' }
   scores: {},     // { 'aptitude/percentages': 85 }
@@ -52,6 +53,11 @@ export const store = {
 
   setDSANotes(notes) {
     _state.dsaNotes = { ...(_state.dsaNotes || {}), ...notes };
+    saveState(_state);
+  },
+
+  setDSACode(code) {
+    _state.dsaCode = { ...(_state.dsaCode || {}), ...code };
     saveState(_state);
   },
 

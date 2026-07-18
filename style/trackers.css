@@ -274,3 +274,105 @@
   color: var(--text-muted);
   border: 1px solid var(--border);
 }
+
+/* ============================================================
+   DSA SHEET — master/detail layout + Solve Space drawer
+   ============================================================ */
+.dsa-shell {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .dsa-shell { grid-template-columns: 1fr; }
+}
+
+.dsa-sidebar {
+  position: sticky;
+  top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+.dsa-sidebar__head { display: flex; flex-direction: column; gap: 2px; }
+.dsa-sidebar__title { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800; color: var(--text-primary); margin: 0; }
+.dsa-sidebar__sub { font-size: var(--text-xs); color: var(--text-muted); margin: 0; }
+
+.dsa-overall { display: flex; flex-direction: column; gap: 4px; }
+.dsa-overall__bar { height: 8px; border-radius: 999px; background: var(--border); overflow: hidden; }
+.dsa-overall__bar span { display: block; height: 100%; background: var(--accent); transition: width 0.3s ease; }
+.dsa-overall__meta { font-size: var(--text-xs); color: var(--text-secondary); }
+
+.dsa-filters { display: flex; flex-direction: column; gap: 6px; }
+.dsa-filters .input-field { margin: 0; width: 100%; }
+
+.dsa-topic-nav { display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--border); padding-top: var(--space-3); }
+.dsa-topic-nav__item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 10px; border: 1px solid transparent; border-radius: var(--radius-md);
+  background: none; color: var(--text-primary); font-size: var(--text-sm); font-family: var(--font-sans);
+  cursor: pointer; text-align: left; transition: all var(--transition-fast, 0.15s ease);
+}
+.dsa-topic-nav__item:hover { background: var(--muted); border-color: var(--border); }
+.dsa-topic-nav__count { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
+
+/* Toolbar above table */
+.dsa-toolbar {
+  display: flex; align-items: center; gap: 12px;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary, var(--card));
+}
+
+/* Solve Space drawer */
+.dsa-drawer { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+.dsa-drawer--open { pointer-events: auto; }
+.dsa-drawer__backdrop {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.45);
+  opacity: 0; transition: opacity 0.2s ease;
+}
+.dsa-drawer--open .dsa-drawer__backdrop { opacity: 1; }
+.dsa-drawer__panel {
+  position: absolute; top: 0; right: 0; height: 100%;
+  width: min(560px, 92vw); background: var(--bg-primary, var(--card));
+  border-left: 1px solid var(--border); box-shadow: -12px 0 40px rgba(0,0,0,0.25);
+  transform: translateX(100%); transition: transform 0.25s ease;
+  display: flex; flex-direction: column;
+}
+.dsa-drawer--open .dsa-drawer__panel { transform: translateX(0); }
+.dsa-drawer__header {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--border);
+}
+.dsa-drawer__title { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; color: var(--text-primary); }
+.dsa-drawer__meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.dsa-drawer__body { flex: 1; overflow-y: auto; padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); }
+
+.dsa-problem__desc { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6; }
+
+.dsa-editor { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+.dsa-editor__bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 8px 10px; background: var(--bg-secondary, var(--card)); border-bottom: 1px solid var(--border);
+}
+.dsa-lang-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+.dsa-lang-btn {
+  padding: 4px 12px; border: none; background: none; color: var(--text-secondary);
+  font-size: var(--text-xs); font-weight: 700; cursor: pointer; font-family: var(--font-sans);
+}
+.dsa-lang-btn.active { background: var(--accent); color: #fff; }
+#dsa-code, #dsa-output { background: var(--code-bg, #0f1419); color: var(--code-fg, #e6edf3); font-family: var(--font-mono); }
+
+.dsa-notes { display: flex; flex-direction: column; gap: 4px; }
+.dsa-notes .notes-input { width: 100%; }
+
+/* dsa-row name button reset (so it looks like a link, not a button) */
+.dsa-open-btn:focus { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
