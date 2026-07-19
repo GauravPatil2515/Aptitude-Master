@@ -36,13 +36,16 @@ export function renderSidebar() {
   const currentPath = window.location.hash.replace('#', '') || '/home';
 
   const items = SUBJECTS.map(sub => {
-    const pct = s.progress?.[sub.id] ?? 0;
+    const st = store.subjectStatus(sub.id);
     const isActive = currentPath.includes(`/${sub.id}`);
+    const dotClass = st.status === 'done' ? 'dot--done' : st.status === 'in-progress' ? 'dot--prog' : 'dot--none';
+    const pctLabel = st.status === 'not-started' ? '—' : `${st.pct}%`;
     return `
       <a href="#/subject/${sub.id}" class="sidebar-item ${isActive ? 'sidebar-item--active' : ''}">
         <span class="sidebar-item__icon" aria-hidden="true">${sub.icon}</span>
         <span class="sidebar-item__label">${sub.label}</span>
-        <span class="sidebar-item__pct">${pct}%</span>
+        <span class="sidebar-item__status"><span class="status-dot ${dotClass}"></span></span>
+        <span class="sidebar-item__pct">${pctLabel}</span>
       </a>`;
   }).join('');
 

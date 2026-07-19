@@ -277,6 +277,22 @@ body {
   opacity: 0.6;
 }
 
+.sidebar-item__status {
+  margin-left: auto;
+  margin-right: 4px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.status-dot.dot--done { background: var(--success); }
+.status-dot.dot--prog { background: var(--warning); }
+.status-dot.dot--none { background: var(--border); }
+
 .sidebar-item--active .sidebar-item__pct {
   color: var(--sidebar-primary);
   opacity: 1;

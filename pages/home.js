@@ -26,7 +26,8 @@ export function renderHome() {
   ];
 
   const progressBars = subjects.map(sub => {
-    const pct = s.progress?.[sub.id] ?? 0;
+    const st = store.subjectStatus(sub.id);
+    const pct = st.pct;
     return `
       <div class="progress-row">
         <div class="progress-row__label">

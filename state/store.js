@@ -21,6 +21,13 @@ const DEFAULT_STATE = {
   todayAgenda: null,
 };
 
+// Static chapter counts per subject (used to derive real completion %).
+// NOTE: if chapters are added later, update this map. DSA/SQL counts reflect
+// the actual problem banks (110 / 299); others reflect authored chapters.
+const SUBJECT_CHAPTER_COUNTS = {
+  aptitude: 16, 'core-cs': 5, dsa: 110, sql: 299, ml: 6, 'ai-engineer': 6,
+};
+
 let _state = { ...DEFAULT_STATE, ...loadState() };
 
 export const store = {
@@ -98,6 +105,25 @@ export const store = {
     // Will be replaced with proper chapter count from manifest in Phase 3
     const visited = keys.filter(k => _state.progress[k]).length;
     _state.progress[subjectId] = Math.min(100, Math.round((visited / Math.max(keys.length, 1)) * 100));
+  },
+
+  // Real, multi-signal completion status for a subject (no fake 100%).
+  // Derives done-count from actual activity: chapter visits for content
+  // subjects, completed DSA/SQL problems for tracker subjects.
+  subjectStatus(subjectId) {
+    const visited = Object.keys(_state.progress || {})
+      .filter(k => k.startsWith(subjectId + '/') && _state.progress[k]);
+    let done;
+    if (subjectId === 'dsa') done = Object.values(_state.dsa || {}).filter(v => v === 'completed').length;
+    else if (subjectId === 'sql') done = Object.values(_state.sql || {}).filter(v => v === 'completed').length;
+    else done = visited.length;
+
+    const total = SUBJECT_CHAPTER_COUNTS[subjectId] || Math.max(visited.length, 1);
+    const pct = Math.min(100, Math.round((done / total) * 100));
+    let status = 'not-started';
+    if (pct >= 100) status = 'done';
+    else if (done > 0) status = 'in-progress';
+    return { pct, status, done, total };
   },
 
   reset() {
