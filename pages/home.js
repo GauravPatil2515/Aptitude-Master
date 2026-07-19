@@ -71,6 +71,9 @@ export function renderHome() {
           <a href="#/mock/tcs-1" class="btn btn--primary btn--sm" style="font-weight: 700;">
             Run TCS Mock Test
           </a>
+          <a href="#/ai-mock" class="btn btn--ghost btn--sm" style="font-weight: 700; border-color: var(--accent); color: var(--accent);">
+            <span class="badge badge--ai" style="font-size:9px; margin-right:6px;">AI</span> Generate Personalised Mock
+          </a>
         </div>
       </div>
 

@@ -14,6 +14,7 @@ import { renderCheatsheet } from './pages/cheatsheet.js';
 import { renderAITutor } from './pages/ai-tutor.js';
 import { renderSQLSheet } from './pages/sql-sheet.js';
 import { renderMock } from './pages/mock.js';
+import { renderAIMock } from './pages/ai-mock.js';
 
 // Route definitions: pattern → handler
 const ROUTES = [
@@ -27,6 +28,7 @@ const ROUTES = [
   { pattern: /^\/cheatsheet\/([\w-]+)$/, handler: ([subject]) => renderCheatsheet(subject) },
   { pattern: /^\/ai-tutor$/, handler: () => renderAITutor() },
   { pattern: /^\/mock\/([\w-]+)$/, handler: ([mockId]) => renderMock(mockId) },
+  { pattern: /^\/ai-mock$/, handler: () => renderAIMock() },
 ];
 
 const Router = {

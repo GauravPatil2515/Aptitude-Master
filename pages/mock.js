@@ -3,7 +3,7 @@
  */
 import { store } from '../state/store.js';
 
-export async function renderMock(mockId) {
+export async function renderMock(mockId, prebuilt = null) {
   const app = document.getElementById('page-content');
 
   // Clean up any existing mock timer
@@ -19,10 +19,13 @@ export async function renderMock(mockId) {
     </div>`;
 
   let mockData;
-  try {
-    const mod = await import(`../data/mocks/${mockId}.js`);
-    mockData = mod.default;
-  } catch (e) {
+  if (prebuilt) {
+    mockData = prebuilt;
+  } else {
+    try {
+      const mod = await import(`../data/mocks/${mockId}.js`);
+      mockData = mod.default;
+    } catch (e) {
     app.innerHTML = `
       <div class="empty-state">
         <div class="empty-state__icon">
@@ -33,6 +36,7 @@ export async function renderMock(mockId) {
         <a href="#/home" class="btn btn--primary" style="margin-top:14px">Go Back Home</a>
       </div>`;
     return;
+    }
   }
 
   // State
