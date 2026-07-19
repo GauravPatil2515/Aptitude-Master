@@ -368,6 +368,10 @@ body.dark-theme .glass {
 .mock-spark { display: inline-flex; align-items: flex-end; gap: 3px; height: 28px; }
 .mock-spark span { width: 6px; background: var(--accent); border-radius: 2px 2px 0 0; min-height: 4px; }
 
+/* ─── WEAK AREAS STRIP ─── */
+.weak-strip { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.weak-strip--empty { font-size: var(--text-sm); color: var(--text-muted); font-weight: 500; }
+
 /* ─── BUTTONS ─── */
 .btn {
   padding: 9px 20px;

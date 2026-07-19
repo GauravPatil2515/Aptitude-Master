@@ -5,6 +5,7 @@
 import { store } from '../state/store.js';
 import Router from '../router.js';
 import { renderAIAdvisor } from '../modules/ai.js';
+import { analyzeWeakness } from '../modules/ai.js';
 
 export function renderHome() {
   const app = document.getElementById('page-content');
@@ -15,6 +16,15 @@ export function renderHome() {
   const mockScore = s.scores?.['mock/tcs-1'] || null;
   const mockHist = (s.mockHistory && s.mockHistory['tcs-1']) || [];
   const mockLast3 = mockHist.slice(-3).map(h => h.pct);
+
+  // Weak areas: pull real labels from the AI weakness engine.
+  const weakReport = analyzeWeakness();
+  const weakLabels = weakReport.hasData
+    ? weakReport.topics.slice(0, 3).map(t => (t.chapter ? t.chapter.replace(/-/g, ' ') : t.subject))
+    : [];
+  const weakHTML = weakLabels.length
+    ? `<div class="weak-strip">${weakLabels.map(w => `<span class="badge badge--diff-hard">${w}</span>`).join('')}</div>`
+    : `<div class="weak-strip weak-strip--empty">No weak areas yet — keep practicing!</div>`;
   const roadmapProgress = s.tcsRoadmapProgress || [false, false, false, false, false];
   const mistakeCount = (s.mistakes || []).length;
 
@@ -275,6 +285,15 @@ export function renderHome() {
           <span class="badge badge--ai" style="font-size: 9px; vertical-align: middle; margin-left: 6px;">AI suggested</span>
         </h2>
         <div class="agenda-grid">${agenda}</div>
+      </section>
+
+      <!-- Weak Areas (AI-detected) -->
+      <section class="home-section" style="margin-bottom: var(--space-8);">
+        <h2 class="section-title" style="font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; color: var(--text-primary); margin-bottom: var(--space-4); display:flex; align-items:center; gap:8px;">
+          Weak Areas
+          <span class="badge badge--ai" style="font-size:9px;">AI detected</span>
+        </h2>
+        ${weakHTML}
       </section>
 
       <!-- AI Study Advisor (weak-topic detector) -->
