@@ -313,3 +313,45 @@ export const SQL_PROBLEMS = [
   { id: 'sql_2798', name: 'Number of Employees Who Met the Target', difficulty: 'easy', pattern: 'Array / Count', companies: ['Amazon'],             link: 'https://leetcode.com/problems/number-of-employees-who-met-the-target/' },
   { id: 'sql_2799', name: 'Count Complete Subarrays in an Array', difficulty: 'medium', pattern: 'Sliding Window / Hash Set', companies: ['Amazon'],   link: 'https://leetcode.com/problems/count-complete-subarrays-in-an-array/' },
 ];
+
+/**
+ * SQL_TOP_50 — Curated "must-do" subset (Striver/LeetCode Top-50 style).
+ * Foundational interview problems across every topic. Drives the
+ * "Top 50 (Must Do)" filter and is the default revision set.
+ */
+export const SQL_TOP_50 = [
+  'sql_175', 'sql_176', 'sql_177', 'sql_180', 'sql_181', 'sql_182', 'sql_183',
+  'sql_184', 'sql_196', 'sql_197', 'sql_511', 'sql_550', 'sql_570', 'sql_577',
+  'sql_584', 'sql_595', 'sql_596', 'sql_601', 'sql_607', 'sql_610', 'sql_620',
+  'sql_627', 'sql_1045', 'sql_1068', 'sql_1069', 'sql_1070', 'sql_1075',
+  'sql_1076', 'sql_1077', 'sql_1082', 'sql_1083', 'sql_1084', 'sql_1141',
+  'sql_1148', 'sql_1158', 'sql_1173', 'sql_1174', 'sql_1179', 'sql_1193',
+  'sql_1204', 'sql_1211', 'sql_1251', 'sql_1280', 'sql_1294', 'sql_1303',
+  'sql_1321', 'sql_1336', 'sql_1378', 'sql_1393', 'sql_1407',
+];
+
+/**
+ * SQL_TCS_NQT — problems most relevant to TCS NQT / Prime / Digital
+ * technical rounds (joins, aggregation, window functions, basics).
+ */
+export const SQL_TCS_NQT = [
+  'sql_175', 'sql_180', 'sql_181', 'sql_182', 'sql_183', 'sql_196', 'sql_197',
+  'sql_511', 'sql_550', 'sql_570', 'sql_577', 'sql_584', 'sql_595', 'sql_596',
+  'sql_607', 'sql_610', 'sql_620', 'sql_627', 'sql_1068', 'sql_1069', 'sql_1070',
+  'sql_1075', 'sql_1076', 'sql_1077', 'sql_1082', 'sql_1083', 'sql_1084',
+  'sql_1141', 'sql_1148', 'sql_1173', 'sql_1174', 'sql_1179', 'sql_1193',
+  'sql_1204', 'sql_1211', 'sql_1251', 'sql_1280', 'sql_1294', 'sql_1303',
+  'sql_1321', 'sql_1336', 'sql_1378', 'sql_1393', 'sql_1407', 'sql_1484',
+  'sql_1511', 'sql_1555', 'sql_1571', 'sql_1581', 'sql_1633', 'sql_1661',
+  'sql_1741', 'sql_1757', 'sql_1777', 'sql_1809', 'sql_1821', 'sql_1873',
+  'sql_1934', 'sql_1965', 'sql_1978', 'sql_2072', 'sql_2082', 'sql_2238',
+  'sql_2356', 'sql_2377', 'sql_2418', 'sql_2480', 'sql_2620', 'sql_2626',
+  'sql_2639', 'sql_2675', 'sql_2676', 'sql_2677', 'sql_2703', 'sql_2704',
+  'sql_2721', 'sql_2722', 'sql_2723', 'sql_2724', 'sql_2725', 'sql_2726',
+  'sql_2727', 'sql_2730', 'sql_2732', 'sql_2733', 'sql_2734', 'sql_2752',
+  'sql_2758', 'sql_2759', 'sql_2760', 'sql_2765', 'sql_2769', 'sql_2783',
+  'sql_2784', 'sql_2788', 'sql_2794', 'sql_2796', 'sql_2798', 'sql_2799',
+];
+
+/** Fast id → problem lookup. */
+export const SQL_PROBLEM_MAP = Object.fromEntries(SQL_PROBLEMS.map(p => [p.id, p]));
