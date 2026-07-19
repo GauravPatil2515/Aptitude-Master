@@ -468,6 +468,21 @@ body {
   padding: 0;
 }
 .global-search__input::placeholder { color: var(--muted-foreground); }
+.global-search__kbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  color: var(--muted-foreground);
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 5px;
+  flex-shrink: 0;
+}
+.global-search:focus-within .global-search__kbd { display: none; }
+@media (max-width: 720px) {
+  .global-search__kbd { display: none; }
+}
 
 .global-search__results {
   position: absolute;

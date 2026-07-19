@@ -128,12 +128,17 @@ export async function initSearch() {
   // Delegate clicks on results (they're anchors, but intercept to close cleanly)
   dropdownEl?.addEventListener('click', () => closeSearch());
 
-  // Ctrl/Cmd+K focuses search
+  // Ctrl/Cmd+K focuses search; "/" focuses search when not already typing
   document.addEventListener('keydown', (e) => {
+    const tag = (e.target.tagName || '').toLowerCase();
+    const typing = tag === 'input' || tag === 'textarea' || e.target.isContentEditable;
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault();
       inputEl.focus();
       inputEl.select();
+    } else if (e.key === '/' && !typing) {
+      e.preventDefault();
+      inputEl.focus();
     }
   });
 }
