@@ -15,6 +15,7 @@ const DEFAULT_STATE = {
   sqlNotes: {},   // { 'sql_175': 'LEFT JOIN pattern' }
   scores: {},     // { 'aptitude/percentages': 85 }
   mistakes: [],
+  mockHistory: {},  // { 'tcs-1': [{ pct, at }] } — last attempts per mock
   profile: { branch: '', target: '', name: '' },
   theme: 'dark',
   lastSession: null,
@@ -124,6 +125,17 @@ export const store = {
     if (pct >= 100) status = 'done';
     else if (done > 0) status = 'in-progress';
     return { pct, status, done, total };
+  },
+
+  // Record a mock attempt to history; keep best score in scores[`mock/<id>`].
+  pushMockResult(mockId, pct) {
+    _state.mockHistory = _state.mockHistory || {};
+    const arr = _state.mockHistory[mockId] || [];
+    arr.push({ pct, at: new Date().toISOString() });
+    _state.mockHistory[mockId] = arr.slice(-10);
+    _state.scores = _state.scores || {};
+    _state.scores[`mock/${mockId}`] = Math.max(_state.scores[`mock/${mockId}`] || 0, pct);
+    saveState(_state);
   },
 
   reset() {

@@ -13,6 +13,8 @@ export function renderHome() {
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
 
   const mockScore = s.scores?.['mock/tcs-1'] || null;
+  const mockHist = (s.mockHistory && s.mockHistory['tcs-1']) || [];
+  const mockLast3 = mockHist.slice(-3).map(h => h.pct);
   const roadmapProgress = s.tcsRoadmapProgress || [false, false, false, false, false];
   const mistakeCount = (s.mistakes || []).length;
 
@@ -174,6 +176,13 @@ export function renderHome() {
                 ${mockScore !== null ? `${mockScore}%` : 'Not Attempted'}
               </span>
             </div>
+            ${mockLast3.length ? `
+            <div class="mock-history" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; padding:0 2px;">
+              <span style="font-size:11px; color:var(--text-muted); font-weight:600;">Last 3: ${mockLast3.join(', ')}</span>
+              <span class="mock-spark">
+                ${mockLast3.map(v => `<span style="height:${Math.max(10, v)}%"></span>`).join('')}
+              </span>
+            </div>` : ''}
 
             <a href="#/mock/tcs-1" class="btn btn-primary btn--full" style="justify-content:center; font-weight:700;">
               ${mockScore !== null ? 'Retake Mock Test' : 'Start Mock Test'}

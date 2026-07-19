@@ -402,6 +402,7 @@ export async function renderMock(mockId, prebuilt = null) {
     const scores = { ...store.get().scores };
     scores[`mock/${mockData.id}`] = overallPct;
     store.set('scores', scores);
+    store.pushMockResult(mockData.id, overallPct);
 
     // Render HTML Results Dashboard
     const cardsSectionHTML = sectionStats.map(s => {
