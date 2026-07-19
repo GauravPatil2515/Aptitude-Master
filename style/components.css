@@ -397,6 +397,23 @@ body.dark-theme .glass {
   user-select: none;
 }
 
+/* Dominant AI-mock CTA — the personalised differentiator */
+.btn-ai-primary {
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #e8853f));
+  color: #161d18;
+  border-color: transparent;
+  font-weight: 800;
+  box-shadow: 0 6px 20px rgba(232,133,63,0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+.btn-ai-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(232,133,63,0.35);
+}
+
 /* Ripple element injected by JS (modules/ui-ripple.js) */
 .btn .ripple {
   position: absolute;

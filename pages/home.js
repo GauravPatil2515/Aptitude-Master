@@ -77,7 +77,7 @@ export function renderHome() {
   const totalChapters = 62;
   const chapterKeys = Object.keys(s.progress || {}).filter(k => k.includes('/') && s.progress[k]);
   const chaptersCompleted = chapterKeys.length;
-  const overallPct = Math.round(subjects.reduce((sum, sub) => sum + (s.progress?.[sub.id] ?? 0), 0) / subjects.length);
+  const overallPct = Math.round(subjects.reduce((sum, sub) => sum + store.subjectStatus(sub.id).pct, 0) / subjects.length);
 
   app.innerHTML = `
     <div class="page page--home">
@@ -96,11 +96,12 @@ export function renderHome() {
           </p>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px;">
-          <a href="#/mock/tcs-1" class="btn btn--primary btn--sm" style="font-weight: 700;">
-            Run TCS Mock Test
-          </a>
-          <a href="#/ai-mock" class="btn btn--ghost btn--sm" style="font-weight: 700; border-color: var(--accent); color: var(--accent);">
+          <a href="#/ai-mock" class="btn btn-ai-primary btn--md" style="font-weight: 800;">
             <span class="badge badge--ai" style="font-size:9px; margin-right:6px;">AI</span> Generate Personalised Mock
+            <span style="display:block; font-size:11px; font-weight:500; opacity:.85; margin-top:2px;">Tailored to your weak areas</span>
+          </a>
+          <a href="#/mock/tcs-1" class="btn btn--ghost btn--sm" style="font-weight: 700;">
+            Run TCS Mock Test
           </a>
         </div>
       </div>
