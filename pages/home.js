@@ -157,6 +157,7 @@ export function renderHome() {
           <div>
             <div class="stat-value">${mistakeCount}</div>
             <div class="stat-label">Logged Mistakes</div>
+            <div class="stat-sub">${mistakeCount === 0 ? 'Clean slate — log errors as you practice' : 'Tap a mistake in review to revisit'}</div>
           </div>
         </div>
       </div>
