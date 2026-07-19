@@ -26,6 +26,7 @@ export function renderHome() {
     ? `<div class="weak-strip">${weakLabels.map(w => `<span class="badge badge--diff-hard">${w}</span>`).join('')}</div>`
     : `<div class="weak-strip weak-strip--empty">No weak areas yet — keep practicing!</div>`;
   const roadmapProgress = s.tcsRoadmapProgress || [false, false, false, false, false];
+  const roadmapPct = Math.round((roadmapProgress.filter(Boolean).length / roadmapProgress.length) * 100);
   const mistakeCount = (s.mistakes || []).length;
 
   // 7-day streak strip: filled days = current streak window ending today.
@@ -210,6 +211,10 @@ export function renderHome() {
               <p style="font-size:var(--text-xs); color:var(--text-secondary); margin-bottom: 18px; line-height:1.4;">
                 Track your placement preparation daily by completing each milestone phase. Mark completed phases as you progress.
               </p>
+              <div class="roadmap-progress">
+                <div class="roadmap-progress__track"><div class="roadmap-progress__fill" style="width:${roadmapPct}%"></div></div>
+                <div class="roadmap-progress__label">${roadmapPct}% through 15-day plan</div>
+              </div>
               <div style="display:flex; flex-direction:column; gap:12px;">
                 
                 <!-- Phase 1 -->
@@ -218,6 +223,7 @@ export function renderHome() {
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 1 (Day 1-3): Quant Aptitude</strong>
+                      <span class="phase-tag phase-tag--study">Study</span>
                       <a href="#/chapter/aptitude/percentages" style="font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0;">Study ↗</a>
                     </div>
                     <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Percentages, Profit & Loss, Simple & Compound Interest</div>
@@ -230,6 +236,7 @@ export function renderHome() {
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 2 (Day 4-6): Logical Reasoning</strong>
+                      <span class="phase-tag phase-tag--study">Study</span>
                       <a href="#/chapter/aptitude/logical-reasoning" style="font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0;">Study ↗</a>
                     </div>
                     <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Syllogisms, Blood Relations, Series, Coding-Decoding</div>
@@ -242,6 +249,7 @@ export function renderHome() {
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 3 (Day 7-9): Verbal Ability</strong>
+                      <span class="phase-tag phase-tag--study">Study</span>
                       <a href="#/chapter/aptitude/verbal-ability" style="font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0;">Study ↗</a>
                     </div>
                     <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Synonyms, Antonyms, One-word substitutes, Idioms</div>
@@ -254,6 +262,7 @@ export function renderHome() {
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 4 (Day 10-12): DSA Coding</strong>
+                      <span class="phase-tag phase-tag--tracker">Tracker</span>
                       <a href="#/dsa" style="font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0;">Tracker ↗</a>
                     </div>
                     <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Arrays, Strings, Trees, Dynamic Programming (TCS NQT tagged Qs)</div>
@@ -266,6 +275,7 @@ export function renderHome() {
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                       <strong style="font-size:13px; color:var(--text-primary); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Phase 5 (Day 13-15): Mocks & Review</strong>
+                      <span class="phase-tag phase-tag--mocks">Mocks</span>
                       <a href="#/mock/tcs-1" style="font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0;">Mocks ↗</a>
                     </div>
                     <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Simulate full mock test, error log review & strategy tuning</div>
