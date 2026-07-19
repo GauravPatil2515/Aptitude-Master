@@ -28,6 +28,47 @@ export function renderTopbar() {
   `;
 
   document.getElementById('topbar-menu-btn')?.addEventListener('click', () => {
-    document.getElementById('app-layout')?.classList.toggle('sidebar-collapsed');
+    const layout = document.getElementById('app-layout');
+    const sidebar = document.querySelector('.sidebar');
+    if (!layout || !sidebar) return;
+    // On narrow screens the sidebar is an off-canvas drawer (toggled via .open).
+    // On wide screens it's the inline collapsible (toggled via .sidebar-collapsed).
+    const isDrawer = window.matchMedia('(max-width: 1100px)').matches;
+    if (isDrawer) {
+      const willOpen = !sidebar.classList.contains('open');
+      sidebar.classList.toggle('open', willOpen);
+      toggleSidebarBackdrop(willOpen);
+    } else {
+      layout.classList.toggle('sidebar-collapsed');
+    }
   });
+
+  // Auto-close the off-canvas drawer after navigating on mobile.
+  window.addEventListener('hashchange', () => {
+    if (window.matchMedia('(max-width: 1100px)').matches) {
+      document.querySelector('.sidebar')?.classList.remove('open');
+      toggleSidebarBackdrop(false);
+    }
+  });
+}
+
+// Lightweight backdrop for the mobile off-canvas sidebar.
+function toggleSidebarBackdrop(show) {
+  let bd = document.getElementById('sidebar-backdrop');
+  if (show) {
+    if (!bd) {
+      bd = document.createElement('div');
+      bd.id = 'sidebar-backdrop';
+      bd.className = 'sidebar-backdrop';
+      bd.addEventListener('click', () => {
+        document.querySelector('.sidebar')?.classList.remove('open');
+        toggleSidebarBackdrop(false);
+      });
+      document.body.appendChild(bd);
+    }
+    // allow paint before fading in
+    requestAnimationFrame(() => bd.classList.add('show'));
+  } else if (bd) {
+    bd.classList.remove('show');
+  }
 }
