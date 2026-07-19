@@ -610,6 +610,8 @@ body {
   padding: 4px 12px;
   border-radius: var(--radius-md);
   transition: var(--transition-fast);
+  position: relative;
+  overflow: hidden;
 }
 
 .mobile-nav-item:hover {

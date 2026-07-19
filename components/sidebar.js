@@ -104,7 +104,11 @@ export function renderSidebar() {
     document.getElementById('app-layout')?.classList.toggle('sidebar-collapsed');
   });
 
-  // Theme toggle
+  // Apply ripple press-feedback to all nav items + logo (consistency with .btn)
+  sidebar.querySelectorAll('.sidebar-item, .sidebar-logo').forEach(el => {
+    el.setAttribute('data-ripple', '');
+  });
+
   document.getElementById('theme-toggle-btn')?.addEventListener('click', () => {
     const isLight = document.body.classList.toggle('light-theme');
     // Mark an explicit dark choice so prefers-color-scheme fallback doesn't override it
