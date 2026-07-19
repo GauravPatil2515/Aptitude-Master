@@ -16,6 +16,17 @@ export function renderHome() {
   const roadmapProgress = s.tcsRoadmapProgress || [false, false, false, false, false];
   const mistakeCount = (s.mistakes || []).length;
 
+  // 7-day streak strip: filled days = current streak window ending today.
+  const today = new Date();
+  const streakDays = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(today);
+    d.setDate(today.getDate() - (6 - i));
+    const age = 6 - i;                       // 0 = today, 6 = 6 days ago
+    const filled = age < (s.streak ?? 0);
+    const isToday = i === 6;
+    return `<span class="streak-day ${filled ? 'streak-day--filled' : ''} ${isToday ? 'streak-day--today' : ''}" title="${d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}"></span>`;
+  }).join('');
+
   const subjects = [
     { id: 'aptitude',    label: 'Aptitude',         color: 'var(--accent-blue)' },
     { id: 'core-cs',    label: 'Core CS',           color: 'var(--accent-violet)' },
@@ -64,7 +75,10 @@ export function renderHome() {
         <div>
           <h1 class="home-hero__greeting" style="font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 800; color: var(--foreground); letter-spacing: var(--tracking-tight);">${greeting}${s.profile?.name ? `, ${s.profile.name}` : ''}</h1>
           <p class="home-hero__sub" style="margin-top: 8px;">
-            <span class="badge badge--time" style="background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.2); font-size: 11px;">${s.streak ?? 0} Day Streak</span>
+            <span class="badge badge--time" style="background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.2); font-size: 11px;">
+              <span class="streak-flame">🔥</span> ${s.streak ?? 0} Day Streak
+            </span>
+            <span class="streak-strip">${streakDays}</span>
             <span style="margin:0 8px;opacity:0.3;color:var(--text-muted)">|</span>
             <span style="font-size: var(--text-sm); font-weight: 500; color: var(--text-secondary);">${overallPct}% Overall Progress</span>
           </p>
