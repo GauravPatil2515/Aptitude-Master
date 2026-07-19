@@ -14,6 +14,7 @@ export function renderHome() {
 
   const mockScore = s.scores?.['mock/tcs-1'] || null;
   const roadmapProgress = s.tcsRoadmapProgress || [false, false, false, false, false];
+  const mistakeCount = (s.mistakes || []).length;
 
   const subjects = [
     { id: 'aptitude',    label: 'Aptitude',         color: 'var(--accent-blue)' },
@@ -94,30 +95,38 @@ export function renderHome() {
       <!-- Stats Row -->
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:28px;">
         <div class="card stat-card">
-          <div class="stat-icon blue"></div>
+          <div class="stat-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
           <div>
             <div class="stat-value">${subjects.length}</div>
             <div class="stat-label">Subjects</div>
           </div>
         </div>
         <div class="card stat-card">
-          <div class="stat-icon green"></div>
+          <div class="stat-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
           <div>
             <div class="stat-value">${chaptersCompleted}</div>
             <div class="stat-label">Chapters Completed</div>
           </div>
         </div>
         <div class="card stat-card">
-          <div class="stat-icon amber"></div>
+          <div class="stat-icon amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3 3 4 3 7a3 3 0 0 1-6 0c0-1 .3-2 1-3 0 2 1 3 2 3 0-3-1-5 0-7z"/><path d="M12 22a6 6 0 0 0 6-6c0-3-2-5-3-7-2 2-3 3-3 6"/></svg>
+          </div>
           <div>
             <div class="stat-value">${s.streak ?? 0}</div>
             <div class="stat-label">Study Streak</div>
           </div>
         </div>
         <div class="card stat-card">
-          <div class="stat-icon purple"></div>
+          <div class="stat-icon purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
           <div>
-            <div class="stat-value">${Object.keys(s.mistakes || []).length}</div>
+            <div class="stat-value">${mistakeCount}</div>
             <div class="stat-label">Logged Mistakes</div>
           </div>
         </div>
