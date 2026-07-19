@@ -27,23 +27,22 @@ export async function renderAIMock() {
 
   app.innerHTML = `
     <div class="page page--ai-mock" style="max-width: 760px; margin: 0 auto; padding: var(--space-6) var(--space-4);">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom: 6px;">
-        <span class="badge badge--ai" style="font-size:10px;">AI · OFFLINE-CAPABLE</span>
-        <span class="badge badge--tcs-nqt" style="font-size:10px;">PERSONALISED</span>
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom: 8px;">
+        <span class="badge badge--ai" style="font-size:10px;">AI</span>
+        <span style="font-size:11px; color:var(--text-muted); font-weight:500;">Runs offline · built from your question banks</span>
       </div>
-      <h1 class="page-title" style="font-size: var(--text-2xl); margin-bottom: 6px;">AI Mock Test Generator</h1>
+      <h1 class="page-title" style="font-size: var(--text-2xl); margin-bottom: 6px;">Personalised Mock Test</h1>
       <p style="color: var(--text-secondary); font-size: var(--text-sm); margin-bottom: 22px;">
-        Builds a mock from your real question banks, weighted toward weak areas. No API key required.
+        Pick a focus and we'll assemble a test from your real chapters, weighted toward the areas you're weakest in.
       </p>
 
       <div class="card" style="padding: var(--space-6); margin-bottom: var(--space-5);">
         <label style="display:block; font-size: var(--text-xs); text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--text-muted); font-weight:700; margin-bottom:10px;">Focus</label>
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:10px;" id="focus-grid">
           ${FOCUS_OPTIONS.map(f => `
-            <button class="ai-mock-focus ${f.id === 'weak' ? 'active' : ''}" data-focus="${f.id}"
-              style="text-align:left; padding:12px 14px; border-radius:var(--radius-md); border:1px solid var(--border-color); background:var(--bg-tertiary); cursor:pointer; transition:var(--transition-fast);">
-              <div style="font-weight:700; font-size:var(--text-sm); color:var(--text-primary);">${f.label}</div>
-              <div style="font-size:11px; color:var(--text-secondary); margin-top:3px; line-height:1.4;">${f.desc}</div>
+            <button class="ai-mock-focus ${f.id === 'weak' ? 'active' : ''}" data-focus="${f.id}">
+              <div class="focus-label">${f.label}</div>
+              <div class="focus-desc">${f.desc}</div>
             </button>`).join('')}
         </div>
 
@@ -84,23 +83,11 @@ export async function renderAIMock() {
   let selectedFocus = 'weak';
   document.querySelectorAll('.ai-mock-focus').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.ai-mock-focus').forEach(b => {
-        b.classList.remove('active');
-        b.style.borderColor = 'var(--border-color)';
-        b.style.background = 'var(--bg-tertiary)';
-      });
+      document.querySelectorAll('.ai-mock-focus').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      btn.style.borderColor = 'var(--accent)';
-      btn.style.background = 'color-mix(in srgb, var(--accent) 8%, transparent)';
       selectedFocus = btn.dataset.focus;
     });
   });
-  // initial active styling
-  document.querySelector('.ai-mock-focus.active')?.style && (() => {
-    const el = document.querySelector('.ai-mock-focus.active');
-    el.style.borderColor = 'var(--accent)';
-    el.style.background = 'color-mix(in srgb, var(--accent) 8%, transparent)';
-  })();
 
   document.getElementById('ai-mock-generate').addEventListener('click', async () => {
     const statusEl = document.getElementById('ai-mock-status');

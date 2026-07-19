@@ -369,9 +369,24 @@ body.dark-theme .glass {
 .mock-spark { display: inline-flex; align-items: flex-end; gap: 3px; height: 28px; }
 .mock-spark span { width: 6px; background: var(--accent); border-radius: 2px 2px 0 0; min-height: 4px; }
 
-/* ─── WEAK AREAS STRIP ─── */
-.weak-strip { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.weak-strip--empty { font-size: var(--text-sm); color: var(--text-muted); font-weight: 500; }
+/* ─── AI MOCK FOCUS OPTIONS ─── */
+.ai-mock-focus {
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-family: var(--font-sans);
+}
+.ai-mock-focus:hover { border-color: var(--accent); }
+.ai-mock-focus.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.ai-mock-focus .focus-label { font-weight: 700; font-size: var(--text-sm); color: var(--text-primary); }
+.ai-mock-focus .focus-desc { font-size: 11px; color: var(--text-secondary); margin-top: 3px; line-height: 1.4; }
 
 /* ─── ROADMAP PROGRESS + PHASE TAGS ─── */
 .roadmap-progress { margin-bottom: 16px; }
